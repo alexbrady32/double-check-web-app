@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data;
 
 namespace DoubleCheck.Controllers
 {
@@ -11,18 +15,18 @@ namespace DoubleCheck.Controllers
         public ActionResult Index()
         {
             ViewResult indexView = View("/Views/Home/Index.cshtml");
-            
+
             return indexView;
         }
 
         public void Login()
         {
-            
+
         }
 
         public void Create()
         {
 
         }
-	}
+    }
 }
