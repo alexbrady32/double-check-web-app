@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace DoubleCheck.Controllers
 {
@@ -8,7 +10,19 @@ namespace DoubleCheck.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
-            return View();
+            ViewResult indexView = View("/Views/Home/Index.cshtml");
+            
+            return indexView;
+        }
+
+        public void Login()
+        {
+            
+        }
+
+        public void Create()
+        {
+
         }
 	}
 }

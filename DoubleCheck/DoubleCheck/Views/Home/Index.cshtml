@@ -3,7 +3,6 @@
     ViewData["Title"] = "Home";
 }
 
-
 <!DOCTYPE html>
 
 <html>
@@ -30,10 +29,10 @@
         <label for="pwd">Password:</label>
         <input type="password" class="form-control" id="pwd">
     </div>
-    <button type="button" class="btn btn-default" id="userLogin">Login</button>
+    <button type="button" class="btn btn-default" id="userLogin" onclick="location.href='@Url.Action("Login", "Home")'">Login</button>
     <div class="form-group">
         &nbsp;
     </div>
-    <button type="button" class="btn-primary" id="createAccount">Create Account</button>
+    <button type="button" class="btn-primary" id="createAccount" onclick="location.href='@Url.Action("CreateUser", "Home")">Create Account</button>
 </body>
 </html>
