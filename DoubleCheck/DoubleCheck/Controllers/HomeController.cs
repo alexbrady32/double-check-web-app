@@ -19,14 +19,14 @@ namespace DoubleCheck.Controllers
             return indexView;
         }
 
-        public void Login()
+        public string Login()
         {
-
+            return "Hello, " + Request["usr"];
         }
 
-        public void Create()
+        public ActionResult Create()
         {
-
+            return View();
         }
     }
 }
