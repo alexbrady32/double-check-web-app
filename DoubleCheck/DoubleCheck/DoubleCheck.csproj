@@ -16,7 +16,7 @@
     <RootNamespace>DoubleCheck</RootNamespace>
     <AssemblyName>DoubleCheck</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -118,7 +119,25 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="Models\DoubleCheckDBContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DoubleCheckDBContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DoubleCheckDBContext.edmx.diagram">
+      <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Models\DoubleCheckDBContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
+      <LastGenOutput>DoubleCheckDBContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DoubleCheckDBContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
+      <LastGenOutput>DoubleCheckDBContext.cs</LastGenOutput>
+    </Content>
+    <Content Include="Resources\Images\sample.jpg" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -135,11 +154,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Asgmt_Type.cs" />
-    <Compile Include="Models\Assignment.cs" />
-    <Compile Include="Models\Class.cs" />
-    <Compile Include="Models\DoubleCheckDataModel.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Asgmt_Type.cs">
+      <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Assignment.cs">
+      <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Class.cs">
+      <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DoubleCheckDBContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoubleCheckDBContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DoubleCheckDBContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DoubleCheckDBContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +201,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="JS\" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -175,7 +219,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50164</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50164/</IISUrl>
+          <IISUrl>http://localhost/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
