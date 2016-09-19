@@ -7,17 +7,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> @ViewData["Title"] - DoubleCheck </title>
+    <title> @ViewBag.Title - DoubleCheck </title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/Content/Site.css" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/Content/Site.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
@@ -48,17 +48,3 @@
     </div>
 </body>
 </html>
-    <!--
-    ﻿<!DOCTYPE html>
-
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>DoubleCheck App</title>
-        <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
-    </head>
-    <body>
-            RenderBody();
-    </body>
-    </html>
-        -->

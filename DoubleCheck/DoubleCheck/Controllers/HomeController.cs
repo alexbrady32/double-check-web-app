@@ -11,6 +11,8 @@ using DoubleCheck.Models;
 
 namespace DoubleCheck.Controllers
 {
+    using System.Linq;
+
     public class HomeController : Controller
     {
         private doublecheckdbEntities db = new doublecheckdbEntities();
@@ -23,12 +25,20 @@ namespace DoubleCheck.Controllers
             return indexView;
         }
 
-        public string Login()
+        [HttpPost]
+        public ActionResult Login(string username, string password)
         {
-            return "Hello, " + Request["usr"];
+            ViewResult assignmentsView = View("/Views/ViewAssignments.cshtml");
+            var matchingUser = (from person in db.Users
+                                where person.Username == username && person.Password == password
+                                select person).FirstOrDefault();
+            assignmentsView.ViewBag.UserId = matchingUser.Id;
+            assignmentsView.ViewBag.UserFName = matchingUser.firstName;
+            assignmentsView.ViewBag.UserLName = matchingUser.lastName;
+            return assignmentsView;
         }
 
-        public ActionResult Create()
+        public ActionResult CreateUser()
         {
             return View();
         }
