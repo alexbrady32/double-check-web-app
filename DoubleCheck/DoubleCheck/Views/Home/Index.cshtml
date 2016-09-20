@@ -1,11 +1,11 @@
 ﻿@model DoubleCheck.Models.User
-@{
+    @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Home";
-}
-<!DOCTYPE html>
-<html>
-<body>
+    }
+    <!DOCTYPE html>
+    <html>
+    <body>
     <div class="container">
         <div class="jumbotron">
             <h1>Double Check</h1>
@@ -16,32 +16,32 @@
     <div class="form-group">
         &nbsp;
     </div>
-    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-    {
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @id = "username" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @id = "username" } })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password", @id = "password" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password", @id = "password" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
-            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Login" class="btn btn-default" />
         </div>
-    }
+    </div>
+}
     <div class="form-group">
         &nbsp;
     </div>
-    <button type="button" class="btn-primary" id="createAccount" onclick="location.href='@Url.Action("CreateUser", "Home")">Create Account</button>
+    <button type="button" class="btn-primary" id="createAccount" onclick="location.href='@Url.Action("Create","Account")'">Create Account</button>
 
 </body>
 </html>

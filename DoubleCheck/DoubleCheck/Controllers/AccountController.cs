@@ -17,7 +17,21 @@ namespace DoubleCheck.Controllers
         // GET: Account
         public ActionResult Login()
         {
-            return View();
+            return View("/Views/Account/Login.cshtml");
+        }
+
+        // POST: Account/Login
+        [HttpPost]
+        public ActionResult Login(string username, string password)
+        {
+            ViewResult assignmentsView = View("/Views/ViewAssignments.cshtml");
+            var matchingUser = (from person in db.Users
+                                where person.Username == username && person.Password == password
+                                select person).FirstOrDefault();
+            assignmentsView.ViewBag.UserId = matchingUser.Id;
+            assignmentsView.ViewBag.UserFName = matchingUser.firstName;
+            assignmentsView.ViewBag.UserLName = matchingUser.lastName;
+            return assignmentsView;
         }
 
         // GET: Account/Details/5
@@ -38,7 +52,7 @@ namespace DoubleCheck.Controllers
         // GET: Account/Create
         public ActionResult Create()
         {
-            return View();
+            return View("/Views/Account/CreateAccount.cshtml");
         }
 
         // POST: Account/Create
@@ -52,7 +66,7 @@ namespace DoubleCheck.Controllers
             {
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(user);
