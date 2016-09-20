@@ -126,6 +126,11 @@
     <Content Include="Models\DoubleCheckDBContext.edmx.diagram">
       <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
     </Content>
+    <Content Include="Resources\Fonts\fontawesome-webfont.eot" />
+    <Content Include="Resources\Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Resources\Fonts\fontawesome-webfont.woff" />
+    <Content Include="Resources\Fonts\fontawesome-webfont.woff2" />
+    <Content Include="Resources\Fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\DoubleCheckDBContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -137,7 +142,11 @@
       <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
       <LastGenOutput>DoubleCheckDBContext.cs</LastGenOutput>
     </Content>
-    <Content Include="Resources\Images\sample.jpg" />
+    <Content Include="Resources\Fonts\font-awesome.min.css" />
+    <Content Include="Resources\Fonts\fontawesome-webfont.svg" />
+    <Content Include="Resources\Images\background-light.jpg" />
+    <Content Include="Resources\Images\login-background.jpg" />
+    <Content Include="Resources\Images\profile.jpg" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -150,6 +159,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +200,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

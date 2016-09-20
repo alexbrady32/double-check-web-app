@@ -1,0 +1,43 @@
+﻿@model DoubleCheck.Models.User
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="login-content">
+    <div class="form-wrapper">
+        <h2>Sign in to DoubleCheck</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true, "Login failed. Check your login details.", new { htmlAttributes = new { @class = "validation-text" } });
+            @Html.AntiForgeryToken()
+            <div class="login-input-block">
+                <i class='fa fa-user fa-lg input-trans'></i>
+                @Html.EditorFor(model => model.Username, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "login-input-field",
+                   @placeholder = "Username"
+               }
+           })
+            </div>
+            <div class="login-input-block">
+                <i class='fa fa-lock fa-lg input-trans'></i>
+                @Html.EditorFor(model => model.Username, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "login-input-field",
+                   @Type = "Password",
+                   @placeholder = "Password"
+               }
+           })
+            </div>
+            <div class="login-input-block">
+                <input type="submit" value="Log In" class="login-submit" />
+            </div>
+        }
+    </div>
+</div>
