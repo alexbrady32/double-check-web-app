@@ -16,7 +16,7 @@
     <div class="form-group">
         &nbsp;
     </div>
-@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
 {
     <div class="form-group">
         @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -41,7 +41,7 @@
     <div class="form-group">
         &nbsp;
     </div>
-    <button type="button" class="btn-primary" id="createAccount" onclick="location.href='@Url.Action("CreateUser", "Home")">Create Account</button>
+    <button type="button" class="btn-primary" id="createAccount" onclick="location.href='@Url.Action("Create","Account")'">Create Account</button>
 
     </body>
 </html>
