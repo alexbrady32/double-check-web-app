@@ -8,7 +8,7 @@
     <div class="form-wrapper">
         <h2>Sign in to DoubleCheck</h2>
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
         {
             @Html.ValidationSummary(true, "Login failed. Check your login details.", new { htmlAttributes = new { @class = "validation-text" } });
             @Html.AntiForgeryToken()
@@ -25,7 +25,7 @@
             </div>
             <div class="login-input-block">
                 <i class='fa fa-lock fa-lg input-trans'></i>
-                @Html.EditorFor(model => model.Username, new
+                @Html.EditorFor(model => model.Password, new
            {
                htmlAttributes = new
                {
