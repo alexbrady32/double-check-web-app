@@ -17,21 +17,33 @@ namespace DoubleCheck.Controllers
         // GET: Account
         public ActionResult Login()
         {
-            return View("/Views/Account/Login.cshtml");
+            return View();
+
         }
 
         // POST: Account/Login
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(User credentials)
         {
-            ViewResult assignmentsView = View("/Views/ViewAssignments.cshtml");
-            var matchingUser = (from person in db.Users
-                                where person.Username == username && person.Password == password
-                                select person).FirstOrDefault();
-            assignmentsView.ViewBag.UserId = matchingUser.Id;
-            assignmentsView.ViewBag.UserFName = matchingUser.firstName;
-            assignmentsView.ViewBag.UserLName = matchingUser.lastName;
-            return assignmentsView;
+            if (ModelState.IsValid)
+            {
+                var user = db.Users.Where(model => model.Username.Equals(credentials.Username) 
+                                                 && model.Password.Equals(credentials.Password)).FirstOrDefault();
+
+                if (user != null)
+                {
+                    Session["UserID"] = user.Id.ToString();
+                    Session["UserFirstName"] = user.firstName.ToString();
+                    Session["UserLastName"] = user.lastName.ToString();
+                    return RedirectToAction("Index", "Home");
+                }
+
+                TempData["Message"] = "Invalid username or password, please try again.";
+
+            }
+
+            return View(credentials);
+
         }
 
         // GET: Account/Details/5
@@ -129,13 +141,5 @@ namespace DoubleCheck.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

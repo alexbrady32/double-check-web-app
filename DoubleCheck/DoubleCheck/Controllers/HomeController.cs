@@ -20,27 +20,14 @@ namespace DoubleCheck.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
-            ViewResult indexView = View("/Views/Home/Index.cshtml");
-
-            return indexView;
-        }
-
-        [HttpPost]
-        public ActionResult Login(string username, string password)
-        {
-            ViewResult assignmentsView = View("/Views/ViewAssignments.cshtml");
-            var matchingUser = (from person in db.Users
-                                where person.Username == username && person.Password == password
-                                select person).FirstOrDefault();
-            assignmentsView.ViewBag.UserId = matchingUser.Id;
-            assignmentsView.ViewBag.UserFName = matchingUser.firstName;
-            assignmentsView.ViewBag.UserLName = matchingUser.lastName;
-            return assignmentsView;
-        }
-
-        public ActionResult CreateUser()
-        {
-            return View();
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
     }
