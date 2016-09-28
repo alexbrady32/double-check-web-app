@@ -1,18 +1,23 @@
 ﻿@model DoubleCheck.Models.User
 
 @{
-    ViewBag.Title = "CreateAccount";
+    ViewBag.Title = "Create Account";
 }
 
-<h2>CreateAccount</h2>
+<h2>Create Account</h2>
 
 @using (Html.BeginForm("Create", "Account", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
-    
+
+    <div id="error_message" class="alert alert-danger hidden">
+        <strong>@ViewBag.Error</strong>
+    </div>
     <div class="form-horizontal">
-        <h4>User</h4>
+        <h4>Create a New Account</h4>
+
         <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2"})
@@ -70,6 +75,18 @@
     </div>
 }
 
+<!-- Denee: Don't click this just yet! Not necessarily functional. -->
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<!-- Denee: Not really sure why the below isn't working. -->
+<script type="text/javascript" src="~/Content/jquery-3.1.1.js">
+    $(document).ready(function () {
+        window.alert("Hullo.")
+        var error = '@ViewBag.Error';
+        if (error != '') {
+            $("#error_message").removeClass('hidden');
+        }
+    })
+</script>

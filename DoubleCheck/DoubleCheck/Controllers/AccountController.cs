@@ -18,6 +18,13 @@ namespace DoubleCheck.Controllers
         private bool invalid;
 
         // GET: Account
+        // Denee: NOTE: This can later return a view that shows a list of account options - edit, delete, etc.
+        public void Index()
+        {
+
+        }
+
+        // GET: Account
         public ActionResult Login()
         {
             return View();
@@ -67,7 +74,7 @@ namespace DoubleCheck.Controllers
         // GET: Account/Create
         public ActionResult Create()
         {
-            return View("/Views/Account/CreateAccount.cshtml");
+            return View("/Views/Account/Create.cshtml");
         }
 
         // POST: Account/Create
@@ -77,11 +84,20 @@ namespace DoubleCheck.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Username,Email,Password,firstName,lastName,phone_num")] User user)
         {
-            if (ModelState.IsValid && IsValidEmail(user.Email))
+            if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                if (IsValidEmail(user.Email))
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    ViewBag.Error = "";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.Error = "Invalid Email! Try again.";
+                }
+                
             }
 
             return View(user);
