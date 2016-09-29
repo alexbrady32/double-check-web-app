@@ -81,9 +81,8 @@
 </div>
 
 <!-- Denee: Not really sure why the below isn't working. -->
-<script type="text/javascript" src="~/Content/jquery-3.1.1.js">
+<script>
     $(document).ready(function () {
-        window.alert("Hullo.")
         var error = '@ViewBag.Error';
         if (error != '') {
             $("#error_message").removeClass('hidden');

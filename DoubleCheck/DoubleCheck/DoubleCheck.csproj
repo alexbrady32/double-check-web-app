@@ -117,13 +117,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\jquery-3.1.1.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\DoubleCheckDBContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DoubleCheckDBContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="JS\jquery-3.1.1.js" />
     <Content Include="Models\DoubleCheckDBContext.edmx.diagram">
       <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
     </Content>
@@ -212,7 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="JS\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
