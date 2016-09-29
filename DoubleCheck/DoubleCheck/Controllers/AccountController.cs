@@ -16,14 +16,7 @@ namespace DoubleCheck.Controllers
     {
         private doublecheckdbEntities db = new doublecheckdbEntities();
         private bool invalid;
-
-        // GET: Account
-        // Denee: NOTE: This can later return a view that shows a list of account options - edit, delete, etc.
-        public void Index()
-        {
-
-        }
-
+        
         // GET: Account
         public ActionResult Login()
         {
@@ -35,7 +28,7 @@ namespace DoubleCheck.Controllers
         [HttpPost]
         public ActionResult Login(User credentials)
         {
-            if (ModelState.IsValid)
+            if (credentials.Username != null && credentials.Password != null)
             {
                 var user = db.Users.Where(model => model.Username.Equals(credentials.Username) 
                                                  && model.Password.Equals(credentials.Password)).FirstOrDefault();
@@ -88,10 +81,17 @@ namespace DoubleCheck.Controllers
             {
                 if (IsValidEmail(user.Email))
                 {
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    ViewBag.Error = "";
-                    return RedirectToAction("Index", "Home");
+                    if (user.phone_num == null || (user.phone_num != null && Regex.IsMatch(user.phone_num, @"^(1-)?\d{3}(-)?\d{3}(-)?\d{4}$")))
+                    {
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                        ViewBag.Error = "";
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Invalid Phone Number! Try again.";
+                    }
                 }
                 else
                 {
