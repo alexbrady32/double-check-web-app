@@ -79,6 +79,9 @@ namespace DoubleCheck.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Create Password Hash and store back into the model
+                user.Password = CreatePasswordHash(user.Password);
+
                 var userCount = db.Users.Count(u => (u.Username == user.Username) || (u.Password == user.Password)
                 || (u.Email == user.Email) || (u.phone_num == user.phone_num));
                 if (userCount == 0)
@@ -202,6 +205,29 @@ namespace DoubleCheck.Controllers
                 invalid = true;
             }
             return match.Groups[1].Value + domainName;
+        }
+
+        public string CreatePasswordHash(string password)
+        {
+            string salt = "JlfufhfiuI4284rhciwIey$f";
+            return Hash(password + salt);
+        }
+
+        private static string Hash(string input)
+        {
+            using (System.Security.Cryptography.SHA1Managed sha1 = new System.Security.Cryptography.SHA1Managed())
+            {
+                var hash = sha1.ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
+                var sb = new System.Text.StringBuilder(hash.Length * 2);
+
+                foreach (byte b in hash)
+                {
+                    // can be "x2" if you want lowercase
+                    sb.Append(b.ToString("X2"));
+                }
+
+                return sb.ToString();
+            }
         }
     }
 }
