@@ -79,27 +79,11 @@ namespace DoubleCheck.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (IsValidEmail(user.Email))
-                {
-                    if (user.phone_num == null || (user.phone_num != null && Regex.IsMatch(user.phone_num, @"^(1-)?\d{3}(-)?\d{3}(-)?\d{4}$")))
-                    {
-                        db.Users.Add(user);
-                        db.SaveChanges();
-                        ViewBag.Error = "";
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        ViewBag.Error = "Invalid Phone Number! Try again.";
-                    }
-                }
-                else
-                {
-                    ViewBag.Error = "Invalid Email! Try again.";
-                }
-                
+                db.Users.Add(user);
+                db.SaveChanges();
+                ViewBag.Error = "";
+                return RedirectToAction("Index", "Home");
             }
-
             return View(user);
         }
 
