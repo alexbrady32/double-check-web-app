@@ -79,10 +79,19 @@ namespace DoubleCheck.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                ViewBag.Error = "";
-                return RedirectToAction("Index", "Home");
+                var userCount = db.Users.Count(u => (u.Username == user.Username) || (u.Password == user.Password)
+                || (u.Email == user.Email) || (u.phone_num == user.phone_num));
+                if (userCount == 0)
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    ViewBag.Error = "";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.Error = "That user already exists!";
+                }  
             }
             return View(user);
         }

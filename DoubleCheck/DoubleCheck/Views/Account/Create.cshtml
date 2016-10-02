@@ -9,6 +9,11 @@
 @using (Html.BeginForm("Create", "Account", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
+
+    <div id="error_message" class="alert alert-danger hidden">
+        <strong>@ViewBag.Error</strong>
+    </div>
+
     <div class="form-horizontal">
         <h4>Create a New Account</h4>
 
@@ -75,3 +80,13 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        var error = '@ViewBag.Error';
+        if (error != '') {
+            $("#error_message").removeClass('hidden');
+        }
+    })
+</script>
