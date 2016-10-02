@@ -30,8 +30,11 @@ namespace DoubleCheck.Controllers
         {
             if (credentials.Username != null && credentials.Password != null)
             {
+                // Use the hashed password when checking the database
+                string hashedPassword = CreatePasswordHash(credentials.Password);
+
                 var user = db.Users.Where(model => model.Username.Equals(credentials.Username) 
-                                                 && model.Password.Equals(credentials.Password)).FirstOrDefault();
+                                                 && model.Password.Equals(hashedPassword)).FirstOrDefault();
 
                 if (user != null)
                 {
