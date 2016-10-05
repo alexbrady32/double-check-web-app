@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="doublecheckdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="doublecheckdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asgmt_Type">
           <Key>
             <PropertyRef Name="Id" />
@@ -40,6 +40,16 @@
           <Property Name="Building" Type="varchar" MaxLength="20" />
           <Property Name="Room_Num" Type="int" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -51,6 +61,7 @@
           <Property Name="firstName" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="lastName" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="phone_num" Type="varchar" MaxLength="10" />
+          <Property Name="Cloze_Score" Type="numeric" Precision="3" Scale="0" />
         </EntityType>
         <Association Name="FK__Assignment__C_Id__2B3F6F97">
           <End Role="Class" Type="Self.Class" Multiplicity="1" />
@@ -104,6 +115,7 @@
           <EntitySet Name="Asgmt_Type" EntityType="Self.Asgmt_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assignments" EntityType="Self.Assignments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Assignment__C_Id__2B3F6F97" Association="Self.FK__Assignment__C_Id__2B3F6F97">
             <End Role="Class" EntitySet="Class" />
@@ -122,8 +134,7 @@
             <End Role="Class" EntitySet="Class" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="doublecheckdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -181,6 +192,7 @@
           <Property Name="phone_num" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Assignments" Relationship="Self.FK__Assignment__U_Id__2A4B4B5E" FromRole="Users" ToRole="Assignments" />
           <NavigationProperty Name="Classes" Relationship="Self.FK__Class__U_Id__24927208" FromRole="Users" ToRole="Class" />
+          <Property Name="Cloze_Score" Type="Decimal" Precision="3" Scale="0" />
         </EntityType>
         <Association Name="FK__Assignment__T_Id__2C3393D0">
           <End Role="Asgmt_Type" Type="Self.Asgmt_Type" Multiplicity="1" />
@@ -251,7 +263,18 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Class" EntitySet="Classes" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="doublecheckdbModel.sysdiagram" />
         </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -299,6 +322,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="doublecheckdbModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Cloze_Score" ColumnName="Cloze_Score" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -306,6 +330,17 @@
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
                 <ScalarProperty Name="lastName" ColumnName="lastName" />
                 <ScalarProperty Name="phone_num" ColumnName="phone_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="doublecheckdbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

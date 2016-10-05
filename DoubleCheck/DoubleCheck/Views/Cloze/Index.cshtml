@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Cloze Exam";
+}
+
+<h2>Index</h2>
+
+<div class="jumbotron">
+    <h4>Double Check needs to assess your reading level in order to estimate how long it will take you to complete your assignments.</h4>
+    <h5>Would you like to take the assessment now?</h5>
+</div>
+
+<div>
+    <a href="@Url.Action("Assess", "Cloze")" class="btn btn-primary">Yes, take me to the assessment</a>
+</div>
+<div>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-default">No, take me back home</a>
+</div>
+<div>
+    <a href="@Url.Action("StopAsking", "Home")" class="btn btn-danger">No, take me back home and don't ask me again.</a>
+</div>

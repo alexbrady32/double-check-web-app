@@ -11,9 +11,7 @@ namespace DoubleCheck.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,18 +22,13 @@ namespace DoubleCheck.Models
         }
     
         public int Id { get; set; }
-        [Required]
         public string Username { get; set; }
-        [Required]
         public string Email { get; set; }
-        [Required]
         public string Password { get; set; }
-        [Required]
         public string firstName { get; set; }
-        [Required]
         public string lastName { get; set; }
-
         public string phone_num { get; set; }
+        public Nullable<decimal> Cloze_Score { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Assignment> Assignments { get; set; }
