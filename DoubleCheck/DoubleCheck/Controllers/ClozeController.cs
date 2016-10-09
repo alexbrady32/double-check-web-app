@@ -18,6 +18,7 @@ namespace DoubleCheck.Controllers
             return View();
         }
 
+        // GET: /Cloze/Account
         public ActionResult Assess()
         {
             return View();
@@ -30,6 +31,11 @@ namespace DoubleCheck.Controllers
             user.Cloze_Score = 85;
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Grade()
+        {
+            return View();
         }
     }
 }

@@ -2,6 +2,36 @@
 @{
     ViewBag.Title = "Assess";
 }
+<!--Using http://www.testyourenglish.net/english-online/cloze-reading/clozetest-3.html-->
 
 <h2>Assess</h2>
+
+@using (Html.BeginForm("Grade", "Cloze", FormMethod.Post))
+{
+    <h2>Read the paragraph and then select which words would best fill in each blank, numbered 1-5 below.</h2>
+
+    <h3>The postal service is the government agency (1) ----- handles the mail. Its job is (2) ----- letters and packages to people and businesses all over the world. Its goal is to see that your mail gets to its destination (3) ----- possible. People (4) ----- the postal service to deliver important letters and even valuables, (5) ----- time and to the right person. </h3>
+    <div>
+        <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-A" value="A" />
+        <label for="paragraph-1-answers-A">A) the fact that </label>
+    </div>
+    <div>
+        <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-B" value="B" />
+        <label for="paragraph-1-answers-B">B) whether </label>
+    </div>
+    <div>
+        <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-C" value="C" />
+        <label for="paragraph-1-answers-C">C) of which </label>
+    </div>
+    <div>
+        <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-D" value="D" />
+        <label for="paragraph-1-answers-D">D) that </label>
+    </div>
+    <div>
+        <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-E" value="E" />
+        <label for="paragraph-1-answers-E">E) in that </label>
+    </div>
+
+    <input type="submit" value="Submit Test" />
+}
 
