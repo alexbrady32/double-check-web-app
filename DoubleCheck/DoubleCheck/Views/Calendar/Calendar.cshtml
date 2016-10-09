@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel='stylesheet' href='~/Scripts/fullcalendar/fullcalendar.css' />
+    <script src='~/Scripts/fullcalendar/lib/jquery.min.js'></script>
+    <script src='~/Scripts/fullcalendar/lib/moment.min.js'></script>
+    <script src='~/Scripts/fullcalendar/fullcalendar.js'></script>
+    <title>Calendar</title>
+    <script>
+        $(document).ready(function () {
+
+            // page is now ready, initialize the calendar...
+
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+                header: {
+                    left: 'prev, next, today',
+                    center: 'title',
+                    right: 'month, agendaWeek, agendaDay, pre'
+                }
+            })
+
+        });
+    </script>
+</head>
+<body>
+    <div> 
+        <div id='calendar'></div>
+    </div>
+</body>
+</html>
