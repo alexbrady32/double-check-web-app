@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace DoubleCheck.Controllers
 {
-    public class AssignmentController : Controller
+    public class AssignmentsController : Controller
     {
         // GET: Assignment
         public ActionResult List()
