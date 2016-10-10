@@ -13,6 +13,7 @@
         <AssociationConnector Association="doublecheckdbModel.FK__Assignment__C_Id__2B3F6F97" ManuallyRouted="false" />
         <AssociationConnector Association="doublecheckdbModel.FK__Assignment__U_Id__2A4B4B5E" ManuallyRouted="false" />
         <AssociationConnector Association="doublecheckdbModel.FK__Class__U_Id__24927208" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="doublecheckdbModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

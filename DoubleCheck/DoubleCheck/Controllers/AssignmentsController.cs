@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoubleCheck.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +9,14 @@ namespace DoubleCheck.Controllers
 {
     public class AssignmentsController : Controller
     {
-        // GET: Assignment
+        private doublecheckdbEntities db = new doublecheckdbEntities();
+
+        // GET: Assignments
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult List()
         {
             return View();
