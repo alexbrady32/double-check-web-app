@@ -35,7 +35,12 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Grade()
         {
-            return View();
+            Console.Write("What's going on?");
+            var answer = Request.Params["paragraph-1-answers"];
+            var answer1 = Request.Params["paragraph-2-answers"];
+            var answer2 = Request.Params["paragraph-3-answers"];
+            var answer3 = Request.Params["paragraph-4-answers"];
+            return RedirectToAction("Index", "Home");
         }
     }
 }
