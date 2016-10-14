@@ -2,9 +2,14 @@
     ViewBag.Title = "Assess";
 }
 
+@{
+    var attributes = new Dictionary<string, object>();
+    attributes.Add("Id", "cloze-form");
+}
+
 <h2>Assess</h2>
 
-@using (Html.BeginForm("Grade", "Cloze", FormMethod.Post))
+@using (Html.BeginForm("Grade", "Cloze", FormMethod.Post, attributes))
 {
     <h2>Read each paragraph and then select which words would best fill in the blanks, numbered 1-5 for each paragraph below.</h2>
 
@@ -125,59 +130,25 @@
 }
 
 
-<!--<script>
-    $(document).ready(function()
-{    $("#grade").click(function() {
-
-if (!$("input[name=paragraph-1-answers]:checked").val() ||
-!$("input[name=paragraph-2-answers]:checked").val() ||
-!$("input[name=paragraph-3-answers]:checked").val() ||
-!$("input[name=paragraph-4-answers]:checked").val() ||
-!$("input[name=paragraph-5-answers]:checked").val() ||
-!$("input[name=paragraph1-1-answers]:checked").val() ||
-!$("input[name=paragraph1-2-answers]:checked").val() ||
-!$("input[name=paragraph1-3-answers]:checked").val() ||
-!$("input[name=paragraph1-4-answers]:checked").val() ||
-!$("input[name=paragraph1-5-answers]:checked").val()
-) {
-alert("You're not done yet!");
-}
-
-else {
-var cat1name = "1";
-var cat2name = "2";
-var cat3name = "3";
-var cat4name = "4";
-var cat5name = "5";
-var cat6name = "6";
-var cat7name = "7";
-var cat8name = "8";
-var cat9name = "9";
-var cat10name = "10";
-var cat11name = "None";
-
-
-var cat1 = ($("input[name=paragraph-1-answers]:checked").val() != "D");
-
-var cat2 = ($("input[name=paragraph-2-answers]:checked").val() != "E");
-
-var cat3 = ($("input[name=paragraph-3-answers]:checked").val() != "D");
-
-var cat4 = ($("input[name=paragraph-4-answers]:checked").val() != "E");
-
-var cat5 = ($("input[name=paragraph-5-answers]:checked").val() != "D");
-
-var cat6 = ($("input[name=paragraph1-1-answers]:checked").val() != "C");
-
-var cat7 = ($("input[name=paragraph1-2-answers]:checked").val() != "D");
-
-var cat8 = ($("input[name=paragraph1-3-answers]:checked").val() != "A");
-
-var cat9 = ($("input[name=paragraph1-4-answers]:checked").val() != "C");
-
-var cat10 = ($("input[name=paragraph1-5-answers]:checked").val() != "C");
-
-var cat11 = (!cat1 && !cat2 && !cat3 && !cat4 && !cat5 && !cat6 && !cat7 && !cat8 && !cat9 && !cat10);
-}});});
-</script>-->
+<script>
+    document.getElementById('cloze-form').onsubmit = function () {
+        if (!$("input[name=paragraph-1-answers]:checked").val() || 
+            !$("input[name=paragraph-2-answers]:checked").val() || 
+            !$("input[name=paragraph-3-answers]:checked").val() || 
+            !$("input[name=paragraph-4-answers]:checked").val() || 
+            !$("input[name=paragraph-5-answers]:checked").val() || 
+            !$("input[name=paragraph1-1-answers]:checked").val() || 
+            !$("input[name=paragraph1-2-answers]:checked").val() || 
+            !$("input[name=paragraph1-3-answers]:checked").val() || 
+            !$("input[name=paragraph1-4-answers]:checked").val() || 
+            !$("input[name=paragraph1-5-answers]:checked").val()) 
+        {
+            alert("You're not done yet!");
+            return false;
+        }
+        else {
+            alert("Thank you for completing the cloze exam! Your exam will be submitted and scored.");
+        }     
+    };
+</script>
 
