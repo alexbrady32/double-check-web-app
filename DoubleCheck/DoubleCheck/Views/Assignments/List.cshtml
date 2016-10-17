@@ -1,18 +1,27 @@
-﻿@model DoubleCheck.Models.User
+﻿@model DoubleCheck.Models.Assignments
 
 @{
     ViewBag.Title = "List";
 }
 
-<!DOCTYPE html>
+<h1>List of Assignments</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>List</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+<table>
+    <tr>
+        <th>Assigment Name</th>
+        <th>Status</th>
+        <th>Due Date</th>
+        <th>Time Remaing</th>
+        <th>Notes</th>
+    </tr>
+    @foreach (var Assignments in model)
+    {
+        <tr>
+            <td>@Assignments.name</td>
+            <td>@Assignments.status</td>
+            <td>@Assignments.due_date</td>
+            <td>@Assignments.TTC</td>
+            <td>@Assignments.discription</td>
+        </tr>
+    }
+</table>
