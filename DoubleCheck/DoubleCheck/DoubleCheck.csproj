@@ -170,7 +170,7 @@
     <Compile Include="Models\Asgmt_Type.cs">
       <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Assignment.cs">
+    <Compile Include="Models\Assignments.cs">
       <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Class.cs">
@@ -190,6 +190,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>

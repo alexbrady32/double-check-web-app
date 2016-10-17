@@ -12,7 +12,7 @@ namespace DoubleCheck.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Assignment
+    public partial class Assignments
     {
         public int A_Id { get; set; }
         public int U_Id { get; set; }
@@ -23,6 +23,7 @@ namespace DoubleCheck.Models
         public System.DateTime Due_Date { get; set; }
         public int TTC { get; set; }
         public string Description { get; set; }
+        public decimal Completion { get; set; }
     
         public virtual Asgmt_Type Asgmt_Type { get; set; }
         public virtual Class Class { get; set; }
