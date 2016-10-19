@@ -19,9 +19,16 @@ namespace DoubleCheck.Controllers
         // GET: Calendar
         public ActionResult Calendar()
         {
-            int userID = Int32.Parse((string)Session["UserID"]);
-            var assignments = db.Assignments1.Where(u => u.U_Id == userID);
+            if (Session["UserID"] != null)
+            {
+                int userID = Int32.Parse((string)Session["UserID"]);
+                var assignments = db.Assignments1.Where(u => u.U_Id == userID);
+                return View();
+            }
+
+            // Really need to return them to the login screen or something...
             return View();
+           
         }
     }
 }
