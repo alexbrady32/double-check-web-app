@@ -22,6 +22,15 @@ namespace DoubleCheck.Controllers
         {
             if (Session["UserID"] != null)
             {
+                var clozeCheck = Session["ClozeCheckComplete"];
+                int userID = Int32.Parse((string)Session["UserID"]);
+                var user = db.Users.Where(u => u.Id == userID).FirstOrDefault();
+                // check if user has taken cloze exam; if not, check if we've already asked them to take it this session
+                if (user.Cloze_Score == null && (clozeCheck == null || (bool)clozeCheck != true))
+                {
+                    return RedirectToAction("Index", "Cloze");
+                }
+                // else:
                 return View();
             }
             else
