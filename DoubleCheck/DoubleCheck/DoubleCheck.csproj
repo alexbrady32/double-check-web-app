@@ -161,6 +161,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\ClozeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -207,10 +208,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Calendar\Calendar.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Cloze\Index.cshtml" />
     <Content Include="Views\Cloze\Assess.cshtml" />
     <Content Include="Views\Assignments\List.cshtml" />
+    <Content Include="Views\Assignments\Create.cshtml" />
+    <Content Include="Views\Assignments\Edit.cshtml" />
+    <Content Include="Views\Assignments\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
