@@ -1,4 +1,4 @@
-﻿@model DoubleCheck.Models.Assignments
+﻿@model List<DoubleCheck.Models.Assignments>
 
 @{
     ViewBag.Title = "List";
@@ -14,14 +14,14 @@
         <th>Time Remaing</th>
         <th>Notes</th>
     </tr>
-    @foreach (var Assignments in model)
+    @foreach (var Assignments in Model)
     {
         <tr>
-            <td>@Assignments.name</td>
-            <td>@Assignments.status</td>
-            <td>@Assignments.due_date</td>
+            <td>@Assignments.Name</td>
+            <td>@Assignments.Status</td>
+            <td>@Assignments.Due_Date</td>
             <td>@Assignments.TTC</td>
-            <td>@Assignments.discription</td>
+            <td>@Assignments.Description</td>
         </tr>
     }
 </table>
