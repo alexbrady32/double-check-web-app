@@ -26,6 +26,7 @@
           <Property Name="Due_Date" Type="smalldatetime" Nullable="false" />
           <Property Name="TTC" Type="int" Nullable="false" />
           <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="Completion" Type="decimal" Precision="3" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Class">
           <Key>
@@ -163,6 +164,7 @@
           <NavigationProperty Name="Asgmt_Type" Relationship="Self.FK__Assignment__T_Id__2C3393D0" FromRole="Assignments" ToRole="Asgmt_Type" />
           <NavigationProperty Name="Class" Relationship="Self.FK__Assignment__C_Id__2B3F6F97" FromRole="Assignments" ToRole="Class" />
           <NavigationProperty Name="User" Relationship="Self.FK__Assignment__U_Id__2A4B4B5E" FromRole="Assignments" ToRole="Users" />
+          <Property Name="Completion" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
         </EntityType>
         <EntityType Name="Class">
           <Key>
@@ -293,6 +295,7 @@
           <EntitySetMapping Name="Assignments">
             <EntityTypeMapping TypeName="doublecheckdbModel.Assignment">
               <MappingFragment StoreEntitySet="Assignments">
+                <ScalarProperty Name="Completion" ColumnName="Completion" />
                 <ScalarProperty Name="A_Id" ColumnName="A_Id" />
                 <ScalarProperty Name="U_Id" ColumnName="U_Id" />
                 <ScalarProperty Name="C_Id" ColumnName="C_Id" />

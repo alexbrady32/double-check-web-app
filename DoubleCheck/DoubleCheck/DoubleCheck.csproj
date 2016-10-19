@@ -190,6 +190,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
     </Compile>
@@ -206,6 +209,7 @@
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Cloze\Index.cshtml" />
     <Content Include="Views\Cloze\Assess.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

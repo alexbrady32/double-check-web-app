@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Windows.old\Users\Denee McClain\Documents\F16\CPTR-486 Senior Project\double-check-web-app\DoubleCheck\DoubleCheck\Models\DoubleCheckDBContext.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Denee McClain.Spencer\Documents\F16\CPTR-488 Senior Project\double-check-web-app\DoubleCheck\DoubleCheck\Models\DoubleCheckDBContext.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
