@@ -1,0 +1,99 @@
+﻿@model DoubleCheck.Models.Assignments
+
+@{
+    ViewBag.Title = "New Assignment";
+}
+
+
+<div class="Panel">
+
+    <div class="Panel-Header">
+        <p>&nbsp;</p>
+        <div class="Panel-Header-Title">
+            <h3>Add New</h3>
+            <h4>Assignment</h4>
+        </div>
+        <div class="Panel-Header-Icon">
+            <i class="fa fa-plus-circle fa-lg"></i>
+        </div>
+    </div>
+
+
+
+    <div class="Panel-Body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br /><br /><br />
+
+            <div class="form-group">
+                @Html.Label("Class", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.C_Id, (SelectList)ViewBag.AppDataClassList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.C_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br /><br /><br />
+
+            <div class="form-group">
+                @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.T_Id, (SelectList)ViewBag.AppDataTypes, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.T_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br /><br /><br />
+
+            <div class="form-group">
+                @Html.Label("Due Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Due_Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.Due_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br /><br /><br />
+
+            <div class="form-group">
+                @Html.Label("Estimated TTC", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TTC, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TTC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br /><br /><br />
+
+            <div class="form-group">
+                @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br /><br /><br />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary btn-create" />
+                </div>
+            </div>
+            <br /><br /><br />
+
+        }
+        <div>
+            <br />
+            <a href="@Url.Action("List", "Assignments")">&#x21a9; Back to List</a>
+        </div>
+    </div>
+</div>
+
+

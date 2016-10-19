@@ -7,13 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoubleCheck.Models;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace DoubleCheck.Controllers
 {
     public class AccountController : Controller
     {
         private doublecheckdbEntities db = new doublecheckdbEntities();
-
+        private bool invalid;
+        
         // GET: Account
         public ActionResult Login()
         {
@@ -25,10 +28,13 @@ namespace DoubleCheck.Controllers
         [HttpPost]
         public ActionResult Login(User credentials)
         {
-            if (ModelState.IsValid)
+            if (credentials.Username != null && credentials.Password != null)
             {
+                // Use the hashed password when checking the database
+                string hashedPassword = CreatePasswordHash(credentials.Password);
+
                 var user = db.Users.Where(model => model.Username.Equals(credentials.Username) 
-                                                 && model.Password.Equals(credentials.Password)).FirstOrDefault();
+                                                 && model.Password.Equals(hashedPassword)).FirstOrDefault();
 
                 if (user != null)
                 {
@@ -64,7 +70,7 @@ namespace DoubleCheck.Controllers
         // GET: Account/Create
         public ActionResult Create()
         {
-            return View("/Views/Account/CreateAccount.cshtml");
+            return View("/Views/Account/Create.cshtml");
         }
 
         // POST: Account/Create
@@ -76,11 +82,23 @@ namespace DoubleCheck.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
-            }
+                // Create Password Hash and store back into the model
+                user.Password = CreatePasswordHash(user.Password);
 
+                var userCount = db.Users.Count(u => (u.Username == user.Username) || (u.Password == user.Password)
+                || (u.Email == user.Email) || (u.phone_num == user.phone_num));
+                if (userCount == 0)
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    ViewBag.Error = "";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.Error = "That user already exists!";
+                }  
+            }
             return View(user);
         }
 
@@ -141,5 +159,78 @@ namespace DoubleCheck.Controllers
             return RedirectToAction("Index");
         }
 
+        public bool IsValidEmail(string strIn)
+        {
+            invalid = false;
+            if (String.IsNullOrEmpty(strIn))
+                return false;
+
+            // Use IdnMapping class to convert Unicode domain names.
+            try
+            {
+                strIn = Regex.Replace(strIn, @"(@)(.+)$", this.DomainMapper,
+                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+
+            if (invalid)
+                return false;
+
+            // Return true if strIn is in valid e-mail format.
+            try
+            {
+                return Regex.IsMatch(strIn,
+                      @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                      @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                      RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+
+        private string DomainMapper(Match match)
+        {
+            // IdnMapping class with default property values.
+            IdnMapping idn = new IdnMapping();
+
+            string domainName = match.Groups[2].Value;
+            try
+            {
+                domainName = idn.GetAscii(domainName);
+            }
+            catch (ArgumentException)
+            {
+                invalid = true;
+            }
+            return match.Groups[1].Value + domainName;
+        }
+
+        public string CreatePasswordHash(string password)
+        {
+            string salt = "JlfufhfiuI4284rhciwIey$f";
+            return Hash(password + salt);
+        }
+
+        private static string Hash(string input)
+        {
+            using (System.Security.Cryptography.SHA1Managed sha1 = new System.Security.Cryptography.SHA1Managed())
+            {
+                var hash = sha1.ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
+                var sb = new System.Text.StringBuilder(hash.Length * 2);
+
+                foreach (byte b in hash)
+                {
+                    // can be "x2" if you want lowercase
+                    sb.Append(b.ToString("X2"));
+                }
+
+                return sb.ToString();
+            }
+        }
     }
 }
