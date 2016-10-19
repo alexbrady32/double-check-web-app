@@ -1,0 +1,27 @@
+﻿@model List<DoubleCheck.Models.Assignments>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h1>List of Assignments</h1>
+
+<table>
+    <tr>
+        <th>Assigment Name</th>
+        <th>Status</th>
+        <th>Due Date</th>
+        <th>Time Remaing</th>
+        <th>Notes</th>
+    </tr>
+    @foreach (var Assignments in Model)
+    {
+        <tr>
+            <td>@Assignments.Name</td>
+            <td>@Assignments.Status</td>
+            <td>@Assignments.Due_Date</td>
+            <td>@Assignments.TTC</td>
+            <td>@Assignments.Description</td>
+        </tr>
+    }
+</table>

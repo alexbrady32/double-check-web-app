@@ -148,7 +148,7 @@
           <Property Name="TTC" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Assignments" Relationship="Self.FK__Assignment__T_Id__2C3393D0" FromRole="Asgmt_Type" ToRole="Assignments" />
         </EntityType>
-        <EntityType Name="Assignment">
+        <EntityType Name="Assignments">
           <Key>
             <PropertyRef Name="A_Id" />
           </Key>
@@ -198,7 +198,7 @@
         </EntityType>
         <Association Name="FK__Assignment__T_Id__2C3393D0">
           <End Role="Asgmt_Type" Type="Self.Asgmt_Type" Multiplicity="1" />
-          <End Role="Assignments" Type="Self.Assignment" Multiplicity="*" />
+          <End Role="Assignments" Type="doublecheckdbModel.Assignments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Asgmt_Type">
               <PropertyRef Name="Id" />
@@ -210,7 +210,7 @@
         </Association>
         <Association Name="FK__Assignment__C_Id__2B3F6F97">
           <End Role="Class" Type="Self.Class" Multiplicity="1" />
-          <End Role="Assignments" Type="Self.Assignment" Multiplicity="*" />
+          <End Role="Assignments" Type="doublecheckdbModel.Assignments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
               <PropertyRef Name="C_Id" />
@@ -222,7 +222,7 @@
         </Association>
         <Association Name="FK__Assignment__U_Id__2A4B4B5E">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Assignments" Type="Self.Assignment" Multiplicity="*" />
+          <End Role="Assignments" Type="doublecheckdbModel.Assignments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="Id" />
@@ -246,20 +246,20 @@
         </Association>
         <EntityContainer Name="doublecheckdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Asgmt_Type" EntityType="Self.Asgmt_Type" />
-          <EntitySet Name="Assignments" EntityType="Self.Assignment" />
+          <EntitySet Name="Assignments1" EntityType="doublecheckdbModel.Assignments" />
           <EntitySet Name="Classes" EntityType="Self.Class" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK__Assignment__T_Id__2C3393D0" Association="Self.FK__Assignment__T_Id__2C3393D0">
             <End Role="Asgmt_Type" EntitySet="Asgmt_Type" />
-            <End Role="Assignments" EntitySet="Assignments" />
+            <End Role="Assignments" EntitySet="Assignments1" />
           </AssociationSet>
           <AssociationSet Name="FK__Assignment__C_Id__2B3F6F97" Association="Self.FK__Assignment__C_Id__2B3F6F97">
             <End Role="Class" EntitySet="Classes" />
-            <End Role="Assignments" EntitySet="Assignments" />
+            <End Role="Assignments" EntitySet="Assignments1" />
           </AssociationSet>
           <AssociationSet Name="FK__Assignment__U_Id__2A4B4B5E" Association="Self.FK__Assignment__U_Id__2A4B4B5E">
             <End Role="Users" EntitySet="Users" />
-            <End Role="Assignments" EntitySet="Assignments" />
+            <End Role="Assignments" EntitySet="Assignments1" />
           </AssociationSet>
           <AssociationSet Name="FK__Class__U_Id__24927208" Association="Self.FK__Class__U_Id__24927208">
             <End Role="Users" EntitySet="Users" />
@@ -292,8 +292,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Assignments">
-            <EntityTypeMapping TypeName="doublecheckdbModel.Assignment">
+          <EntitySetMapping Name="Assignments1">
+            <EntityTypeMapping TypeName="doublecheckdbModel.Assignments">
               <MappingFragment StoreEntitySet="Assignments">
                 <ScalarProperty Name="Completion" ColumnName="Completion" />
                 <ScalarProperty Name="A_Id" ColumnName="A_Id" />

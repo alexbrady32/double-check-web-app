@@ -161,6 +161,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\ClozeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -169,7 +170,7 @@
     <Compile Include="Models\Asgmt_Type.cs">
       <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Assignment.cs">
+    <Compile Include="Models\Assignments.cs">
       <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Class.cs">
@@ -209,7 +210,7 @@
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Cloze\Index.cshtml" />
     <Content Include="Views\Cloze\Assess.cshtml" />
-    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Assignments\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
