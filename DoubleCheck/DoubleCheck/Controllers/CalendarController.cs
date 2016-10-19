@@ -20,7 +20,7 @@ namespace DoubleCheck.Controllers
         public ActionResult Calendar()
         {
             int userID = Int32.Parse((string)Session["UserID"]);
-            var assignments = db.Assignments.Where(u => u.U_Id == userID);
+            var assignments = db.Assignments1.Where(u => u.U_Id == userID);
             return View();
         }
     }
