@@ -213,6 +213,7 @@
     <Content Include="Views\Cloze\Index.cshtml" />
     <Content Include="Views\Cloze\Assess.cshtml" />
     <Content Include="Views\Assignments\List.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

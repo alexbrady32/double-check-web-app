@@ -1,27 +1,23 @@
 ﻿@model DoubleCheck.Models.User
 
 @{
-    ViewBag.Title = "Create Account";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Create Account</h2>
+<h2>Edit</h2>
 
-@using (Html.BeginForm("Create", "Account", FormMethod.Post)) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <div id="error_message" class="alert alert-danger hidden">
-        <strong>@ViewBag.Error</strong>
-    </div>
-
+    
     <div class="form-horizontal">
-        <h4>Create a New Account</h4>
-
+        <h4>User</h4>
         <hr />
-
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
@@ -31,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type="email" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -39,13 +35,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type= "password" } })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type="password" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label for="firstName" class="control-label col-md-2">First Name</label>
+            @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
@@ -53,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            <label for="lastName" class="control-label col-md-2">Last Name</label>
+            @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
@@ -61,9 +57,9 @@
         </div>
 
         <div class="form-group">
-            <label for="phone_num" class="control-label col-md-2">Phone Number</label>
+            @Html.LabelFor(model => model.phone_num, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.phone_num, new { htmlAttributes = new { @class = "form-control", @type="number" } })
+                @Html.EditorFor(model => model.phone_num, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.phone_num, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -71,7 +67,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.canNotifyByEmail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.canNotifyByEmail, new { htmlAttributes = new { @class = "form-control", @type = "checkbox" } })
+                @Html.EditorFor(model => model.canNotifyByEmail, new { htmlAttributes = new { @class = "form-control", @type="checkbox" } })
                 @Html.ValidationMessageFor(model => model.canNotifyByEmail, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -79,25 +75,19 @@
         <div class="form-group">
             @Html.LabelFor(model => model.canNotifyByText, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.canNotifyByText, new { htmlAttributes = new { @class = "form-control", @type = "checkbox" } })
+                @Html.EditorFor(model => model.canNotifyByText, new { htmlAttributes = new { @class = "form-control", @type="checkbox" } })
                 @Html.ValidationMessageFor(model => model.canNotifyByText, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-
-<script>
-    $(document).ready(function () {
-        var error = '@ViewBag.Error';
-        if (error != '') {
-            $("#error_message").removeClass('hidden');
-        }
-    })
-</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
