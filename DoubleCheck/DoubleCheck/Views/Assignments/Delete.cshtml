@@ -1,0 +1,58 @@
+﻿@model DoubleCheck.Models.Assignments
+
+@{
+    ViewBag.Title = "Delete Assignment";
+}
+
+
+<div class="Panel">
+    <div class="Panel-Header">
+        <p>&nbsp;</p>
+        <h3 style="text-align:center;">Are you sure you want to delete this Assignment?</h3>
+    </div>
+    
+    <br /><br />
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+
+        <dt>Status</dt>
+        <dd>@Html.DisplayFor(model => model.Status)</dd>
+
+        <dt>Due Date</dt>
+        <dd>@Html.DisplayFor(model => model.Due_Date)</dd>
+        
+        <dt>TTC</dt>
+        <dd>@Html.DisplayFor(model => model.TTC)</dd>
+
+        <dt>Description</dt>
+        <dd>@Html.DisplayFor(model => model.Description)</dd>
+        
+        <dt>Completion</dt>
+        <dd>@Html.DisplayFor(model => model.Completion)</dd>
+
+        <dt>Class</dt>
+        <dd>@Html.DisplayFor(model => model.Class.Name)</dd>
+        
+        <dt>Type</dt>
+        <dd>@Html.DisplayFor(model => model.Asgmt_Type.Name)</dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger btn-create" />
+        </div>
+    }
+
+    <div>
+        <br />
+        <a href="@Url.Action("List", "Assignments")">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x21a9;Back to List</a>
+        <br />
+        <br />
+    </div>
+
+</div>
