@@ -1,8 +1,4 @@
 ﻿
-@{
-    
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -24,7 +20,30 @@
                     left: 'prev, next, today',
                     center: 'title',
                     right: 'month, agendaWeek, agendaDay, pre'
-                }
+                },
+                events: [
+        {
+            title: 'event1',
+            start: '2016-10-19'
+        },
+        {
+            title: 'event2',
+            start: '2016-10-19',
+            end: '2016-10-20'
+        },
+        {
+            title: 'event3',
+            start: '2016-10-19T12:30:00',
+            end: '2016-10-19T13:00:00',
+            allDay: false // will make the time show
+        },
+        {
+            title: 'event4',
+            start: '2016-10-19T12:50:00',
+            end: '2016-10-19T13:10:00',
+            allDay: false // will make the time show
+        }
+                ]
             })
 
         });
