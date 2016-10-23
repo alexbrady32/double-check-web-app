@@ -1,4 +1,5 @@
-﻿
+﻿@model List<DoubleCheck.Controllers.CalendarModel>
+
 <!DOCTYPE html>
 
 <html>
@@ -13,7 +14,17 @@
         $(document).ready(function () {
 
             // page is now ready, initialize the calendar...
-
+            var jsonObjArray = @Html.Raw(Json.Encode(Model));
+            console.log(jsonObjArray);
+            var eventsData = [];
+            for (i = 0; i < jsonObjArray.length; i++){
+                eventsData[i] = [];
+                eventsData[i].title = jsonObjArray[i].title;
+                eventsData[i].start = new Date(parseInt(jsonObjArray[i].startTime.substr(6)));
+                eventsData[i].end = new Date(parseInt(jsonObjArray[i].endTime.substr(6)));
+                eventsData[i].allDay = false;
+            }
+            console.log(eventsData);
             $('#calendar').fullCalendar({
                 // put your options and callbacks here
                 header: {
@@ -21,7 +32,7 @@
                     center: 'title',
                     right: 'month, agendaWeek, agendaDay, pre'
                 },
-                events: [
+               /* events: [
         {
             title: 'event1',
             start: '2016-10-19'
@@ -43,14 +54,15 @@
             end: '2016-10-19T13:10:00',
             allDay: false // will make the time show
         }
-                ]
+                ]*/
+                events: eventsData
             })
 
         });
     </script>
 </head>
 <body>
-    <div> 
+    <div style="width:90%; margin-left: auto; margin-right:auto; margin-top:100px;"> 
         <div id='calendar'></div>
     </div>
 </body>

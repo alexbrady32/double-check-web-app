@@ -50,16 +50,16 @@ namespace DoubleCheck.Controllers
                     calendarData.Add(data);
                 }
 
-                /*
+                
                 foreach (Class c in classes)
                 {
                     CalendarModel data = new CalendarModel(c.Name);
                     
                     calendarData.Add(new CalendarModel(c.Name));
                 }
-                */
+                
 
-                return View();
+                return View(calendarData);
             }
             // TODO: need to return a not logged in page or something here.
             return View();
