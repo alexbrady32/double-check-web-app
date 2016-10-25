@@ -69,18 +69,22 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.canNotifyByEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label for="phone_num" class="control-label col-md-2">Would you like to receive an email when your assignments are due?</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.canNotifyByEmail, new { htmlAttributes = new { @class = "form-control", @type = "checkbox" } })
-                @Html.ValidationMessageFor(model => model.canNotifyByEmail, "", new { @class = "text-danger" })
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.canNotifyByEmail)
+                    @Html.ValidationMessageFor(model => model.canNotifyByEmail, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.canNotifyByText, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label for="phone_num" class="control-label col-md-2">Would you like to receive a text message when your assignments are due?</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.canNotifyByText, new { htmlAttributes = new { @class = "form-control", @type = "checkbox" } })
-                @Html.ValidationMessageFor(model => model.canNotifyByText, "", new { @class = "text-danger" })
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.canNotifyByText)
+                    @Html.ValidationMessageFor(model => model.canNotifyByText, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
