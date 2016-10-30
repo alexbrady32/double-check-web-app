@@ -21,7 +21,8 @@ namespace DoubleCheck.Controllers
 
         public ActionResult List()
         {
-            return View(db.Assignments1.ToList());
+            int userID = int.Parse((string)Session["UserID"]);
+            return View(db.Assignments1.ToList().Where(model => model.U_Id.Equals(userID)));
         }
 
         public ActionResult Create()

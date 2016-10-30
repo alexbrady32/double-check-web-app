@@ -1,6 +1,4 @@
-﻿@model List<DoubleCheck.Models.Assignments>
-
-@{
+﻿@{
     ViewBag.Title = "List";
 }
 
@@ -8,6 +6,7 @@
 
 <table style="text-align:center">
     <tr>
+        <th>Class</th>
         <th>Assigment Name</th>
         <th>Status</th>
         <th>Due Date</th>
@@ -19,6 +18,7 @@
     @foreach (var Assignments in Model)
     {
         <tr>
+            <td>@Assignments.C_Id</td>
             <td>@Assignments.Name</td>
             <td>@Assignments.Status</td>
             <td>@Assignments.Due_Date</td>
