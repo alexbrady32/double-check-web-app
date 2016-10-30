@@ -17,20 +17,22 @@ namespace DoubleCheck.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Class()
         {
-            this.Assignments = new HashSet<Assignments>();
+            this.Assignments = new HashSet<Assignment>();
+            this.Time_Periods = new HashSet<Time_Periods>();
         }
     
         public int C_Id { get; set; }
         public int U_Id { get; set; }
         public string Name { get; set; }
-        public System.TimeSpan Start_Time { get; set; }
-        public System.TimeSpan End_Time { get; set; }
-        public string Days { get; set; }
         public string Building { get; set; }
         public Nullable<int> Room_Num { get; set; }
+        public System.DateTime Start_Date { get; set; }
+        public System.DateTime End_Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Assignments> Assignments { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Time_Periods> Time_Periods { get; set; }
     }
 }

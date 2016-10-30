@@ -23,6 +23,7 @@
                 eventsData[i].start = new Date(parseInt(jsonObjArray[i].startTime.substr(6)));
                 eventsData[i].end = new Date(parseInt(jsonObjArray[i].endTime.substr(6)));
                 eventsData[i].allDay = false;
+                eventsData[i].dow = jsonObjArray[i].dow;
             }
             console.log(eventsData);
             $('#calendar').fullCalendar({

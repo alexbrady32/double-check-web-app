@@ -19,7 +19,7 @@ namespace DoubleCheck.Controllers
 
         public ActionResult List()
         {
-            return View(db.Assignments1.ToList());
+            return View(db.Assignments.ToList());
         }
     }
 }
