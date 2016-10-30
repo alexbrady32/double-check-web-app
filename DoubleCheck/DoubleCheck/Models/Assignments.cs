@@ -26,7 +26,7 @@ namespace DoubleCheck.Models
         public decimal Completion { get; set; }
     
         public virtual Asgmt_Type Asgmt_Type { get; set; }
-        public virtual Class Class { get; set; }
         public virtual User User { get; set; }
+        public virtual Class Class { get; set; }
     }
 }

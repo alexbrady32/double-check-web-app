@@ -35,11 +35,18 @@
           <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="U_Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="Start_Time" Type="time" Precision="0" Nullable="false" />
-          <Property Name="End_Time" Type="time" Precision="0" Nullable="false" />
-          <Property Name="Days" Type="varchar" MaxLength="7" Nullable="false" />
           <Property Name="Building" Type="varchar" MaxLength="20" />
           <Property Name="Room_Num" Type="int" />
+          <Property Name="Start_Date" Type="date" Nullable="false" />
+          <Property Name="End_Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Class_Times">
+          <Key>
+            <PropertyRef Name="C_Id" />
+            <PropertyRef Name="T_Id" />
+          </Key>
+          <Property Name="C_Id" Type="int" Nullable="false" />
+          <Property Name="T_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -50,6 +57,15 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Time_Periods">
+          <Key>
+            <PropertyRef Name="T_Id" />
+          </Key>
+          <Property Name="T_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Start_Time" Type="time" Precision="0" Nullable="false" />
+          <Property Name="End_Time" Type="time" Precision="0" Nullable="false" />
+          <Property Name="Days" Type="varchar" MaxLength="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -114,11 +130,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Class_Time__C_Id__52593CB8">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class_Times" Type="Self.Class_Times" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="Class_Times">
+              <PropertyRef Name="C_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Class_Time__T_Id__5165187F">
+          <End Role="Time_Periods" Type="Self.Time_Periods" Multiplicity="1" />
+          <End Role="Class_Times" Type="Self.Class_Times" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Time_Periods">
+              <PropertyRef Name="T_Id" />
+            </Principal>
+            <Dependent Role="Class_Times">
+              <PropertyRef Name="T_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="doublecheckdbModelStoreContainer">
           <EntitySet Name="Asgmt_Type" EntityType="Self.Asgmt_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assignments" EntityType="Self.Assignments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Class_Times" EntityType="Self.Class_Times" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Time_Periods" EntityType="Self.Time_Periods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Assignment__C_Id__2B3F6F97" Association="Self.FK__Assignment__C_Id__2B3F6F97">
             <End Role="Class" EntitySet="Class" />
@@ -135,6 +208,14 @@
           <AssociationSet Name="FK__Class__U_Id__24927208" Association="Self.FK__Class__U_Id__24927208">
             <End Role="Users" EntitySet="Users" />
             <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Class_Time__C_Id__52593CB8" Association="Self.FK__Class_Time__C_Id__52593CB8">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Class_Times" EntitySet="Class_Times" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Class_Time__T_Id__5165187F" Association="Self.FK__Class_Time__T_Id__5165187F">
+            <End Role="Time_Periods" EntitySet="Time_Periods" />
+            <End Role="Class_Times" EntitySet="Class_Times" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -164,24 +245,9 @@
           <Property Name="TTC" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Asgmt_Type" Relationship="Self.FK__Assignment__T_Id__2C3393D0" FromRole="Assignments" ToRole="Asgmt_Type" />
-          <NavigationProperty Name="Class" Relationship="Self.FK__Assignment__C_Id__2B3F6F97" FromRole="Assignments" ToRole="Class" />
           <NavigationProperty Name="User" Relationship="Self.FK__Assignment__U_Id__2A4B4B5E" FromRole="Assignments" ToRole="Users" />
           <Property Name="Completion" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
-        </EntityType>
-        <EntityType Name="Class">
-          <Key>
-            <PropertyRef Name="C_Id" />
-          </Key>
-          <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="U_Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Start_Time" Type="Time" Nullable="false" Precision="0" />
-          <Property Name="End_Time" Type="Time" Nullable="false" Precision="0" />
-          <Property Name="Days" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Building" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Room_Num" Type="Int32" />
-          <NavigationProperty Name="Assignments" Relationship="Self.FK__Assignment__C_Id__2B3F6F97" FromRole="Class" ToRole="Assignments" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Class__U_Id__24927208" FromRole="Class" ToRole="Users" />
+          <NavigationProperty Name="Class" Relationship="doublecheckdbModel.FK__Assignment__C_Id__2B3F6F97" FromRole="Assignments" ToRole="Class" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -195,10 +261,10 @@
           <Property Name="lastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="phone_num" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Assignments" Relationship="Self.FK__Assignment__U_Id__2A4B4B5E" FromRole="Users" ToRole="Assignments" />
-          <NavigationProperty Name="Classes" Relationship="Self.FK__Class__U_Id__24927208" FromRole="Users" ToRole="Class" />
           <Property Name="Cloze_Score" Type="Decimal" Precision="3" Scale="0" />
           <Property Name="canNotifyByEmail" Type="Boolean" Nullable="false" />
           <Property Name="canNotifyByText" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Classes" Relationship="doublecheckdbModel.FK__Class__U_Id__24927208" FromRole="User" ToRole="Class" />
         </EntityType>
         <Association Name="FK__Assignment__T_Id__2C3393D0">
           <End Role="Asgmt_Type" Type="Self.Asgmt_Type" Multiplicity="1" />
@@ -209,18 +275,6 @@
             </Principal>
             <Dependent Role="Assignments">
               <PropertyRef Name="T_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Assignment__C_Id__2B3F6F97">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
-          <End Role="Assignments" Type="doublecheckdbModel.Assignments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Class">
-              <PropertyRef Name="C_Id" />
-            </Principal>
-            <Dependent Role="Assignments">
-              <PropertyRef Name="C_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -236,40 +290,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Class__U_Id__24927208">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Class" Type="Self.Class" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Class">
-              <PropertyRef Name="U_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="doublecheckdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Asgmt_Type" EntityType="Self.Asgmt_Type" />
           <EntitySet Name="Assignments1" EntityType="doublecheckdbModel.Assignments" />
-          <EntitySet Name="Classes" EntityType="Self.Class" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK__Assignment__T_Id__2C3393D0" Association="Self.FK__Assignment__T_Id__2C3393D0">
             <End Role="Asgmt_Type" EntitySet="Asgmt_Type" />
-            <End Role="Assignments" EntitySet="Assignments1" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Assignment__C_Id__2B3F6F97" Association="Self.FK__Assignment__C_Id__2B3F6F97">
-            <End Role="Class" EntitySet="Classes" />
             <End Role="Assignments" EntitySet="Assignments1" />
           </AssociationSet>
           <AssociationSet Name="FK__Assignment__U_Id__2A4B4B5E" Association="Self.FK__Assignment__U_Id__2A4B4B5E">
             <End Role="Users" EntitySet="Users" />
             <End Role="Assignments" EntitySet="Assignments1" />
           </AssociationSet>
-          <AssociationSet Name="FK__Class__U_Id__24927208" Association="Self.FK__Class__U_Id__24927208">
-            <End Role="Users" EntitySet="Users" />
+          <EntitySet Name="sysdiagrams" EntityType="doublecheckdbModel.sysdiagram" />
+          <EntitySet Name="Time_Periods" EntityType="doublecheckdbModel.Time_Periods" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(doublecheckdbModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(doublecheckdbModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Classes" EntityType="doublecheckdbModel.Class" />
+          <AssociationSet Name="FK__Assignment__C_Id__2B3F6F97" Association="doublecheckdbModel.FK__Assignment__C_Id__2B3F6F97">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Assignments" EntitySet="Assignments1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Class__U_Id__24927208" Association="doublecheckdbModel.FK__Class__U_Id__24927208">
+            <End Role="User" EntitySet="Users" />
             <End Role="Class" EntitySet="Classes" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="doublecheckdbModel.sysdiagram" />
+          <AssociationSet Name="Class_Times" Association="doublecheckdbModel.Class_Times">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Time_Periods" EntitySet="Time_Periods" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -281,6 +358,70 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="Time_Periods">
+          <Key>
+            <PropertyRef Name="T_Id" />
+          </Key>
+          <Property Name="T_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Start_Time" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="End_Time" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="Days" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Classes" Relationship="doublecheckdbModel.Class_Times" FromRole="Time_Periods" ToRole="Class" />
+        </EntityType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Building" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Room_Num" Type="Int32" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Assignments" Relationship="doublecheckdbModel.FK__Assignment__C_Id__2B3F6F97" FromRole="Class" ToRole="Assignments" />
+          <NavigationProperty Name="User" Relationship="doublecheckdbModel.FK__Class__U_Id__24927208" FromRole="Class" ToRole="User" />
+          <NavigationProperty Name="Time_Periods" Relationship="doublecheckdbModel.Class_Times" FromRole="Class" ToRole="Time_Periods" />
+        </EntityType>
+        <Association Name="FK__Assignment__C_Id__2B3F6F97">
+          <End Type="doublecheckdbModel.Class" Role="Class" Multiplicity="1" />
+          <End Type="doublecheckdbModel.Assignments" Role="Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="Assignments">
+              <PropertyRef Name="C_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Class__U_Id__24927208">
+          <End Type="doublecheckdbModel.User" Role="User" Multiplicity="1" />
+          <End Type="doublecheckdbModel.Class" Role="Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="U_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Class_Times">
+          <End Type="doublecheckdbModel.Class" Role="Class" Multiplicity="*" />
+          <End Type="doublecheckdbModel.Time_Periods" Role="Time_Periods" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -312,20 +453,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Classes">
-            <EntityTypeMapping TypeName="doublecheckdbModel.Class">
-              <MappingFragment StoreEntitySet="Class">
-                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
-                <ScalarProperty Name="U_Id" ColumnName="U_Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
-                <ScalarProperty Name="End_Time" ColumnName="End_Time" />
-                <ScalarProperty Name="Days" ColumnName="Days" />
-                <ScalarProperty Name="Building" ColumnName="Building" />
-                <ScalarProperty Name="Room_Num" ColumnName="Room_Num" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="doublecheckdbModel.User">
               <MappingFragment StoreEntitySet="Users">
@@ -353,6 +480,61 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Time_Periods">
+            <EntityTypeMapping TypeName="doublecheckdbModel.Time_Periods">
+              <MappingFragment StoreEntitySet="Time_Periods">
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="End_Time" ColumnName="End_Time" />
+                <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+                <ScalarProperty Name="T_Id" ColumnName="T_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="doublecheckdbModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="doublecheckdbModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="doublecheckdbModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="doublecheckdbModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="doublecheckdbModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="doublecheckdbModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="doublecheckdbModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="doublecheckdbModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="doublecheckdbModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="doublecheckdbModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="Room_Num" ColumnName="Room_Num" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="U_Id" ColumnName="U_Id" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Class_Times" TypeName="doublecheckdbModel.Class_Times" StoreEntitySet="Class_Times">
+            <EndProperty Name="Time_Periods">
+              <ScalarProperty Name="T_Id" ColumnName="T_Id" />
+            </EndProperty>
+            <EndProperty Name="Class">
+              <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
