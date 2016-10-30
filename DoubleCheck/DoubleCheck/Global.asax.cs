@@ -15,6 +15,7 @@ namespace DoubleCheck
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            // Where I might place the scheduler
         }
     }
 }
