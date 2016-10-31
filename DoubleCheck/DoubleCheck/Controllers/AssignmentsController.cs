@@ -22,7 +22,7 @@ namespace DoubleCheck.Controllers
         public ActionResult List()
         {
             int userID = int.Parse((string)Session["UserID"]);
-            return View(db.Assignments1.ToList().Where(model => model.U_Id.Equals(userID)));
+            return View(db.Assignments.ToList().Where(model => model.U_Id.Equals(userID)));
         }
 
         public ActionResult Create()
@@ -33,7 +33,7 @@ namespace DoubleCheck.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Assignments NewAssignment)
+        public ActionResult Create(Assignment NewAssignment)
         {
           if(ModelState.IsValid)
             {
@@ -42,7 +42,7 @@ namespace DoubleCheck.Controllers
                 NewAssignment.Status = 1;
                 NewAssignment.Completion = 0;
 
-                db.Assignments1.Add(NewAssignment);
+                db.Assignments.Add(NewAssignment);
                 db.SaveChanges();
 
                 return RedirectToAction("List");
@@ -56,7 +56,7 @@ namespace DoubleCheck.Controllers
             ViewBag.AppDataClassList = new SelectList(db.Classes, "C_Id", "Name");
             ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
 
-            Assignments assignment = db.Assignments1.Find(id);
+            Assignment assignment = db.Assignments.Find(id);
             if(assignment == null)
             {
                 return HttpNotFound();
@@ -65,11 +65,11 @@ namespace DoubleCheck.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Assignments assignment)
+        public ActionResult Edit(Assignment assignment)
         {
             if (ModelState.IsValid)
             {
-                Assignments a = db.Assignments1.Find(assignment.A_Id);
+                Assignment a = db.Assignments.Find(assignment.A_Id);
                 a.Name = assignment.Name;
                 a.Class = assignment.Class;
                 a.T_Id = assignment.T_Id;
@@ -91,7 +91,7 @@ namespace DoubleCheck.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Assignments a = db.Assignments1.Find(id);
+            Assignment a = db.Assignments.Find(id);
             if (a == null)
             {
                 return HttpNotFound();
@@ -104,8 +104,8 @@ namespace DoubleCheck.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Assignments a = db.Assignments1.Find(id);
-            db.Assignments1.Remove(a);
+            Assignment a = db.Assignments.Find(id);
+            db.Assignments.Remove(a);
             db.SaveChanges();
             return RedirectToAction("List");
         }

@@ -26,9 +26,10 @@ namespace DoubleCheck.Models
         }
     
         public virtual DbSet<Asgmt_Type> Asgmt_Type { get; set; }
-        public virtual DbSet<Assignments> Assignments1 { get; set; }
+        public virtual DbSet<Assignment> Assignments { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Time_Periods> Time_Periods { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
