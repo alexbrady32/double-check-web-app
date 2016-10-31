@@ -17,7 +17,7 @@ namespace DoubleCheck.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Assignments = new HashSet<Assignments>();
+            this.Assignments = new HashSet<Assignment>();
             this.Classes = new HashSet<Class>();
         }
     
@@ -33,7 +33,7 @@ namespace DoubleCheck.Models
         public bool canNotifyByText { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Assignments> Assignments { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class> Classes { get; set; }
     }

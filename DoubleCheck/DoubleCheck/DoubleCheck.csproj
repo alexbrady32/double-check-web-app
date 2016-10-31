@@ -143,9 +143,6 @@
     <Content Include="Resources\Fonts\fontawesome-webfont.woff" />
     <Content Include="Resources\Fonts\fontawesome-webfont.woff2" />
     <Content Include="Resources\Fonts\FontAwesome.otf" />
-    <None Include="job_scheduling_data_2_0.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\DoubleCheckDBContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -157,6 +154,19 @@
       <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
       <LastGenOutput>DoubleCheckDBContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\Fonts\fontawesome-webfont.eot" />
+    <Content Include="Resources\Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Resources\Fonts\fontawesome-webfont.woff" />
+    <Content Include="Resources\Fonts\fontawesome-webfont.woff2" />
+    <Content Include="Resources\Fonts\FontAwesome.otf" />
+    <EntityDeploy Include="Models\DoubleCheckDBContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DoubleCheckDBContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DoubleCheckDBContext.edmx.diagram">
+      <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Resources\Fonts\font-awesome.min.css" />
     <Content Include="Resources\Fonts\fontawesome-webfont.svg" />
     <Content Include="Resources\Images\background-light.jpg" />
@@ -186,7 +196,7 @@
     <Compile Include="Models\Asgmt_Type.cs">
       <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Assignments.cs">
+    <Compile Include="Models\Assignment.cs">
       <DependentUpon>DoubleCheckDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Class.cs">

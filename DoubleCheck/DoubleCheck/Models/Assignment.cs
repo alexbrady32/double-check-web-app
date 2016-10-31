@@ -12,7 +12,7 @@ namespace DoubleCheck.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Assignments
+    public partial class Assignment
     {
         public int A_Id { get; set; }
         public int U_Id { get; set; }
