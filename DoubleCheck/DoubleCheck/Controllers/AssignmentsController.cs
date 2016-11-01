@@ -21,7 +21,17 @@ namespace DoubleCheck.Controllers
 
         public ActionResult List()
         {
-            int userID = int.Parse((string)Session["UserID"]);
+            int userID;
+
+            if (Session["UserID"] != null)
+            {
+                userID = int.Parse((string)Session["UserID"]);
+            }
+            else
+            {
+                return RedirectToAction("Account", "Login");
+            }
+
             return View(db.Assignments.ToList().Where(model => model.U_Id.Equals(userID)));
         }
 
