@@ -221,6 +221,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\EmailJob.cs" />
+    <Compile Include="Utilities\JobScheduler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
