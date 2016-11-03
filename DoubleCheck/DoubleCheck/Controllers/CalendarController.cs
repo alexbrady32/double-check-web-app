@@ -56,14 +56,46 @@ namespace DoubleCheck.Controllers
                 
                 foreach (Class c in classes)
                 {
-                    CalendarModel data = new CalendarModel(c.Name);
+                    
                     
                     var currentClassTimePeriods = c.Time_Periods; 
                     foreach (Time_Periods tp in currentClassTimePeriods)
                     {
-                        data.startTime = data.startTime.AddHours(tp.Start_Time.Hours);
-                        data.startTime = data.startTime.AddMinutes(tp.Start_Time.Minutes);
-                        data.startTime = data.startTime.AddSeconds(tp.Start_Time.Seconds);
+                        
+
+                        // Loop through the days array and when there is a class on that day
+                        // as indicated by a '1', then go ahead and create the event repeating event in the
+                        // date range.
+                        for (int i = 0; i < tp.Days.Count(); i++)
+                        {
+                            if (tp.Days[i] == '1')
+                            {
+                                DateTime curDate = c.Start_Date;
+                                // Find the first date in the date range that is on the given day of the week
+                                // Casting the DayOfWeek to and int returns a value between 0 and 6
+                                while ((int) curDate.DayOfWeek != i)
+                                {
+                                    curDate.AddDays(1);
+                                }
+                                while (curDate < c.End_Date)
+                                {
+                                    CalendarModel data = new CalendarModel(c.Name);
+
+                                    // Enter the start and end time for the class for this time period
+                                    //data.startTime.AddTicks(tp.Start_Time.Ticks);
+                                    //data.endTime.AddTicks(tp.End_Time.Ticks);
+                                    data.startTime = curDate;
+                                    data.startTime = data.startTime.AddHours(tp.Start_Time.Hours);
+                                    data.startTime = data.startTime.AddMinutes(tp.Start_Time.Minutes);
+                                    data.startTime = data.startTime.AddSeconds(tp.Start_Time.Seconds);
+
+                                    calendarData.Add(data);
+                                }
+                            }
+                        }
+                        //data.startTime = data.startTime.AddHours(tp.Start_Time.Hours);
+                        //data.startTime = data.startTime.AddMinutes(tp.Start_Time.Minutes);
+                        //data.startTime = data.startTime.AddSeconds(tp.Start_Time.Seconds);
                     }
                     
                     /*
@@ -77,7 +109,7 @@ namespace DoubleCheck.Controllers
                     data.endTime = data.endTime.AddMinutes(c.End_Time.Minutes);
                     data.endTime = data.endTime.AddSeconds(c.End_Time.Seconds);
                     */
-                    calendarData.Add(data);
+                    
                 }
                 
 
