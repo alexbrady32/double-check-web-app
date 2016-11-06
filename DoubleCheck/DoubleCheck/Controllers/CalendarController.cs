@@ -33,13 +33,12 @@ namespace DoubleCheck.Controllers
             {
                 int userID = Int32.Parse((string)Session["UserID"]);
 
-                // TODO: Add in where clause for both assignments and classes
-                //var assignments = db.Assignments1.Where(u => u.U_Id == userID);
-                var assignments = db.Assignments;
-                var classes = db.Classes;
-                var timePeriods = db.Time_Periods;
+                var assignments = db.Assignments.Where(u => u.U_Id == userID);
+                var classes = db.Classes.Where(u => u.U_Id == userID);
 
-                var calendarData = new List<CalendarModel>();
+                var calendarData = new List<List<CalendarModel>>();
+                var assignmentsData = new List<CalendarModel>();
+                var classesData = new List<CalendarModel>();
                 CalendarModel data;
 
                 foreach (Assignment a in assignments)
@@ -53,7 +52,7 @@ namespace DoubleCheck.Controllers
                     //var serializer = new JavaScriptSerializer();
                     // TODO: Do we really need the json data field in the json data?
                     //data.JsonData = serializer.Serialize(data);
-                    calendarData.Add(data);
+                    assignmentsData.Add(data);
                 }
 
                 
@@ -86,8 +85,6 @@ namespace DoubleCheck.Controllers
 
                                     data = new CalendarModel(c.Name);
                                     // Enter the start and end time for the class for this time period
-                                    //data.startTime.AddTicks(tp.Start_Time.Ticks);
-                                    //data.endTime.AddTicks(tp.End_Time.Ticks);
                                     data.startTime = curDate;
                                     data.startTime = data.startTime.AddHours(tp.Start_Time.Hours);
                                     data.startTime = data.startTime.AddMinutes(tp.Start_Time.Minutes);
@@ -98,32 +95,20 @@ namespace DoubleCheck.Controllers
                                     data.endTime = data.endTime.AddMinutes(tp.End_Time.Minutes);
                                     data.endTime = data.endTime.AddSeconds(tp.End_Time.Seconds);
 
-                                    calendarData.Add(data);
+                                    classesData.Add(data);
 
                                     curDate = curDate.AddDays(7);
                                 }
                             }
                         }
-                        //data.startTime = data.startTime.AddHours(tp.Start_Time.Hours);
-                        //data.startTime = data.startTime.AddMinutes(tp.Start_Time.Minutes);
-                        //data.startTime = data.startTime.AddSeconds(tp.Start_Time.Seconds);
+
                     }
                     
-                    /*
-                    data.startTime = new DateTime(2016, 10, 23); // TODO: Get actual date data
-                    data.startTime = data.startTime.AddHours(c.Start_Time.Hours);
-                    data.startTime = data.startTime.AddMinutes(c.Start_Time.Minutes);
-                    data.startTime = data.startTime.AddSeconds(c.Start_Time.Seconds);
-
-                    data.endTime = new DateTime(2016, 10, 23); // TODO: Get actual date data
-                    data.endTime = data.endTime.AddHours(c.End_Time.Hours);
-                    data.endTime = data.endTime.AddMinutes(c.End_Time.Minutes);
-                    data.endTime = data.endTime.AddSeconds(c.End_Time.Seconds);
-                    */
                     
                 }
-                
 
+                calendarData.Add(assignmentsData);
+                calendarData.Add(classesData);
                 return View(calendarData);
             }
             // TODO: need to return a not logged in page or something here.

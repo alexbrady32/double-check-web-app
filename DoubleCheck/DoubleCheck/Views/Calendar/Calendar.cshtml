@@ -1,4 +1,4 @@
-﻿@model List<DoubleCheck.Controllers.CalendarModel>
+﻿@model List<List<DoubleCheck.Controllers.CalendarModel>>
 
 <!DOCTYPE html>
 
@@ -14,26 +14,57 @@
         $(document).ready(function () {
 
             // page is now ready, initialize the calendar...
+            var classesToggle = true;
             var jsonObjArray = @Html.Raw(Json.Encode(Model));
             console.log(jsonObjArray);
-            var eventsData = [];
-            for (i = 0; i < jsonObjArray.length; i++){
-                eventsData[i] = [];
-                eventsData[i].title = jsonObjArray[i].title;
-                eventsData[i].start = new Date(parseInt(jsonObjArray[i].startTime.substr(6)));
-                eventsData[i].end = new Date(parseInt(jsonObjArray[i].endTime.substr(6)));
-                eventsData[i].allDay = false;
-                if (jsonObjArray[i].id != null){
-                    eventsData[i].url = "../Assignments/Edit/" + jsonObjArray[i].id;
-                }
-                
-                //eventsData[i].dow = jsonObjArray[i].dow;
+            var assignmentsData = [];
+            var classesData = [];
+
+            var assignmentsJson = jsonObjArray[0];
+            var classesJson = jsonObjArray[1];
+            
+            // Assignments Data
+            for (i = 0; i < assignmentsJson.length; i++){
+                assignmentsData[i] = [];
+                assignmentsData[i].title = assignmentsJson[i].title;
+                assignmentsData[i].start = new Date(parseInt(assignmentsJson[i].startTime.substr(6)));
+                assignmentsData[i].end = new Date(parseInt(assignmentsJson[i].endTime.substr(6)));
+                assignmentsData[i].allDay = false;
+                assignmentsData[i].url = "../Assignments/Edit/" + assignmentsJson[i].id;   
+                //eventsData[i].dow = assignmentsJson[i].dow;
             }
-            console.log(eventsData);
+
+            // Classes Data
+            for (i = 0; i < classesJson.length; i++){
+                classesData[i] = [];
+                classesData[i].title = classesJson[i].title;
+                classesData[i].start = new Date(parseInt(classesJson[i].startTime.substr(6)));
+                classesData[i].end = new Date(parseInt(classesJson[i].endTime.substr(6)));
+                classesData[i].allDay = false;                            
+            }
+
+            
             $('#calendar').fullCalendar({
                 // put your options and callbacks here
+
+                customButtons: {
+                    toggleClasses: {
+                        text: 'Toggle Classes',
+                        click: function() {
+                            if (classesToggle){
+                                $('#calendar').fullCalendar( 'removeEventSource',  classesData);
+                                classesToggle = false;
+                            }
+                            else{
+                                $('#calendar').fullCalendar( 'addEventSource',  classesData);
+                                classesToggle = true;
+                            }
+                        }
+                    }
+                },
+
                 header: {
-                    left: 'prev, next, today',
+                    left: 'prev, next, today, toggleClasses',
                     center: 'title',
                     right: 'month, agendaWeek, agendaDay, pre'
                 },
@@ -60,7 +91,7 @@
             allDay: false // will make the time show
         }
                 ]*/
-                events: eventsData
+                eventSources: [assignmentsData, classesData]
             })
 
         });
