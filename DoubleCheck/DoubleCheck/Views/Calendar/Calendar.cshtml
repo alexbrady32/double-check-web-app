@@ -14,7 +14,7 @@
         $(document).ready(function () {
 
             // page is now ready, initialize the calendar...
-            var classesToggle = true;
+            var classesToggle = true; // A global variable that stores the classes toggle state
             var jsonObjArray = @Html.Raw(Json.Encode(Model));
             console.log(jsonObjArray);
             var assignmentsData = [];
@@ -48,12 +48,13 @@
                 // put your options and callbacks here
 
                 customButtons: {
+                    // Custom button that allows toggling of class times from the calendar
                     toggleClasses: {
                         text: 'Toggle Classes',
                         click: function() {
                             if (classesToggle){
                                 $('#calendar').fullCalendar( 'removeEventSource',  classesData);
-                                classesToggle = false;
+                                classesToggle = false; 
                             }
                             else{
                                 $('#calendar').fullCalendar( 'addEventSource',  classesData);
@@ -62,6 +63,8 @@
                         }
                     }
                 },
+                
+                defaultView: 'agendaWeek',
 
                 header: {
                     left: 'prev, next, today, toggleClasses',
