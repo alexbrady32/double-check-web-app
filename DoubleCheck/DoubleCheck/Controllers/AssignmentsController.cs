@@ -32,7 +32,9 @@ namespace DoubleCheck.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            return View(db.Assignments.ToList().Where(model => model.U_Id.Equals(userID)));
+            List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(userID)).ToList();
+           
+            return View(assignments);
         }
 
         public ActionResult Create()
