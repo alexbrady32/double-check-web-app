@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2f706856ea3147438e231fd9680de53d" Name="Diagram1">
+      <Diagram DiagramId="be4b87527a0a4c90b18e4114c8f4d0ce" Name="Diagram1">
         <EntityTypeShape EntityType="doublecheckdbModel.Asgmt_Type" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="doublecheckdbModel.Assignment" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="doublecheckdbModel.Class" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />

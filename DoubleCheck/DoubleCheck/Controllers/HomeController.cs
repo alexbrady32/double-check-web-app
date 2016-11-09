@@ -31,7 +31,7 @@ namespace DoubleCheck.Controllers
                     return RedirectToAction("Index", "Cloze");
                 }
                 // else:
-                return View();
+                return RedirectToAction("List", "Assignments");
             }
             else
             {

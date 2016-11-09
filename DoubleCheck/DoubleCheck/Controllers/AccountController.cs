@@ -17,7 +17,13 @@ namespace DoubleCheck.Controllers
         private doublecheckdbEntities db = new doublecheckdbEntities();
         private bool invalid;
         
-        // GET: Account
+        // GET: Account/
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: Account/Login
         public ActionResult Login()
         {
             return View();
@@ -78,7 +84,7 @@ namespace DoubleCheck.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Username,Email,Password,firstName,lastName,phone_num")] User user)
+        public ActionResult Create([Bind(Include = "Id,Username,Email,Password,firstName,lastName,phone_num,canNotifyByEmail,canNotifyByText")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -102,14 +108,14 @@ namespace DoubleCheck.Controllers
             return View(user);
         }
 
-        // GET: Account/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Account/Edit
+        public ActionResult Edit()
         {
-            if (id == null)
+            if (Session["UserID"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = db.Users.Find(Int32.Parse((string)Session["UserID"]));
             if (user == null)
             {
                 return HttpNotFound();
@@ -117,20 +123,39 @@ namespace DoubleCheck.Controllers
             return View(user);
         }
 
-        // POST: Account/Edit/5
+        // POST: Account/Edit
+        // [Bind(Include = "Id,Username,Password,Email,firstName,lastName,phone_num,Cloze_Score,canNotifyByEmail,canNotifyByText")] 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Username,Email,Password,firstName,lastName,phone_num")] User user)
+        public ActionResult Edit(User user)
         {
-            if (ModelState.IsValid)
+            if (Session["UserID"] != null)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(user).State = EntityState.Modified;
+                    //decimal? score = db.Users.Find(user.Id).Cloze_Score;
+                    if ((string)Request.Params["retypePassword"] != "")
+                    {
+                        if (String.Equals(CreatePasswordHash((string)Request.Params["retypePassword"]), user.Password))
+                        {
+                            user.Password = CreatePasswordHash((string)Request.Params["newPassword"]);
+                            ViewBag.Error = "";
+                        }
+                        else
+                        {
+                            ViewBag.Error = "Incorrect retyped password!";
+                            return View(user);
+                        }
+                    }
+                    //user.Cloze_Score = score;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            return View(user);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // GET: Account/Delete/5
