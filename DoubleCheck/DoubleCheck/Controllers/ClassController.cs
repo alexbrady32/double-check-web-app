@@ -99,16 +99,19 @@ namespace DoubleCheck.Controllers
                     }
                     var startTime = i != 0 ? collection["start_time" + i.ToString()] : collection["start_time"];
                     var endTime = i != 0 ? collection["end_time" + i.ToString()] : collection["end_time"];
-                    if (day != null && day != "" && startTime != null && startTime != "" && endTime != null && endTime != "")
+                    if (day != null && startTime != null && endTime != null)
                     {
-                        var timePeriod = new Time_Periods
+                        if (dbDay != "" && startTime != "" && endTime != "")
                         {
-                            Start_Time = TimeSpan.Parse(startTime),
-                            End_Time = TimeSpan.Parse(endTime),
-                            Days = dbDay
-                        };
-                        var lastInsertedTimePeriod = db.Time_Periods.Add(timePeriod);
-                        lastInsertedClass.Time_Periods.Add(lastInsertedTimePeriod);
+                            var timePeriod = new Time_Periods
+                            {
+                                Start_Time = TimeSpan.Parse(startTime),
+                                End_Time = TimeSpan.Parse(endTime),
+                                Days = dbDay
+                            };
+                            var lastInsertedTimePeriod = db.Time_Periods.Add(timePeriod);
+                            lastInsertedClass.Time_Periods.Add(lastInsertedTimePeriod);
+                        }
                         i++;
                     }
                     else

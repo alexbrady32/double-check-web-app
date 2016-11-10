@@ -103,55 +103,10 @@
 </div>
 
 <script>
+    var current = 1;
     $('#addDaysButton').click(function addRowToTable(e) {
         e.preventDefault();
-        /*var table = document.getElementById("time_periods");
 
-        var row = table.rows[1].cloneNode(true);
-
-        var current = table.rows.length - 1;
-
-        row.cells[0].getElementsByTagName('input')[0].list = "days" + current.toString();
-        row.cells[0].getElementsByTagName('input')[0].name = "day" + current.toString();
-        row.cells[0].getElementsByTagName('input')[0].id = "day_input" + current.toString();
-        row.cells[0].getElementsByTagName('select')[0].id = "days" + current.toString();
-        row.cells[0].getElementsByTagName('select')[0].innerHTML = "<option value=\"MWF\"></option>\
-                                <option value=\"TTH\"></option>\
-                                <option value=\"MW\"></option>\
-                                <option value=\"M\"></option>\
-                                <option value=\"T\"></option>\
-                                <option value=\"W\"></option>\
-                                <option value=\"TH\"></option>\
-                                <option value=\"F\"></option>\
-                                <option value=\"Sat\"></option>\
-                                <option value=\"Sun\"></option>";
-
-        row.cells[1].getElementsByTagName('input')[0].name = "start_time" + current.toString();
-        row.cells[1].getElementsByTagName('input')[0].id = "start_input" + current.toString();
-        row.cells[2].getElementsByTagName('input')[0].id = "end_input" + current.toString();
-
-        table.appendChild(row);
-
-
-        var table = document.getElementById("time_periods");
-
-        /*cell1.innerHTML = "<input list=\"days" + current.toString() + "\" name=\"day" + current.toString() + "\" />\
-                              <datalist id=\"days" + current.toString() + "\">\
-                                <option value=\"MWF\"></option>\
-                                <option value=\"TTH\"></option>\
-                                <option value=\"MW\"></option>\
-                                <option value=\"M\"></option>\
-                                <option value=\"T\"></option>\
-                                <option value=\"W\"></option>\
-                                <option value=\"TH\"></option>\
-                                <option value=\"F\"></option>\
-                                <option value=\"Sat\"></option>\
-                                <option value=\"Sun\"></option>\
-                            </datalist>";
-        cell2.innerHTML = "<input type=\"time\" name=\"start_time" + current.toString() + "\" />";
-        cell3.innerHTML = "<input type=\"time\" name=\"end_time" + current.toString() + " />";*/
-
-        var current = $('#time_periods').length;
         $('#time_periods').find('tbody:last').append('<tr>\
                 <td>\
                     <input id="day_input' + current.toString() + '" list="days" name="day' + current.toString() + '" />\
@@ -175,5 +130,6 @@
                     <input id="end_input' + current.toString() + '" type="time" name="end_time' + current.toString() + '" />\
                 </td>\
             </tr>');
+        current = current + 1;
     });
 </script>
