@@ -103,15 +103,23 @@ namespace DoubleCheck.Controllers
                     {
                         if (dbDay != "" && startTime != "" && endTime != "")
                         {
-                            // only create new one if there's no existing
-                            var timePeriod = new Time_Periods
+                            var existingPeriod = db.Time_Periods.Where(t => t.Start_Time == TimeSpan.Parse(startTime)
+                            && t.End_Time == TimeSpan.Parse(endTime) && t.Days == dbDay);
+                            if (existingPeriod.Count() > 0)
                             {
-                                Start_Time = TimeSpan.Parse(startTime),
-                                End_Time = TimeSpan.Parse(endTime),
-                                Days = dbDay
-                            };
-                            var lastInsertedTimePeriod = db.Time_Periods.Add(timePeriod);
-                            lastInsertedClass.Time_Periods.Add(lastInsertedTimePeriod);
+                                lastInsertedClass.Time_Periods.Add(existingPeriod.First());
+                            }
+                            else
+                            {
+                                var timePeriod = new Time_Periods
+                                {
+                                    Start_Time = TimeSpan.Parse(startTime),
+                                    End_Time = TimeSpan.Parse(endTime),
+                                    Days = dbDay
+                                };
+                                var lastInsertedTimePeriod = db.Time_Periods.Add(timePeriod);
+                                lastInsertedClass.Time_Periods.Add(lastInsertedTimePeriod);
+                            }
                         }
                         i++;
                     }
