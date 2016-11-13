@@ -103,6 +103,7 @@ namespace DoubleCheck.Controllers
                     {
                         if (dbDay != "" && startTime != "" && endTime != "")
                         {
+                            // only create new one if there's no existing
                             var timePeriod = new Time_Periods
                             {
                                 Start_Time = TimeSpan.Parse(startTime),
