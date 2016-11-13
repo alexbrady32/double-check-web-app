@@ -1,5 +1,6 @@
 
 @{
+    var status = "Unknown";
     ViewBag.Title = "List";
 }
 
@@ -19,12 +20,30 @@
     </tr>
     @foreach (var Assignments in Model)
     {
+        @* Check assignment status and return it as text rather than a number *@
+        if (Assignments.Status == 1)
+        {
+            status = "Not started";
+        }
+        if (Assignments.Status == 2)
+        {
+            status = "In progress";
+        }
+        if (Assignments.Status == 3)
+        {
+            status = "Completed";
+        }
+        @*else
+        {
+            status = "Unknown";
+        }*@
+
         <tr>
             <td>@Assignments.C_Id</td>
             <td>@Assignments.Name</td>
-            <td>@Assignments.Status</td>
+            <td>@status</td>
             <td>@Assignments.Due_Date</td>
-            <td>@Assignments.TTC</td>
+            <td>@(Assignments.TTC - (Assignments.TTC * Assignments.Completion))</td>
             <td>@Assignments.Description</td>
             <td>@Html.ActionLink("Edit", "Edit", new { id = Assignments.A_Id })</td>
             <td>@Html.ActionLink("Details", "Details", new { id = Assignments.A_Id })</td>
