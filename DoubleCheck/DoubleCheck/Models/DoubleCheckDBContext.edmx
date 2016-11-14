@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="doublecheckdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="doublecheckdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asgmt_Type">
           <Key>
             <PropertyRef Name="Id" />
@@ -35,7 +35,7 @@
           <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="U_Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="Building" Type="varchar" MaxLength="20" />
+          <Property Name="Building" Type="varchar" MaxLength="50" />
           <Property Name="Room_Num" Type="int" />
           <Property Name="Start_Date" Type="date" Nullable="false" />
           <Property Name="End_Date" Type="date" Nullable="false" />
@@ -187,8 +187,7 @@
             <End Role="Class_Times" EntitySet="Class_Times" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="doublecheckdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -226,7 +225,7 @@
           <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="U_Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Building" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Building" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Room_Num" Type="Int32" />
           <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />

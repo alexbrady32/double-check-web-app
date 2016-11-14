@@ -235,7 +235,6 @@
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Cloze\Index.cshtml" />
     <Content Include="Views\Cloze\Assess.cshtml" />
-    <Content Include="Views\Assignments\List.cshtml" />
     <Content Include="Views\Assignments\Create.cshtml" />
     <Content Include="Views\Assignments\Edit.cshtml" />
     <Content Include="Views\Assignments\Delete.cshtml" />
@@ -243,6 +242,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Class\Index.cshtml" />
     <Content Include="Views\Class\Create.cshtml" />
+    <Content Include="Views\Assignments\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
