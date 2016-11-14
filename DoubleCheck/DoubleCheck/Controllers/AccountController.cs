@@ -185,6 +185,16 @@ namespace DoubleCheck.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Account/ForgotPassword/email
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(string email)
+        {
+            
+            return RedirectToAction("Login");
+        }
+
+
         public bool IsValidEmail(string strIn)
         {
             invalid = false;
