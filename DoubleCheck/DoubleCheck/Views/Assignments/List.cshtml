@@ -41,7 +41,7 @@
     minutesCalc = (Assignments.TTC - (Assignments.TTC * Assignments.Completion)) % 60;
     completion = hoursCalc > 0 ? (hoursCalc > 1 ? hoursCalc.ToString() + " hours " : hoursCalc.ToString() + " hour ") : "";
     completion += minutesCalc > 0 ? minutesCalc.ToString() + " minutes" : "";
-
+    completion = completion == "" ? "0 hours 0 minutes" : completion;
 
         <tr>
             <td>@Assignments.Class.Name</td>
