@@ -31,6 +31,8 @@ namespace DoubleCheck.Models
         public Nullable<decimal> Cloze_Score { get; set; }
         public bool canNotifyByEmail { get; set; }
         public bool canNotifyByText { get; set; }
+        public string ResetPasswordHash { get; set; }
+        public Nullable<System.DateTime> ResetPasswordExpiration { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Assignment> Assignments { get; set; }
