@@ -195,8 +195,22 @@ namespace DoubleCheck.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(string email)
         {
+            var result = db.Users.Where(u => u.Email == email);
+            if (result.Count() == 1)
+            {
+                User user = result.First();
+                user.ResetPasswordHash = CreatePasswordHash(DateTime.Now.ToString());
+                user.ResetPasswordExpiration = DateTime.Now.AddDays(3);
+                db.SaveChanges();
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                // Email either exists twice (which it shouldn't, if database implemented correctly)
+                // Or, email doesn't exist. For security reasons, the user should not know whether its a valid email or not
+                return RedirectToAction("Login");
+            }
             
-            return RedirectToAction("Login");
         }
 
 
