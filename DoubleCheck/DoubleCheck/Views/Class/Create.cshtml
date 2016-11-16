@@ -6,7 +6,7 @@
 
 <h2>Create New Class</h2>
 
-@using (Html.BeginForm("Create", "Class", FormMethod.Post)) 
+@using (Html.BeginForm("Create", "Class", FormMethod.Post, htmlAttributes: new { @name = "CreateClass", @id = "CreateClass"}))
 {
     @Html.AntiForgeryToken()
     
@@ -41,6 +41,7 @@
             @Html.LabelFor(model => model.Start_Date, "Class Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Start_Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                <p>Use format: yyyy-mm-dd</p>
                 @Html.ValidationMessageFor(model => model.Start_Date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -49,6 +50,7 @@
             @Html.LabelFor(model => model.End_Date, "Class End Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.End_Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                <p>Use format: yyyy-mm-dd</p>
                 @Html.ValidationMessageFor(model => model.End_Date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,24 +60,24 @@
                 <table id="time_periods">
                     <tr>
                         <th>Days</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
+                        <th>Start Time (Use format: hh:mm AM/PM)</th>
+                        <th>End Time (Use format: hh:mm AM/PM)</th>
                     </tr>
                     <tr>
                         <td>
-                            <input id="day_input" list="days" name="day" />
-                            <datalist id="days">
-                                <option value="MWF"></option>
-                                <option value="TTH"></option>
-                                <option value="MW"></option>
-                                <option value="M"></option>
-                                <option value="T"></option>
-                                <option value="W"></option>
-                                <option value="TH"></option>
-                                <option value="F"></option>
-                                <option value="Sat"></option>
-                                <option value="Sun"></option>
-                            </datalist>
+                            <!--<input id="day_input" list="days" name="day" />-->
+                            <select id="days" name="days" form="CreateClass">
+                                <option value="MWF">MWF</option>
+                                <option value="TTH">TTH</option>
+                                <option value="MW">MW</option>
+                                <option value="M">M</option>
+                                <option value="T">T</option>
+                                <option value="W">W</option>
+                                <option value="TH">TH</option>
+                                <option value="F">F</option>
+                                <option value="Sat">Sat</option>
+                                <option value="Sun">Sun</option>
+                            </select>
                         </td>
                         <td>
                             <input id="start_input" type="time" name="start_time" />
@@ -109,19 +111,19 @@
 
         $('#time_periods').find('tbody:last').append('<tr>\
                 <td>\
-                    <input id="day_input' + current.toString() + '" list="days" name="day' + current.toString() + '" />\
-                    <datalist id="days' + current.toString() + '">\
-                        <option value="MWF"></option>\
-                        <option value="TTH"></option>\
-                        <option value="MW"></option>\
-                        <option value="M"></option>\
-                        <option value="T"></option>\
-                        <option value="W"></option>\
-                        <option value="TH"></option>\
-                        <option value="F"></option>\
-                        <option value="Sat"></option>\
-                        <option value="Sun"></option>\
-                    </datalist>\
+                    <!--<input id="day_input' + current.toString() + '" list="days" name="day' + current.toString() + '" />-->\
+                    <select id="days' + current.toString() + '" name="days' + current.toString() + '" form="CreateClass">\
+                        <option value="MWF">MWF</option>\
+                        <option value="TTH">TTH</option>\
+                        <option value="MW">MW</option>\
+                        <option value="M">M</option>\
+                        <option value="T">T</option>\
+                        <option value="W">W</option>\
+                        <option value="TH">TH</option>\
+                        <option value="F">F</option>\
+                        <option value="Sat">Sat</option>\
+                        <option value="Sun">Sun</option>\
+                    </select>\
                 </td>\
                 <td>\
                     <input id="start_input' + current.toString() + '" type="time" name="start_time' + current.toString() + '" />\
