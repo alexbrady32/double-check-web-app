@@ -230,9 +230,15 @@ namespace DoubleCheck.Controllers
                         day = "";
                         break;
                 }
+                var startTime = period.Start_Time.Hours > 12
+                    ? (period.Start_Time.Hours - 12).ToString() + ":" + period.Start_Time.Minutes.ToString("00") + " PM"
+                    : period.Start_Time.ToString(@"h\:mm") + " AM";
+                var endTime = period.End_Time.Hours > 12
+                    ? (period.End_Time.Hours - 12).ToString() + ":" + period.End_Time.Minutes.ToString("00") + " PM"
+                    : period.End_Time.ToString(@"h\:mm") + " AM";
                 currentPeriod = day != ""
-                    ? day + period.Start_Time.ToString(@"h\:mm") +
-                    " - " + period.End_Time.ToString(@"h\:mm") + "\n"
+                    ? day + startTime +
+                    " - " + endTime + ";" + Environment.NewLine
                     : "";
                 timePeriods += currentPeriod;
             }
@@ -244,15 +250,20 @@ namespace DoubleCheck.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            var classToDelete = db.Classes.Where(c => c.C_Id == id).FirstOrDefault();
             try
             {
-                // TODO: Add delete logic here
-
+                foreach (var period in classToDelete.Time_Periods.ToList())
+                {
+                    classToDelete.Time_Periods.Remove(period);
+                }
+                db.Classes.Remove(classToDelete);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Delete", id);
             }
         }
     }
