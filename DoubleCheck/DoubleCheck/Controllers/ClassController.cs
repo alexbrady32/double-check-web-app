@@ -1,6 +1,7 @@
 ﻿using DoubleCheck.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -166,7 +167,8 @@ namespace DoubleCheck.Controllers
         // GET: Class/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var editClass = db.Classes.Where(c => c.C_Id == id).FirstOrDefault();
+            return View(editClass);
         }
 
         // POST: Class/Edit/5
@@ -175,6 +177,14 @@ namespace DoubleCheck.Controllers
         {
             try
             {
+                var editClass = db.Classes.Where(c => c.C_Id == id).FirstOrDefault();
+                db.Entry(editClass).State = EntityState.Modified;
+                editClass.Name = collection["Name"];
+                editClass.Building = collection["Building"];
+                editClass.Room_Num = Int32.Parse(collection["Room_Num"]);
+                editClass.Start_Date = DateTime.Parse(collection["Start_Date"]);
+                editClass.End_Date = DateTime.Parse(collection["End_Date"]);
+                // Refactor Time Period parsing here
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");

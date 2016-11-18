@@ -1,0 +1,313 @@
+﻿@model DoubleCheck.Models.Class
+
+@{
+    ViewBag.Title = "Edit";
+    var tableCount = 0;
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Class", FormMethod.Post, htmlAttributes: new { @name="EditClass", @id="EditClass" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Class</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.C_Id)
+        @Html.HiddenFor(model => model.U_Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Building, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Building, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Building, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Room_Num, "Room Number", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Room_Num, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Room_Num, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Start_Date, "Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Start_Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Start_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.End_Date, "End Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.End_Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.End_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <table name="periodTable" id="periodTable" class="table">
+                <tr>
+                    <th>Days</th>
+                    <th>Start Time (Use format hh:mm)</th>
+                    <th>End Time (Use format hh:mm)</th>
+                </tr>
+                @foreach (var period in Model.Time_Periods)
+                {
+                    tableCount = tableCount + 1;
+                    <tr>
+                        @if (period.Days == "0101010")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF" selected>MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T">T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else if (period.Days == "0010100")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH" selected>TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T">T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else if (period.Days == "0101000")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW" selected>MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T">T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else if (period.Days == "0100000")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M" selected>M</option>
+                                    <option value="T">T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else if (period.Days == "0010000")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T" selected>T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else if (period.Days == "0001000")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T">T</option>
+                                    <option value="W" selected>W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else if (period.Days == "0000100")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T">T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH" selected>TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else if (period.Days == "0000010")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T">T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F" selected>F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else if (period.Days == "0000001")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T">T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat" selected>Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else if (period.Days == "1000000")
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T">T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun" selected>Sun</option>
+                                </select>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <select id="days" name="days" form="EditClass">
+                                    <option value="MWF">MWF</option>
+                                    <option value="TTH">TTH</option>
+                                    <option value="MW">MW</option>
+                                    <option value="M">M</option>
+                                    <option value="T">T</option>
+                                    <option value="W">W</option>
+                                    <option value="TH">TH</option>
+                                    <option value="F">F</option>
+                                    <option value="Sat">Sat</option>
+                                    <option value="Sun">Sun</option>
+                                </select>
+                            </td>
+                        }
+                        <td>
+                            <input id="start_input" type="time" name="start_time" value="@period.Start_Time" />
+                        </td>
+                        <td>
+                            <input id="end_input" type="time" name="end_time" value="@period.End_Time" />
+                        </td>
+                    </tr>
+                }
+            </table>
+            <button id="addDaysButton">Add Days</button>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    var current = @tableCount;
+    $('#addDaysButton').click(function addRowToTable(e) {
+        e.preventDefault();
+        alert("So is this code!");
+        $('#periodTable').find('tbody:last').append('<tr>\
+                <td>\
+                    <!--<input id="day_input' + current.toString() + '" list="days" name="day' + current.toString() + '" />-->\
+                    <select id="days' + current.toString() + '" name="days' + current.toString() + '" form="CreateClass">\
+                        <option value="MWF">MWF</option>\
+                        <option value="TTH">TTH</option>\
+                        <option value="MW">MW</option>\
+                        <option value="M">M</option>\
+                        <option value="T">T</option>\
+                        <option value="W">W</option>\
+                        <option value="TH">TH</option>\
+                        <option value="F">F</option>\
+                        <option value="Sat">Sat</option>\
+                        <option value="Sun">Sun</option>\
+                    </select>\
+                </td>\
+                <td>\
+                    <input id="start_input' + current.toString() + '" type="time" name="start_time' + current.toString() + '" />\
+                </td>\
+                <td>\
+                    <input id="end_input' + current.toString() + '" type="time" name="end_time' + current.toString() + '" />\
+                </td>\
+            </tr>');
+        current = current + 1;
+    });
+</script>
