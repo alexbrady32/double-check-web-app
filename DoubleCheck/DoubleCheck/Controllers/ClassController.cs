@@ -55,106 +55,7 @@ namespace DoubleCheck.Controllers
                                            Start_Date = startDate,
                                            End_Date = endDate};
                 var lastInsertedClass = db.Classes.Add(newClass);
-                int i = 0;
-                bool finished = false;
-                while (!finished)
-                {
-                    var day = i != 0 ? collection["days" + i.ToString()] : collection["days"];
-                    String dbDay;
-                    switch (day)
-                    {
-                        case "MWF":
-                            dbDay = "0101010";
-                            break;
-                        case "TTH":
-                            dbDay = "0010101";
-                            break;
-                        case "MW":
-                            dbDay = "0101000";
-                            break;
-                        case "M":
-                            dbDay = "0100000";
-                            break;
-                        case "T":
-                            dbDay = "0010000";
-                            break;
-                        case "W":
-                            dbDay = "0001000";
-                            break;
-                        case "TH":
-                            dbDay = "0000100";
-                            break;
-                        case "F":
-                            dbDay = "0000010";
-                            break;
-                        case "Sat":
-                            dbDay = "0000001";
-                            break;
-                        case "Sun":
-                            dbDay = "1000000";
-                            break;
-                        default:
-                        case null:
-                            dbDay = "";
-                            break;
-                    }
-                    var startTime = i != 0 ? collection["start_time" + i.ToString()] : collection["start_time"];
-                    var endTime = i != 0 ? collection["end_time" + i.ToString()] : collection["end_time"];
-                    if (day != null && startTime != null && endTime != null)
-                    {
-                        if (dbDay != "" && startTime != "" && endTime != "")
-                        {
-                            TimeSpan startSpan;
-                            TimeSpan endSpan;
-                            try
-                            {
-                                startSpan = TimeSpan.Parse(startTime);
-                                endSpan = TimeSpan.Parse(endTime);
-                            }
-                            catch (FormatException e)
-                            {
-                                var startAMPM = startTime.Split(' ');
-                                var endAMPM = endTime.Split(' ');
-                                if (startAMPM.Count() > 1)
-                                {
-                                    startTime = startAMPM[1] == "PM"
-                                        ? (Int32.Parse(startAMPM[0].Split(':')[0]) + 12).ToString() + ":" + startAMPM[0].Split(':')[1]
-                                        : startAMPM[0];
-                                }
-                                if (endAMPM.Count() > 1)
-                                {
-                                    endTime = endAMPM[1] == "PM"
-                                        ? (Int32.Parse(endAMPM[0].Split(':')[0]) + 12).ToString() + ":" + endAMPM[0].Split(':')[1]
-                                        : endAMPM[0];
-                                }
-                            }
-                            startSpan = TimeSpan.Parse(startTime);
-                            endSpan = TimeSpan.Parse(endTime);
-                            var existingPeriod = db.Time_Periods.Where(t => t.Start_Time == startSpan
-                            && t.End_Time == endSpan && t.Days == dbDay);
-                            if (existingPeriod.Count() > 0)
-                            {
-                                lastInsertedClass.Time_Periods.Add(existingPeriod.First());
-                            }
-                            else
-                            {
-                                var timePeriod = new Time_Periods
-                                {
-                                    Start_Time = startSpan,
-                                    End_Time = endSpan,
-                                    Days = dbDay
-                                };
-                                var lastInsertedTimePeriod = db.Time_Periods.Add(timePeriod);
-                                lastInsertedClass.Time_Periods.Add(lastInsertedTimePeriod);
-                            }
-                        }
-                        i++;
-                    }
-                    else
-                    {
-                        finished = true;
-                    }
-                }
+                TimePeriodParsing(lastInsertedClass, collection);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -184,9 +85,9 @@ namespace DoubleCheck.Controllers
                 editClass.Room_Num = Int32.Parse(collection["Room_Num"]);
                 editClass.Start_Date = DateTime.Parse(collection["Start_Date"]);
                 editClass.End_Date = DateTime.Parse(collection["End_Date"]);
-                // Refactor Time Period parsing here
-                // TODO: Add update logic here
-
+                TimePeriodRemoval(editClass);
+                TimePeriodParsing(editClass, collection);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -263,10 +164,7 @@ namespace DoubleCheck.Controllers
             var classToDelete = db.Classes.Where(c => c.C_Id == id).FirstOrDefault();
             try
             {
-                foreach (var period in classToDelete.Time_Periods.ToList())
-                {
-                    classToDelete.Time_Periods.Remove(period);
-                }
+                TimePeriodRemoval(classToDelete);
                 db.Classes.Remove(classToDelete);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -275,6 +173,121 @@ namespace DoubleCheck.Controllers
             {
                 return RedirectToAction("Delete", id);
             }
+        }
+
+        public void TimePeriodRemoval(Class modifyClass)
+        {
+            foreach (var period in modifyClass.Time_Periods.ToList())
+            {
+                modifyClass.Time_Periods.Remove(period);
+            }
+        }
+
+        public void TimePeriodParsing(Class modifyClass, FormCollection collection)
+        {
+            int i = 0;
+            bool finished = false;
+            while (!finished)
+            {
+                var day = i != 0 ? collection["days" + i.ToString()] : collection["days"];
+                String dbDay;
+                switch (day)
+                {
+                    case "MWF":
+                        dbDay = "0101010";
+                        break;
+                    case "TTH":
+                        dbDay = "0010100";
+                        break;
+                    case "MW":
+                        dbDay = "0101000";
+                        break;
+                    case "M":
+                        dbDay = "0100000";
+                        break;
+                    case "T":
+                        dbDay = "0010000";
+                        break;
+                    case "W":
+                        dbDay = "0001000";
+                        break;
+                    case "TH":
+                        dbDay = "0000100";
+                        break;
+                    case "F":
+                        dbDay = "0000010";
+                        break;
+                    case "Sat":
+                        dbDay = "0000001";
+                        break;
+                    case "Sun":
+                        dbDay = "1000000";
+                        break;
+                    default:
+                    case null:
+                        dbDay = "";
+                        break;
+                }
+                var startTime = i != 0 ? collection["start_time" + i.ToString()] : collection["start_time"];
+                var endTime = i != 0 ? collection["end_time" + i.ToString()] : collection["end_time"];
+                if (day != null && startTime != null && endTime != null)
+                {
+                    if (dbDay != "" && startTime != "" && endTime != "")
+                    {
+                        TimeSpan startSpan;
+                        TimeSpan endSpan;
+                        try
+                        {
+                            startSpan = TimeSpan.Parse(startTime);
+                            endSpan = TimeSpan.Parse(endTime);
+                        }
+                        catch (FormatException e)
+                        {
+                            var startAMPM = startTime.Split(' ');
+                            var endAMPM = endTime.Split(' ');
+                            if (startAMPM.Count() > 1)
+                            {
+                                startTime = startAMPM[1] == "PM" && Int32.Parse(startAMPM[0].Split(':')[0]) != 12
+                                    ? (Int32.Parse(startAMPM[0].Split(':')[0]) + 12).ToString() + ":" + startAMPM[0].Split(':')[1]
+                                    : Int32.Parse(startAMPM[0].Split(':')[0]) == 12 && startAMPM[1] == "AM"
+                                    ? "00:" + startAMPM[0].Split(':')[1] : startAMPM[0];
+                            }
+                            if (endAMPM.Count() > 1)
+                            {
+                                endTime = endAMPM[1] == "PM" && Int32.Parse(endAMPM[0].Split(':')[0]) != 12
+                                    ? (Int32.Parse(endAMPM[0].Split(':')[0]) + 12).ToString() + ":" + endAMPM[0].Split(':')[1]
+                                    : Int32.Parse(endAMPM[0].Split(':')[0]) == 12 && endAMPM[1] == "AM"
+                                    ? "00:" + endAMPM[0].Split(':')[1] : endAMPM[0];
+                            }
+                        }
+                        startSpan = TimeSpan.Parse(startTime);
+                        endSpan = TimeSpan.Parse(endTime);
+                        var existingPeriod = db.Time_Periods.Where(t => t.Start_Time == startSpan
+                        && t.End_Time == endSpan && t.Days == dbDay);
+                        if (existingPeriod.Count() > 0)
+                        {
+                            modifyClass.Time_Periods.Add(existingPeriod.First());
+                        }
+                        else
+                        {
+                            var timePeriod = new Time_Periods
+                            {
+                                Start_Time = startSpan,
+                                End_Time = endSpan,
+                                Days = dbDay
+                            };
+                            var lastInsertedTimePeriod = db.Time_Periods.Add(timePeriod);
+                            modifyClass.Time_Periods.Add(lastInsertedTimePeriod);
+                        }
+                    }
+                    i++;
+                }
+                else
+                {
+                    finished = true;
+                }
+            }
+            db.SaveChanges();
         }
     }
 }

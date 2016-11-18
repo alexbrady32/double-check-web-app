@@ -284,11 +284,9 @@
     var current = @tableCount;
     $('#addDaysButton').click(function addRowToTable(e) {
         e.preventDefault();
-        alert("So is this code!");
         $('#periodTable').find('tbody:last').append('<tr>\
                 <td>\
-                    <!--<input id="day_input' + current.toString() + '" list="days" name="day' + current.toString() + '" />-->\
-                    <select id="days' + current.toString() + '" name="days' + current.toString() + '" form="CreateClass">\
+                    <select id="days' + current.toString() + '" name="days' + current.toString() + '" form="EditClass">\
                         <option value="MWF">MWF</option>\
                         <option value="TTH">TTH</option>\
                         <option value="MW">MW</option>\
