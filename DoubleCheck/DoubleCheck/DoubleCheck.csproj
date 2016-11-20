@@ -245,6 +245,7 @@
     <Content Include="Views\Assignments\List.cshtml" />
     <Content Include="Views\Class\Delete.cshtml" />
     <Content Include="Views\Class\Edit.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

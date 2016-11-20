@@ -79,6 +79,12 @@ namespace DoubleCheck.Controllers
             return View("/Views/Account/Create.cshtml");
         }
 
+        // GET: Account/Create
+        public ActionResult ForgotPassword()
+        {
+            return View("/Views/Account/ForgotPassword.cshtml");
+        }
+
         // POST: Account/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
