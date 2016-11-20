@@ -323,7 +323,12 @@ footer {
 
 /* ----------------- LIST PAGE ----------------*/
 
-.list-table, td, th {
+.list-table td {
+    border: 1px solid black;
+    background-color: lightgrey;
+}
+
+.list-table th {
     border: 1px solid black;
     background-color: lightgrey;
 }
