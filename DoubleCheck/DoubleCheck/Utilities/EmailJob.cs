@@ -41,7 +41,7 @@ namespace DoubleCheck.Utilities
 
         public void SendEmailMessage(string recipient, string body)
         {
-            using (var message = new MailMessage("doublecheck@gmail.com", recipient))
+            using (var message = new MailMessage("doublechecksau@gmail.com", recipient))
             {
                 message.Subject = "Assignment Reminder";
                 message.Body = body;
@@ -50,7 +50,7 @@ namespace DoubleCheck.Utilities
                     EnableSsl = true,
                     Host = "smtp.gmail.com",
                     Port = 587,
-                    Credentials = new NetworkCredential("doublecheck@gmail.com", "alwaysDoubleCheck12321")
+                    Credentials = new NetworkCredential("doublechecksau@gmail.com", "DARPdoublecheck@SAU")
                 })
                 {
                     client.Send(message);
