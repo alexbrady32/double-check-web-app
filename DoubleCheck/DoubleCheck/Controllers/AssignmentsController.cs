@@ -43,6 +43,20 @@ namespace DoubleCheck.Controllers
             var usersClasses = db.Classes.Where(c => c.U_Id == user);
             ViewBag.AppDataClassList = new SelectList(usersClasses, "C_Id", "Name");
             ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
+            // For determining the estimated time to complete for reading assignments
+            var userScore = db.Users.Where(u => u.Id == user).FirstOrDefault().Cloze_Score;
+            if (userScore < 80)
+            {
+                ViewBag.ClozeMultiplier = 0.8;
+            }
+            else if (userScore >= 90)
+            {
+                ViewBag.ClozeMultiplier = 1.2;
+            }
+            else
+            {
+                ViewBag.ClozeMultiplier = 1.0;
+            }
             return View();
         }
 
