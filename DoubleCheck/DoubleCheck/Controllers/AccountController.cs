@@ -113,7 +113,7 @@ namespace DoubleCheck.Controllers
         {
             if (Session["UserID"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             User user = db.Users.Find(Int32.Parse((string)Session["UserID"]));
             if (user == null)
