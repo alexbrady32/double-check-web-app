@@ -32,6 +32,37 @@ namespace DoubleCheck.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+            var stringsToUse = Utilities.Utilities.calculateWeeklyTotal(userID);
+            var message = "";
+            var string3Join = "";
+            var string4Join = "";
+            if (stringsToUse[1] != "")
+            {
+                message += "You need to spend "
+                    + stringsToUse[1] + " on your assignments this week in order to finish them in time. That includes ";
+                if (stringsToUse[2] != "")
+                {
+                    message += stringsToUse[2] + " on assignments due this week";
+                    string3Join = stringsToUse[4] != "" ? ", " : " and ";
+                    string4Join = " and ";
+                }
+                if (stringsToUse[3] != "")
+                {
+                    message += string3Join + stringsToUse[3] + "on assignments due in the coming weeks";
+                    string4Join = " and ";
+                }
+                if (stringsToUse[4] != "")
+                {
+                    message += string4Join + stringsToUse[4] + " on past due assignments.";
+                }
+                else
+                {
+                    message += ".";
+                }
+                
+            }
+            ViewBag.Message = message;
+
             List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(userID)).ToList();
            
             return View(assignments);

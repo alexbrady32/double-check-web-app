@@ -16,25 +16,16 @@ namespace DoubleCheck.Utilities
         {
             var users = db.Users.Where(u => u.canNotifyByEmail == true);
             foreach (var user in users) {
-                var numberOfAssignments = user.Assignments.Count();
-                var totalTTC = 0;
-                foreach (var assignment in user.Assignments)
+                var stringsToUse = Utilities.calculateWeeklyTotal(user.Id);
+                if (stringsToUse[1] != "")
                 {
-                    totalTTC += assignment.TTC;
-                }
-                if (numberOfAssignments > 0 && totalTTC > 0)
-                {
-                    var hours = (totalTTC / 60) > 0 ? (totalTTC / 60).ToString() + " hours and " : "";
-                    var minutes = totalTTC % 60;
-                    // add link to home page in future
                     string emailBody = "Hello, " + user.firstName.ToString() + "!\n\n"
-                        + "Don't get behind in your schoolwork! You have " + numberOfAssignments.ToString() +
-                        " assignments due this week. You have estimated that this will take you approximately " +
-                        hours + minutes.ToString() + " minutes to complete these assignments. " +
-                        "Log in to DoubleCheck to get started. \n\n" +
-                        "Sincerely, \n\n" + "Your friends at DoubleCheck";
+                            + "Don't get behind in your schoolwork! You have " + stringsToUse[0] +
+                            " assignments due this week. You have estimated that this will take you approximately " +
+                            stringsToUse[1] + " to complete these assignments. " +
+                            "Log in to DoubleCheck to get started. \n\n" +
+                            "Sincerely, \n\n" + "Your friends at DoubleCheck";
                     SendEmailMessage(user.Email, emailBody);
-
                 }
             }
         }
@@ -55,9 +46,7 @@ namespace DoubleCheck.Utilities
                 {
                     client.Send(message);
                 }
-             }
+            }
         }
-
-
     }
 }
