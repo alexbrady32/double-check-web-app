@@ -202,6 +202,34 @@ namespace DoubleCheck.Controllers
                 user.ResetPasswordHash = CreatePasswordHash(DateTime.Now.ToString());
                 user.ResetPasswordExpiration = DateTime.Now.AddDays(3);
                 db.SaveChanges();
+
+                // Code to get current url path taken from StackOverflow post
+                // http://stackoverflow.com/questions/1214607/how-can-i-get-the-root-domain-uri-in-asp-net
+                var appPath = string.Empty;
+                //Getting the current context of HTTP request
+                var context = System.Web.HttpContext.Current;
+                //Checking the current context content
+                if (context != null)
+                {
+                    //Formatting the fully qualified website url/name
+                    appPath = string.Format("{0}://{1}{2}",
+                                            context.Request.Url.Scheme,
+                                            context.Request.Url.Host,
+                                            context.Request.Url.Port == 80
+                                                ? string.Empty
+                                                : ":" + context.Request.Url.Port
+                                            );
+                    appPath += "/Account/ResetPassword";
+                }
+                /*
+                if (!appPath.EndsWith("/"))
+                    appPath += "/";
+                */
+
+                string emailBody = "Hello, " + user.firstName.ToString() + "!\n\n"
+                        + "Please click on the following link to reset your DoubleCheck password. \n\n" +  
+                        " \n\n" +
+                        "Sincerely, \n\n" + "Your friends at DoubleCheck";
                 Utilities.EmailJob.SendEmailMessage("alexbrady32@gmail.com", "hello there", "test");
                 return RedirectToAction("Login");
             }
