@@ -25,16 +25,18 @@ namespace DoubleCheck.Utilities
                             stringsToUse[1] + " to complete these assignments. " +
                             "Log in to DoubleCheck to get started. \n\n" +
                             "Sincerely, \n\n" + "Your friends at DoubleCheck";
-                    SendEmailMessage(user.Email, emailBody);
+                    string subject = "Assignment Reminder";
+                    SendEmailMessage(user.Email, emailBody, subject);
+
                 }
             }
         }
 
-        public void SendEmailMessage(string recipient, string body)
+        static public void SendEmailMessage(string recipient, string body, string subject)
         {
             using (var message = new MailMessage("doublechecksau@gmail.com", recipient))
             {
-                message.Subject = "Assignment Reminder";
+                message.Subject = subject;
                 message.Body = body;
                 using (SmtpClient client = new SmtpClient
                 {
