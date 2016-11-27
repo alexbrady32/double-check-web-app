@@ -197,7 +197,7 @@ namespace DoubleCheck.Controllers
                 user.ResetPasswordHash = CreatePasswordHash(DateTime.Now.ToString());
                 user.ResetPasswordExpiration = DateTime.Now.AddDays(3);
                 db.SaveChanges();
-                //Utilities.EmailJob.SendEmailMessage("alexbrady32@gmail.com", "hello there", "test");
+                Utilities.EmailJob.SendEmailMessage("alexbrady32@gmail.com", "hello there", "test");
                 return RedirectToAction("Login");
             }
             else
