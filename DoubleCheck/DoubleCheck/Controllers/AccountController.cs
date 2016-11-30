@@ -215,6 +215,9 @@ namespace DoubleCheck.Controllers
                                                 : ":" + context.Request.Url.Port
                                             );
                     appPath += "/Account/ResetPassword";
+                    // Adds the password hash as a GET parameter into the url
+                    appPath += "?code=";
+                    appPath += user.ResetPasswordHash;
                 }
                 /*
                 if (!appPath.EndsWith("/"))
@@ -223,9 +226,11 @@ namespace DoubleCheck.Controllers
 
                 string emailBody = "Hello, " + user.firstName.ToString() + "!\n\n"
                         + "Please click on the following link to reset your DoubleCheck password. \n\n" +  
-                        " \n\n" +
+                        appPath + " \n\n" +
                         "Sincerely, \n\n" + "Your friends at DoubleCheck";
-                Utilities.EmailJob.SendEmailMessage("alexbrady32@gmail.com", "hello there", "test");
+                string emailSubject = "DoubleCheck - Reset Password Request";
+                // TODO: Use the logged in user's email address
+                Utilities.EmailJob.SendEmailMessage("alexbrady32@gmail.com", emailBody, emailSubject);
                 return RedirectToAction("Login");
             }
             else
@@ -235,6 +240,12 @@ namespace DoubleCheck.Controllers
                 return RedirectToAction("Login");
             }
             
+        }
+
+        public ActionResult ResetPassword(string code)
+        {
+
+            return View();
         }
 
 
