@@ -73,9 +73,23 @@ namespace DoubleCheck.Controllers
             return View();
         }
 
-        // GET: Account/Create
+        // GET: Account/ForgotPassword
         public ActionResult ForgotPassword()
         {
+            return View();
+        }
+
+        // GET: Account/ResetPassword
+        public ActionResult ResetPassword(string code)
+        {
+            var user = db.Users.Where(u => u.ResetPasswordHash == code).First();
+            if (DateTime.Now < user.ResetPasswordExpiration)
+            {
+                return View(user);
+            }
+            // TODO: Either Hash is expired, or a code was not in the link (verify this)
+            // So we need to either give them a message, or I guess just redirect the user in the case of 
+            // a code not being passed in
             return View();
         }
 
@@ -219,10 +233,7 @@ namespace DoubleCheck.Controllers
                     appPath += "?code=";
                     appPath += user.ResetPasswordHash;
                 }
-                /*
-                if (!appPath.EndsWith("/"))
-                    appPath += "/";
-                */
+                
 
                 string emailBody = "Hello, " + user.firstName.ToString() + "!\n\n"
                         + "Please click on the following link to reset your DoubleCheck password. \n\n" +  
@@ -242,10 +253,18 @@ namespace DoubleCheck.Controllers
             
         }
 
-        public ActionResult ResetPassword(string code)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword([Bind(Include = "Id,Password")] User user)
         {
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                // Create Password Hash and store back into the model
+                user.Password = CreatePasswordHash(user.Password);
+                db.SaveChanges();
+                return RedirectToAction("Login", "Account");
+            }
+            return View(user);
         }
 
 
