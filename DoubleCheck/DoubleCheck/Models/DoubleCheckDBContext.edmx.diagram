@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="be4b87527a0a4c90b18e4114c8f4d0ce" Name="Diagram1">
-        <EntityTypeShape EntityType="doublecheckdbModel.Asgmt_Type" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="doublecheckdbModel.Assignment" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="doublecheckdbModel.Class" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="doublecheckdbModel.Asgmt_Type" Width="1.5" PointX="7.875" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="doublecheckdbModel.Assignment" Width="1.5" PointX="5.125" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="doublecheckdbModel.Class" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="doublecheckdbModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="doublecheckdbModel.Time_Periods" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="doublecheckdbModel.Time_Periods" Width="1.5" PointX="4.625" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="doublecheckdbModel.User" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
         <AssociationConnector Association="doublecheckdbModel.FK__Assignment__T_Id__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="doublecheckdbModel.FK__Assignment__C_Id__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="doublecheckdbModel.FK__Assignment__C_Id__2B3F6F97" ManuallyRouted="false" ></AssociationConnector>
         <AssociationConnector Association="doublecheckdbModel.FK__Assignment__U_Id__2A4B4B5E" ManuallyRouted="false" />
         <AssociationConnector Association="doublecheckdbModel.FK__Class__U_Id__24927208" ManuallyRouted="false" />
         <AssociationConnector Association="doublecheckdbModel.Class_Times" ManuallyRouted="false" />
