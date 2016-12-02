@@ -132,7 +132,7 @@ namespace DoubleCheck.Controllers
             {
                 Assignment a = db.Assignments.Find(assignment.A_Id);
                 a.Name = assignment.Name;
-                a.Class = assignment.Class;
+                a.Class = db.Classes.Where(c => c.C_Id == assignment.C_Id).First();
                 a.T_Id = assignment.T_Id;
                 a.Due_Date = assignment.Due_Date;
                 a.TTC = assignment.TTC;

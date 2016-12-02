@@ -53,16 +53,10 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control", @min = 1, @max = 3 } })
-                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                @Html.HiddenFor(model => model.Status)
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Due_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Due_Date, "Due Date", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Due_Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                         @Html.ValidationMessageFor(model => model.Due_Date, "", new { @class = "text-danger" })
@@ -70,7 +64,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.TTC, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.TTC, "Estimated Time to Complete (in minutes)", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.TTC, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.TTC, "", new { @class = "text-danger" })
@@ -85,13 +79,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Completion, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Completion, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Completion, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                @Html.HiddenFor(model => model.Completion)
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
