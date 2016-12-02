@@ -112,7 +112,9 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Edit(int id)
         {
-            ViewBag.AppDataClassList = new SelectList(db.Classes, "C_Id", "Name");
+            var user = Int32.Parse((string)Session["UserID"]);
+            var usersClasses = db.Classes.Where(c => c.U_Id == user);
+            ViewBag.AppDataClassList = new SelectList(usersClasses, "C_Id", "Name");
             ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
 
             Assignment assignment = db.Assignments.Find(id);
