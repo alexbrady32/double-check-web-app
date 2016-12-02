@@ -21,18 +21,18 @@ namespace DoubleCheck.Controllers
 
         public ActionResult List()
         {
-            int userID;
+            Int32 user;
 
             if (Session["UserID"] != null)
             {
-                userID = int.Parse((string)Session["UserID"]);
+                user = Int32.Parse((string)Session["UserID"]);
             }
             else
             {
-                return RedirectToAction("Login", "Account");
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
-            var stringsToUse = Utilities.Utilities.calculateWeeklyTotal(userID);
+            var stringsToUse = Utilities.Utilities.calculateWeeklyTotal(user);
             var message = "";
             var string3Join = "";
             var string4Join = "";
@@ -63,7 +63,7 @@ namespace DoubleCheck.Controllers
             }
             ViewBag.Message = message;
 
-            List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(userID)).ToList();
+            List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(user)).ToList();
            
             return View(assignments);
         }

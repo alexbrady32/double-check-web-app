@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
 
 namespace DoubleCheck.Controllers
 {
@@ -15,7 +16,17 @@ namespace DoubleCheck.Controllers
         // GET: Class
         public ActionResult Index()
         {
-            User user = db.Users.Find(Int32.Parse((string)Session["UserID"]));
+            User user;
+
+            if (Session["UserID"] != null)
+            {
+                user = db.Users.Find(Int32.Parse((string)Session["UserID"]));
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             return View(user.Classes);
         }
 
