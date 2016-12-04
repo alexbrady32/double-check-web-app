@@ -16,7 +16,25 @@ namespace DoubleCheck.Controllers
         // GET: Assignments
         public ActionResult Index()
         {
-            return View();
+            Int32 user;
+
+            if (Session["UserID"] != null)
+            {
+                user = Int32.Parse((string)Session["UserID"]);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
+            var ttc_strings = Utilities.Utilities.calculateWeeklyTotal(user);
+
+            ViewBag.TTC_Total = ttc_strings[1];
+            ViewBag.TTC_ThisWeek = ttc_strings[2];
+            ViewBag.TTC_NextWeek = ttc_strings[3];
+            ViewBag.TTC_PastDue = ttc_strings[4];
+            List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(user)).ToList();
+            return View(assignments);
         }
 
         public ActionResult List()
