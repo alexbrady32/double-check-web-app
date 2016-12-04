@@ -14,46 +14,25 @@ namespace DoubleCheck.Controllers
         private doublecheckdbEntities db = new doublecheckdbEntities();
 
         // GET: Assignments
-
         public ActionResult Index()
         {
-            int userID;
-
-            if (Session["UserID"] != null)
-            {
-                userID = int.Parse((string)Session["UserID"]);
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            var ttc_strings = Utilities.Utilities.calculateWeeklyTotal(userID);
-
-            ViewBag.TTC_Total = ttc_strings[1];
-            ViewBag.TTC_ThisWeek = ttc_strings[2];
-            ViewBag.TTC_NextWeek = ttc_strings[3];
-            ViewBag.TTC_PastDue = ttc_strings[4];
-
-            List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(userID)).ToList();
-           
-            return View(assignments);
+            return View();
         }
 
         public ActionResult List()
         {
-            int userID;
+            Int32 user;
 
             if (Session["UserID"] != null)
             {
-                userID = int.Parse((string)Session["UserID"]);
+                user = Int32.Parse((string)Session["UserID"]);
             }
             else
             {
-                return RedirectToAction("Login", "Account");
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
-            var stringsToUse = Utilities.Utilities.calculateWeeklyTotal(userID);
+            var stringsToUse = Utilities.Utilities.calculateWeeklyTotal(user);
             var message = "";
             var string3Join = "";
             var string4Join = "";
@@ -80,15 +59,14 @@ namespace DoubleCheck.Controllers
                 {
                     message += ".";
                 }
-
+                
             }
             ViewBag.Message = message;
 
-            List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(userID)).ToList();
-
+            List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(user)).ToList();
+           
             return View(assignments);
         }
-
 
         public ActionResult Create()
         {
@@ -134,16 +112,16 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Edit(int id)
         {
-            Assignment assignment = db.Assignments.Find(id);
+            var user = Int32.Parse((string)Session["UserID"]);
+            var usersClasses = db.Classes.Where(c => c.U_Id == user);
+            ViewBag.AppDataClassList = new SelectList(usersClasses, "C_Id", "Name");
+            ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
 
+            Assignment assignment = db.Assignments.Find(id);
             if(assignment == null)
             {
                 return HttpNotFound();
             }
-
-            ViewBag.AppDataClassList = new SelectList(db.Classes, "C_Id", "Name");
-            ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
-
             return View(assignment);
         }
 
@@ -154,7 +132,7 @@ namespace DoubleCheck.Controllers
             {
                 Assignment a = db.Assignments.Find(assignment.A_Id);
                 a.Name = assignment.Name;
-                a.Class = assignment.Class;
+                a.Class = db.Classes.Where(c => c.C_Id == assignment.C_Id).First();
                 a.T_Id = assignment.T_Id;
                 a.Due_Date = assignment.Due_Date;
                 a.TTC = assignment.TTC;

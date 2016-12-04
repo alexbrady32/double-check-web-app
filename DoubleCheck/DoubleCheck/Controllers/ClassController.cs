@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
 
 namespace DoubleCheck.Controllers
 {
@@ -15,7 +16,17 @@ namespace DoubleCheck.Controllers
         // GET: Class
         public ActionResult Index()
         {
-            User user = db.Users.Find(Int32.Parse((string)Session["UserID"]));
+            User user;
+
+            if (Session["UserID"] != null)
+            {
+                user = db.Users.Find(Int32.Parse((string)Session["UserID"]));
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             return View(user.Classes);
         }
 
@@ -40,14 +51,8 @@ namespace DoubleCheck.Controllers
                 // Assemble the start date and end dates
                 var dateTimeStart = collection["Start_Date"];
                 var dateTimeEnd = collection["End_Date"];
-                var startItems = dateTimeStart.Split('-');
-                var endItems = dateTimeEnd.Split('-');
-                var startDate = new DateTime(Int32.Parse(startItems[0]), 
-                    Int32.Parse(startItems[1]), Int32.Parse(startItems[2]));
-                
-                var endDate = new DateTime(Int32.Parse(endItems[0]),
-                    Int32.Parse(endItems[1]), Int32.Parse(endItems[2]));
-
+                var startDate = DateTime.Parse(dateTimeStart);
+                var endDate = DateTime.Parse(dateTimeEnd);
                 var newClass = new Class { Building = collection["Building"],
                                            Name = collection["Name"],
                                            U_Id = Int32.Parse((string)Session["UserID"]),
