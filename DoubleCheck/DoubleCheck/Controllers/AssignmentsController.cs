@@ -122,7 +122,7 @@ namespace DoubleCheck.Controllers
                 db.Assignments.Add(NewAssignment);
                 db.SaveChanges();
 
-                return RedirectToAction("List");
+                return RedirectToAction("Index");
             }
 
             return View(NewAssignment);
