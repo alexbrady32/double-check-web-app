@@ -31,7 +31,7 @@ namespace DoubleCheck.Controllers
             // Assigning the user a score that gives them an average reading level
             user.Cloze_Score = 85;
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Assignments");
         }
 
         public ActionResult Grade()
@@ -57,7 +57,7 @@ namespace DoubleCheck.Controllers
             var user = db.Users.Where(u => u.Id == userID).FirstOrDefault();
             user.Cloze_Score = grade * 100;
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Assignments");
         }
     }
 }
