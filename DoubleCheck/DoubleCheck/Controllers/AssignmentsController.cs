@@ -54,22 +54,22 @@ namespace DoubleCheck.Controllers
             var message = "";
             var string3Join = "";
             var string4Join = "";
-            if (stringsToUse[1] != "")
+            if (stringsToUse[1] != "0:00")
             {
                 message += "You need to spend "
                     + stringsToUse[1] + " on your assignments this week in order to finish them in time. That includes ";
-                if (stringsToUse[2] != "")
+                if (stringsToUse[2] != "0:00")
                 {
                     message += stringsToUse[2] + " on assignments due this week";
-                    string3Join = stringsToUse[4] != "" ? ", " : " and ";
+                    string3Join = stringsToUse[4] != "0:00" ? ", " : " and ";
                     string4Join = " and ";
                 }
-                if (stringsToUse[3] != "")
+                if (stringsToUse[3] != "0:00")
                 {
-                    message += string3Join + stringsToUse[3] + "on assignments due in the coming weeks";
+                    message += string3Join + stringsToUse[3] + " on assignments due in the coming weeks";
                     string4Join = " and ";
                 }
-                if (stringsToUse[4] != "")
+                if (stringsToUse[4] != "0:00")
                 {
                     message += string4Join + stringsToUse[4] + " on past due assignments.";
                 }
@@ -157,7 +157,7 @@ namespace DoubleCheck.Controllers
                 a.Description = assignment.Description;
                 db.SaveChanges();
 
-                return RedirectToAction("List");
+                return RedirectToAction("Index");
             }
 
             return View(assignment);
@@ -186,7 +186,7 @@ namespace DoubleCheck.Controllers
             Assignment a = db.Assignments.Find(id);
             db.Assignments.Remove(a);
             db.SaveChanges();
-            return RedirectToAction("List");
+            return RedirectToAction("Index");
         }
     }
 }
