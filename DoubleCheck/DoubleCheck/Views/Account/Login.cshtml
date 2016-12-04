@@ -4,15 +4,14 @@
     ViewBag.Title = "Home";
 }
 
-<div class="login-content">
+<div id="login-content" class="login-content">
     <div class="login-intro">
-        <span>Always double check your homework! With the Double Check web application you can schedule all of your assignments in one place, get notifications for study time, and watch your list of completed assignments grow and grow.</span>
-        <h2> Create an account or login to get started! </h2>
+        @*<h4>Always double check your homework! With the Double Check web application you can schedule all of your assignments in one place, get notifications for study time, and watch your list of completed assignments grow and grow.</h4>*@
+        <p>Sign in to DoubleCheck</p>
     </div>
 
 
     <div class="form-wrapper">
-        <h2>Sign in to DoubleCheck</h2>
 
         @using (Html.BeginForm("Login", "Account", FormMethod.Post))
         {
@@ -20,25 +19,25 @@
             <div class="login-input-block">
                 <i class='fa fa-user fa-lg input-trans'></i>
                 @Html.EditorFor(model => model.Username, new
-                  {
-                      htmlAttributes = new
-                     {
-                         @class = "login-input-field",
-                         @placeholder = "Username"
-                      }
-                 })
+           {
+               htmlAttributes = new
+               {
+                   @class = "login-input-field",
+                   @placeholder = "Username"
+               }
+           })
             </div>
             <div class="login-input-block">
                 <i class='fa fa-lock fa-lg input-trans'></i>
                 @Html.EditorFor(model => model.Password, new
-                 {
-                    htmlAttributes = new
-                       {
-                         @class = "login-input-field",
-                        @Type = "Password",
-                           @placeholder = "Password"
-                      }
-                 })
+           {
+               htmlAttributes = new
+               {
+                   @class = "login-input-field",
+                   @Type = "Password",
+                   @placeholder = "Password"
+               }
+           })
             </div>
 
             if (TempData["Message"] != null)

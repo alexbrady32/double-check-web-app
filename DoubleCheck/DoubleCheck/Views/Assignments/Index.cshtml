@@ -1,0 +1,181 @@
+﻿@model IEnumerable<DoubleCheck.Models.Assignment>
+
+@{
+    var status = "Unknown";
+    var completion = "";
+    var date = "";
+    var dateClass = "";
+    int hoursCalc = 0;
+    decimal minutesCalc = 0;
+    ViewBag.Title = "Assignments";
+}
+
+<div class="bg">
+
+    <div class="ttc-section">
+        <div class="ttc-title">
+            <p>Estimated Study Time</p>
+        </div>
+
+        <div class="ttc-card">
+            <p class="ttc-card-name">Past Due</p>
+            <span class="ttc-card-time">@ViewBag.TTC_PastDue</span>Hrs
+        </div>
+
+        <div class="ttc-card">
+            <p class="ttc-card-name">Due This Week</p>
+            <span class="ttc-card-time">@ViewBag.TTC_ThisWeek</span>Hrs
+        </div>
+
+        <div class="ttc-card">
+            <p class="ttc-card-name">Due Next Week</p>
+            <span class="ttc-card-time">@ViewBag.TTC_NextWeek</span>Hrs
+        </div>
+
+        <div class="ttc-card">
+            <p class="ttc-card-name">Total</p>
+            <span class="ttc-card-time">@ViewBag.TTC_Total</span>Hrs
+        </div>
+    </div>
+
+    <div class="asgmt-panels">
+        <p class="asg-title">Not Started</p>
+        @foreach (var Assignment in Model)
+        {
+            if (Assignment.Status == 1)
+            {
+                date = Assignment.Due_Date.ToString();
+                if (Assignment.Due_Date > DateTime.Now.Date)
+                {
+                    dateClass = "asgmt-Green";
+                }
+                else if (Assignment.Due_Date < DateTime.Now.Date)
+                {
+                    dateClass = "asgmt-Red";
+                }
+                else
+                {
+                    dateClass = "asgmt-Orange";
+                }
+
+                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'">
+                    <div class="asgmt-card-color"></div>
+                    <div class="asgmt-card-name">@Assignment.Name</div>
+                    <div class="asgmt-card-class">@Assignment.Class.Name</div>
+                    <div class="asgmt-card-date @dateClass">@date.Substring(0, 10)</div>
+                    <div class="asgmt-card-time @dateClass">@date.Substring(date.Length - 11)</div>
+                    <div class="asgmt-card-notes">Notes</div>
+                    <div class="asgmt-card-separator"></div>
+                    <div class="asgmt-card-noteDetails">@Assignment.Description</div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="asgmt-panels">
+        <p class="asg-title">In Progress</p>
+        @foreach (var Assignment in Model)
+        {
+            if (Assignment.Status == 2)
+            {
+                date = Assignment.Due_Date.ToString();
+                if (Assignment.Due_Date > DateTime.Now.Date) {
+                    dateClass = "asgmt-Green";
+                }
+                else if (Assignment.Due_Date < DateTime.Now.Date) {
+                    dateClass = "asgmt-Red";
+                }
+                else {
+                    dateClass = "asgmt-Orange";
+                }
+
+                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'">
+                    <div class="asgmt-card-color"></div>
+                    <div class="asgmt-card-name">@Assignment.Name</div>
+                    <div class="asgmt-card-class">@Assignment.Class.Name</div>
+                    <div class="asgmt-card-date @dateClass">@date.Substring(0, 10)</div>
+                    <div class="asgmt-card-time @dateClass">@date.Substring(date.Length - 11)</div>
+                    <div class="asgmt-card-notes">Notes</div>
+                    <div class="asgmt-card-separator"></div>
+                    <div class="asgmt-card-noteDetails">@Assignment.Description</div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="asgmt-panels">
+        <p class="asg-title">Completed</p>
+        @foreach (var Assignment in Model)
+        {
+            if (Assignment.Status == 3)
+            {
+                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'">
+                    <div class="asgmt-card-color"></div>
+                    <div class="asgmt-card-name">@Assignment.Name</div>
+                    <div class="asgmt-card-class">@Assignment.Class.Name</div>
+                    <div class="asgmt-card-date">@date.Substring(0, 10)</div>
+                    <div class="asgmt-card-time">@date.Substring(date.Length - 11)</div>
+                    <div class="asgmt-card-notes">Notes</div>
+                    <div class="asgmt-card-separator"></div>
+                    <div class="asgmt-card-noteDetails">@Assignment.Description</div>
+                </div>
+            }
+        }
+    </div>
+
+
+    @*
+    <table style="text-align:center">
+        <tr>
+            <th>Class</th>
+            <th>Assigment Name</th>
+            <th>Status</th>
+            <th>Due Date</th>
+            <th>Time Remaing</th>
+            <th>Notes</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var Assignments in Model)
+        {
+            @* Check assignment status and return it as text rather than a number 
+        if (Assignments.Status == 1)
+        {
+            status = "Not started";
+        }
+        if (Assignments.Status == 2)
+        {
+            status = "In progress";
+        }
+        if (Assignments.Status == 3)
+        {
+            status = "Completed";
+        }
+
+        hoursCalc = ((int)(Assignments.TTC - (Assignments.TTC * Assignments.Completion))) / 60;
+        minutesCalc = (Assignments.TTC - (Assignments.TTC * Assignments.Completion)) % 60;
+        minutesCalc = ((int)minutesCalc);
+        completion = hoursCalc > 0 ? (hoursCalc > 1 ? hoursCalc.ToString() + ":" : hoursCalc.ToString() + ":") : "";
+        completion += minutesCalc > 0 ? minutesCalc.ToString() : "";
+        completion = completion == "" ? "0:00" : completion;
+
+        <tr>
+            <td>@Assignments.Class.Name</td>
+            <td>@Assignments.Name</td>
+            <td>@status</td>
+            <td>@Assignments.Due_Date</td>
+            <td>@completion</td>
+            <td>@Assignments.Description</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { id = Assignments.A_Id })</td>
+            <td>@Html.ActionLink("Details", "Details", new { id = Assignments.A_Id })</td>
+            <td>@Html.ActionLink("Delete", "Delete", new { id = Assignments.A_Id })</td>
+        </tr>
+        }
+    </table>
+        *@
+    <br />
+
+
+    @Html.ActionLink("New Assignment", "Create")
+</div>

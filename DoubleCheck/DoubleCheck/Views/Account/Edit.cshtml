@@ -1,115 +1,155 @@
 ﻿@model DoubleCheck.Models.User
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "My Account";
 }
 
-<h2>Edit</h2>
+@*<h1 class="create-acc-title">Hello, @Session["UserFirstName"]!</h1>*@
+<div class="myacct-panel">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+    <div class="myacct-panel-left">
+        <h1 class="create-acc-title">My Account</h1>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.Cloze_Score)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        <div class="myacct-picture-panel">
+            <div class="picture-frame">
+                <img src="~/Resources/Images/profile.png" />
+            </div>
+            <div class="myacct-username">
+                <h2>@Session["UserFirstName"] @Session["UserLastName"]</h2>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, "Current Password", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type="password" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, "Retype Current Password", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" id="retypePassword" name="retypePassword" type="password" value="" />
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div id="error_message" class="alert alert-danger hidden">
-            <strong>@ViewBag.Error</strong>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, "New Password", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" id="newPassword" name="newPassword" type="password" value="" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type="email" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.firstName, "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.lastName, "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.phone_num, "Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.phone_num, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.phone_num, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="canNotifyByEmail" class="control-label col-md-2">Receive assignment notifcations by email</label>
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.canNotifyByEmail)
-                    @Html.ValidationMessageFor(model => model.canNotifyByEmail, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="canNotifyByText" class="control-label col-md-2">Receive assignment notifcations by text</label>
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.canNotifyByText)
-                    @Html.ValidationMessageFor(model => model.canNotifyByText, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <hr />
+        <div class="myacct-logout">
+            <a href="@Url.Action("Login", "Account")">Logout</a>
         </div>
     </div>
-}
+
+    <div class="create-acc-panel-right">
+        <div class="section-title">
+            <h1 class="create-acc-subtitle">DoubleCheck &#10004;&#10004;</h1>
+            <p>Edit your account.</p>
+        </div>
+        <hr />
+
+        @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+
+            <div id="error_message" class="alert alert-danger hidden">
+                <strong>@ViewBag.Error</strong>
+            </div>
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.Cloze_Score)
+
+                    <div class="form-group">
+                        <i class='fa fa-user fa-lg input-trans control-label col-md-2'> Username </i>
+                        <div class="col-md-10">
+                            <div class="create-input-block">
+                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "create-input-field", @disabled = "true" } })
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <i class='fa fa-lock fa-lg input-trans control-label col-md-2'> Password </i>
+                        <div class="col-md-10">
+                            <div class="create-input-block">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "create-input-field", @placeholder = "Password", @type = "password" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <i class='fa fa-lock fa-lg input-trans control-label col-md-2'> Retype Current Password </i>
+                        <div class="col-md-10">
+                            <input class="create-input-field" id="retypePassword" name="retypePassword" type="password" value="" />
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <i class='fa fa-lock fa-lg input-trans control-label col-md-2'> New Password </i>
+                        <div class="col-md-10">
+                            <input class="create-input-field" id="newPassword" name="newPassword" type="password" value="" />
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <i class='fa fa-envelope fa-lg input-trans control-label col-md-2'> Email </i>
+                        <div class="col-md-10">
+                            <div class="create-input-block">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "create-input-field" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <i class='fa fa-user fa-lg input-trans control-label col-md-2'> First Name </i>
+                        <div class="col-md-10">
+                            <div class="create-input-block">
+                                @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "create-input-field" } })
+                                @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <i class='fa fa-user fa-lg input-trans control-label col-md-2'> Last Name </i>
+                        <div class="col-md-10">
+                            <div class="create-input-block">
+                                @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "create-input-field" } })
+                                @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <i class='fa fa-phone-square fa-lg input-trans control-label col-md-2'> Phone Number </i>
+                        <div class="col-md-10">
+                            <div class="create-input-block">
+                                @Html.EditorFor(model => model.phone_num, new { htmlAttributes = new { @class = "create-input-field" } })
+                                @Html.ValidationMessageFor(model => model.phone_num, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">
+                        <br />
+                        <p>Manage your notifications.</p>
+                    </div>
+                    <hr />
+                    
+
+                    <div class="form-group checkbox-group">
+                        <div class="checkbox-item">
+                                @Html.EditorFor(model => model.canNotifyByEmail, new { htmlAttributes = new { @class = "create-input-checkbox" } })
+                                @Html.ValidationMessageFor(model => model.canNotifyByEmail, "", new { @class = "text-danger" })
+                            <b> Receive assignment notifcations by text </b>
+                        </div>
+                        <div class="checkbox-item">
+                             @Html.EditorFor(model => model.canNotifyByText, new { htmlAttributes = new { @class = "create-input-checkbox" } })
+                             @Html.ValidationMessageFor(model => model.canNotifyByText, "", new { @class = "text-danger" })
+                            <b> Receive assignment notifcations by text </b>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <br />
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="SAVE" class="acc-submit" />
+                        </div>
+                    </div>
+                </div>
+        }
+    </div>
+</div>
 
 <script>
     $(document).ready(function () {

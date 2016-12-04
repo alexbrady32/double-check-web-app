@@ -14,9 +14,30 @@ namespace DoubleCheck.Controllers
         private doublecheckdbEntities db = new doublecheckdbEntities();
 
         // GET: Assignments
+
         public ActionResult Index()
         {
-            return View();
+            int userID;
+
+            if (Session["UserID"] != null)
+            {
+                userID = int.Parse((string)Session["UserID"]);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var ttc_strings = Utilities.Utilities.calculateWeeklyTotal(userID);
+
+            ViewBag.TTC_Total = ttc_strings[1];
+            ViewBag.TTC_ThisWeek = ttc_strings[2];
+            ViewBag.TTC_NextWeek = ttc_strings[3];
+            ViewBag.TTC_PastDue = ttc_strings[4];
+
+            List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(userID)).ToList();
+           
+            return View(assignments);
         }
 
         public ActionResult List()
@@ -59,14 +80,15 @@ namespace DoubleCheck.Controllers
                 {
                     message += ".";
                 }
-                
+
             }
             ViewBag.Message = message;
 
             List<Assignment> assignments = db.Assignments.Where(model => model.U_Id.Equals(userID)).ToList();
-           
+
             return View(assignments);
         }
+
 
         public ActionResult Create()
         {
@@ -112,14 +134,16 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Edit(int id)
         {
-            ViewBag.AppDataClassList = new SelectList(db.Classes, "C_Id", "Name");
-            ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
-
             Assignment assignment = db.Assignments.Find(id);
+
             if(assignment == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.AppDataClassList = new SelectList(db.Classes, "C_Id", "Name");
+            ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
+
             return View(assignment);
         }
 

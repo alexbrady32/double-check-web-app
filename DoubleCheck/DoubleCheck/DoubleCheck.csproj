@@ -163,8 +163,9 @@
     <Content Include="Resources\Fonts\font-awesome.min.css" />
     <Content Include="Resources\Fonts\fontawesome-webfont.svg" />
     <Content Include="Resources\Images\background-light.jpg" />
+    <Content Include="Resources\Images\create_acct_bg.jpg" />
     <Content Include="Resources\Images\login-background.jpg" />
-    <Content Include="Resources\Images\profile.jpg" />
+    <Content Include="Resources\Images\profile.png" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -246,6 +247,7 @@
     <Content Include="Views\Assignments\List.cshtml" />
     <Content Include="Views\Class\Delete.cshtml" />
     <Content Include="Views\Class\Edit.cshtml" />
+    <Content Include="Views\Assignments\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
