@@ -14,11 +14,19 @@
         $("#slider").slider({
             min: 0,
             max: 1,
-            step: .05
+            step: .05,
+            create: function (event, ui) {
+                var initialSliderValue = Math.floor(@Model.Completion * 100);
+                $('#SliderValue').html(initialSliderValue + '%');
+                $('#slider').slider("value", @Model.Completion);
+            },
+            slide: function (event, ui) {
+                var sliderValue = Math.floor(ui.value * 100);
+                $('#SliderValue').html(sliderValue + '%');
+            }
         });
         
         $('#SaveButton').click(function () {
-            console.log("yay!");
             $('#CompletionInput').attr('value', $('#slider').slider("option", "value"));
         });
         
@@ -103,11 +111,17 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Completion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Completion, "Percent Completed", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
+                       
                         <div id="slider">
                             <input type="hidden" name="Completion" id="CompletionInput"  />
                         </div>
+                        <div class="row">
+                            <div id="SliderBegin" class="col-md-6" style="text-align:left">0</div>
+                            <div id="SliderEnd" class="col-md-6" style="text-align:right">100</div>
+                        </div>                       
+                        <div id="SliderValue" style="text-align:center"></div>
                     </div>
                 </div>
 
