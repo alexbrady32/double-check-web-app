@@ -155,6 +155,7 @@ namespace DoubleCheck.Controllers
                 a.Due_Date = assignment.Due_Date;
                 a.TTC = assignment.TTC;
                 a.Description = assignment.Description;
+                a.Completion = assignment.Completion;
                 db.SaveChanges();
 
                 return RedirectToAction("Index");

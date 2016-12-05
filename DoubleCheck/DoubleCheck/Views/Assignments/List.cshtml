@@ -8,6 +8,22 @@
     ViewBag.Title = "List";
 }
 
+<script>
+    $(document).ready(function () {
+        $(function ViewSlider() {
+            //$("#slider").slider();
+        });
+
+        $(".slider").click(function () {
+            $(this).html("<div id='mySecondDiv'></div>");
+        });
+    });
+        
+    
+    
+        
+</script>
+
 <div class="jumbotron">
     <h3>@ViewBag.Message</h3>
 </div>
@@ -21,6 +37,7 @@
         <th>Status</th>
         <th>Due Date</th>
         <th>Time Remaing</th>
+        <th>Percent Complete</th>
         <th>Notes</th>
         <th></th>
         <th></th>
@@ -28,6 +45,7 @@
     </tr>
     @foreach (var Assignments in Model)
     {
+
         @* Check assignment status and return it as text rather than a number *@
     if (Assignments.Status == 1)
     {
@@ -53,6 +71,7 @@
             <td>@status</td>
             <td>@Assignments.Due_Date</td>
             <td>@completion</td>
+            <td><div class="slider" id="@Assignments.A_Id">Edit</div></td>
             <td>@Assignments.Description</td>
             <td>@Html.ActionLink("Edit", "Edit", new { id = Assignments.A_Id })</td>
             <td>@Html.ActionLink("Details", "Details", new { id = Assignments.A_Id })</td>
