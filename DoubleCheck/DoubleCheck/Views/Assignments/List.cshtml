@@ -47,23 +47,23 @@
     {
 
         @* Check assignment status and return it as text rather than a number *@
-    if (Assignments.Status == 1)
-    {
-        status = "Not started";
-    }
-    if (Assignments.Status == 2)
-    {
-        status = "In progress";
-    }
-    if (Assignments.Status == 3)
-    {
-        status = "Completed";
-    }
-    hoursCalc = ((int) (Assignments.TTC - (Assignments.TTC * Assignments.Completion))) / 60;
-    minutesCalc = ((int) ((Assignments.TTC - (Assignments.TTC * Assignments.Completion)) % 60));
-    completion = hoursCalc > 0 ? (hoursCalc > 1 ? hoursCalc.ToString() + " hours " : hoursCalc.ToString() + " hour ") : "";
-    completion += minutesCalc > 0 ? minutesCalc.ToString() + " minutes" : "";
-    completion = completion == "" ? "0 hours 0 minutes" : completion;
+        if (Assignments.Status == 1)
+        {
+            status = "Not started";
+        }
+        if (Assignments.Status == 2)
+        {
+            status = "In progress";
+        }
+        if (Assignments.Status == 3)
+        {
+            status = "Completed";
+        }
+        hoursCalc = ((int) (Assignments.TTC - (Assignments.TTC * Assignments.Completion))) / 60;
+        minutesCalc = ((int) ((Assignments.TTC - (Assignments.TTC * Assignments.Completion)) % 60));
+        completion = hoursCalc > 0 ? (hoursCalc > 1 ? hoursCalc.ToString() + " hours " : hoursCalc.ToString() + " hour ") : "";
+        completion += minutesCalc > 0 ? minutesCalc.ToString() + " minutes" : "";
+        completion = completion == "" ? "0 hours 0 minutes" : completion;
 
         <tr>
             <td>@Assignments.Class.Name</td>
