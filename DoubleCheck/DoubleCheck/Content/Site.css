@@ -475,6 +475,23 @@ h2 {
     text-align:center;
 }
 
+.asgmt-new {
+    text-decoration:none;
+    padding: 5px;
+    font-size:18px;
+    color:#334052;
+    background-color:#eee;
+    border: 1px solid #334052;
+    border-radius:5px;
+}
+.asgmt-new:hover {
+    color:white;
+    background-color:#334052;
+    border: 1px solid #cdcdcd;
+
+
+    text-decoration:none;
+}
 .asgmt-panels {
     display:inline-table;
 }

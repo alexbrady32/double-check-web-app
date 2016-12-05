@@ -33,7 +33,8 @@
             <span class="ttc-card-time">@ViewBag.TTC_Total</span>Hrs
         </div>
     </div>
-
+    <a class="asgmt-new" href="@Url.Action("Create", "Assignments")"><i class="fa fa-plus-circle fa-sm"></i> New Assignment</a>
+    <br />
     <div class="asgmt-panels">
         <p class="asg-title">Not Started</p>
         @foreach (var Assignment in Model)
@@ -120,6 +121,4 @@
     </div>
     <br />
 
-
-    @Html.ActionLink("New Assignment", "Create")
 </div>
