@@ -16,11 +16,12 @@
             max: 1,
             step: .05
         });
-        /*
-        $('$SaveButton').click(function(){
+        
+        $('#SaveButton').click(function () {
+            console.log("yay!");
             $('#CompletionInput').attr('value', $('#slider').slider("option", "value"));
         });
-        */
+        
 
     });
 
@@ -104,8 +105,8 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Completion, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <div id="slider" Name="CompletionSlider">
-                            <input type="hidden" name="Completion" id="CompletionInput" />
+                        <div id="slider">
+                            <input type="hidden" name="Completion" id="CompletionInput"  />
                         </div>
                     </div>
                 </div>
