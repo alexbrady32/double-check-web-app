@@ -156,6 +156,23 @@ namespace DoubleCheck.Controllers
                 a.TTC = assignment.TTC;
                 a.Description = assignment.Description;
                 a.Completion = assignment.Completion;
+                /*
+                // Assignment is not started
+                if (assignment.Completion == 0)
+                {
+                    a.Status = 1;
+                }
+                // Assignment is Completed
+                else if (assignment.Completion == 1)
+                {
+                    a.Status = 3;
+                }
+                // Assignment is in progress
+                else
+                {
+                    a.Status = 2;
+                }
+                */
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
