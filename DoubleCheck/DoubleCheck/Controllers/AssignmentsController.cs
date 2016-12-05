@@ -156,7 +156,7 @@ namespace DoubleCheck.Controllers
                 a.TTC = assignment.TTC;
                 a.Description = assignment.Description;
                 a.Completion = assignment.Completion;
-                /*
+                
                 // Assignment is not started
                 if (assignment.Completion == 0)
                 {
@@ -172,7 +172,7 @@ namespace DoubleCheck.Controllers
                 {
                     a.Status = 2;
                 }
-                */
+                
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
