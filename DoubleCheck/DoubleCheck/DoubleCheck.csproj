@@ -153,6 +153,7 @@
     <Content Include="Models\DoubleCheckDBContext.edmx.diagram">
       <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\web_deploy_2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Resources\Fonts\fontawesome-webfont.eot" />
     <Content Include="Resources\Fonts\fontawesome-webfont.ttf" />
