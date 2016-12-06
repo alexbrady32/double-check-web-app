@@ -154,22 +154,17 @@
       <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\web_deploy_2.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Resources\Fonts\fontawesome-webfont.eot" />
     <Content Include="Resources\Fonts\fontawesome-webfont.ttf" />
     <Content Include="Resources\Fonts\fontawesome-webfont.woff" />
     <Content Include="Resources\Fonts\fontawesome-webfont.woff2" />
     <Content Include="Resources\Fonts\FontAwesome.otf" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Resources\Fonts\font-awesome.min.css" />
     <Content Include="Resources\Fonts\fontawesome-webfont.svg" />
     <Content Include="Resources\Images\background-light.jpg" />
     <Content Include="Resources\Images\create_acct_bg.jpg" />
     <Content Include="Resources\Images\login-background.jpg" />
     <Content Include="Resources\Images\profile.png" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Resources\Images\profile.jpg" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
