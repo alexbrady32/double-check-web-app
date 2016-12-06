@@ -88,7 +88,16 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Create()
         {
-            var user = Int32.Parse((string)Session["UserID"]);
+            Int32 user;
+
+            if (Session["UserID"] != null)
+            {
+                user = Int32.Parse((string)Session["UserID"]);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             var usersClasses = db.Classes.Where(c => c.U_Id == user);
             ViewBag.AppDataClassList = new SelectList(usersClasses, "C_Id", "Name");
             ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
@@ -130,7 +139,18 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Edit(int id)
         {
-            var user = Int32.Parse((string)Session["UserID"]);
+
+            Int32 user;
+
+            if (Session["UserID"] != null)
+            {
+                user = Int32.Parse((string)Session["UserID"]);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             var usersClasses = db.Classes.Where(c => c.U_Id == user);
             ViewBag.AppDataClassList = new SelectList(usersClasses, "C_Id", "Name");
             ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");

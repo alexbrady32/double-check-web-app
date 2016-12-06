@@ -57,7 +57,15 @@ namespace DoubleCheck.Controllers
             return View(credentials);
 
         }
+        
+        // GET: Account/Logout
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
+        }
 
+        
         // GET: Account/Details/5
         public ActionResult Details(int? id)
         {
