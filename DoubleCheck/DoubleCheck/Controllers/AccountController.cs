@@ -84,7 +84,7 @@ namespace DoubleCheck.Controllers
         // GET: Account/Create
         public ActionResult Create()
         {
-            return View("/Views/Account/Create.cshtml");
+            return View();
         }
 
         // POST: Account/Create
