@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/DoubleCheck/DoubleCheck/Properties/PublishProfiles
