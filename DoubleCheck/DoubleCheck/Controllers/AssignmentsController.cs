@@ -24,7 +24,7 @@ namespace DoubleCheck.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return RedirectToAction("Login", "Account");
             }
 
             var ttc_strings = Utilities.Utilities.calculateWeeklyTotal(user);
@@ -47,7 +47,7 @@ namespace DoubleCheck.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return RedirectToAction("Login", "Account");
             }
 
             var stringsToUse = Utilities.Utilities.calculateWeeklyTotal(user);
@@ -96,7 +96,7 @@ namespace DoubleCheck.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return RedirectToAction("Login", "Account");
             }
             var usersClasses = db.Classes.Where(c => c.U_Id == user);
             ViewBag.AppDataClassList = new SelectList(usersClasses, "C_Id", "Name");
@@ -148,7 +148,7 @@ namespace DoubleCheck.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return RedirectToAction("Login", "Account");
             }
 
             var usersClasses = db.Classes.Where(c => c.U_Id == user);
@@ -204,16 +204,25 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Assignment a = db.Assignments.Find(id);
+                if (a == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(a);
             }
-            Assignment a = db.Assignments.Find(id);
-            if (a == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Account");
             }
-            return View(a);
+
         }
 
         // POST: Account/Delete/5

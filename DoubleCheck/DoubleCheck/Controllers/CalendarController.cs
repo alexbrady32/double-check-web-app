@@ -111,8 +111,10 @@ namespace DoubleCheck.Controllers
                 calendarData.Add(classesData);
                 return View(calendarData);
             }
-            // TODO: need to return a not logged in page or something here.
-            return View();
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
            
         }
     }

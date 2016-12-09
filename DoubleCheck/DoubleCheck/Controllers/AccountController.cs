@@ -66,26 +66,19 @@ namespace DoubleCheck.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        
-        // GET: Account/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
 
         // GET: Account/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            
         }
 
         // POST: Account/Create
@@ -122,8 +115,9 @@ namespace DoubleCheck.Controllers
         {
             if (Session["UserID"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return RedirectToAction("Login", "Account");
             }
+
             User user = db.Users.Find(Int32.Parse((string)Session["UserID"]));
             if (user == null)
             {
@@ -172,7 +166,7 @@ namespace DoubleCheck.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Account");
             }
             User user = db.Users.Find(id);
             if (user == null)

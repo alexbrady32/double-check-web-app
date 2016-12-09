@@ -14,6 +14,11 @@ namespace DoubleCheck.Controllers
         // GET: Cloze
         public ActionResult Index()
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             Session["ClozeCheckComplete"] = true;
             return View();
         }
@@ -21,6 +26,11 @@ namespace DoubleCheck.Controllers
         // GET: /Cloze/Account
         public ActionResult Assess()
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             return View();
         }
         
