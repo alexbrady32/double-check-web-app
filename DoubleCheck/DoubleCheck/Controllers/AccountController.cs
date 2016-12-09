@@ -70,15 +70,7 @@ namespace DoubleCheck.Controllers
         // GET: Account/Create
         public ActionResult Create()
         {
-            if (Session["UserID"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            
+            return View();
         }
 
         // POST: Account/Create
