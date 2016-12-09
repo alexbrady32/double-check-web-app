@@ -47,6 +47,43 @@ h2 {
     z-index:1;
 }
 
+.nav-acc {
+    font-family: 'Lato', sans-serif;
+    font-weight:bold;
+    height:100%;
+    position:relative;
+    float:right;
+    margin-right:50px;
+    margin-left:15px;
+    cursor:pointer;
+    color:white;
+    font-size:20px;
+    transition:0.5s;
+}
+
+.nav-acc:hover {
+    color:#00bbff;
+    font-size:24px;
+}
+
+.nav-acc-img {
+    position:absolute;
+    top: 50%;
+    margin-top:-20px;   
+}
+
+.nav-acc-img img {
+    max-height:40px;
+    max-width:40px;
+    border-radius:20px;
+    border: 2px solid #334052;
+}
+
+.nav-acc-name {
+    line-height:60px;
+    margin-left:50px;
+}
+
 #menu-button {
     float:left;
     padding: 5px;
@@ -525,6 +562,11 @@ h2 {
     margin-right:-10px;
     display:none;
     z-index:3;
+    transition:0.5s;
+}
+
+.asgmt-card-delete:hover {
+    background-color:#d20e0e;
 }
 
 .asgmt-card-color {
@@ -726,8 +768,64 @@ h2 {
     color:white;
 }
 
+/* ----------------- CLOZE EXAM----------------*/
 
+.cloze-index-title {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width:100%;
+    padding-top:100px;
+    text-align:center;
+}
 
+.cloze-options {
+    width:100%;
+    text-align:center;
+}
+
+.cloze-btn-option {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:25px!important;
+    display:inline-block;
+    width:350px;
+    height:100px;
+    margin:25px;
+    padding:25px;
+    border-radius:5px;
+}
+
+.cloze-pg {
+    font-family:'Alegreya Sans', sans-serif;
+    width:100%;
+    padding:100px;
+}
+
+.cloze-assess-title {
+    margin-bottom:50px;
+}
+
+input[type="radio"] {
+    height:25px;
+    width:25px;
+    display:inline-block;
+    margin:0px!important;
+    cursor:pointer;
+}
+
+input[type=radio]:checked + label{
+  color: teal;
+}
+
+.check {
+    cursor:pointer;
+    height:25px;
+    line-height:25px;
+    position:absolute;
+    display:inline-block;
+}
+
+.check:hover {
+    color: teal;
+}
 /* ----------------- FOOTER ----------------*/
 footer {
     position:fixed;

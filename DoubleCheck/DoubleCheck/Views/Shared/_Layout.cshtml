@@ -29,6 +29,10 @@
             <div class="menu-icon"></div>
             <div class="menu-icon"></div>
         </div>
+        <div class="nav-acc" onclick="window.location.href = '@Url.Action("Edit", "Account")'">
+            <div class="nav-acc-img"><img src="~/Resources/Images/profile.png" /></div>
+            <div class="nav-acc-name">@Session["UserFirstName"]</div>
+        </div>
     </div>
 
     <div id="SideBar">

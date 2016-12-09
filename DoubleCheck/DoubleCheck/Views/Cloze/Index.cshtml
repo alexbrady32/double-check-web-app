@@ -3,19 +3,16 @@
     ViewBag.Title = "Cloze Exam";
 }
 
-<h2>Index</h2>
-
-<div class="jumbotron">
+<div class="cloze-index-title">
+    <h1>Welcome, @Session["UserFirstName"]!</h1>
     <h4>Double Check needs to assess your reading level in order to estimate how long it will take you to complete your assignments.</h4>
-    <h5>Would you like to take the assessment now?</h5>
+    <h4>Would you like to take the assessment now?</h4>
 </div>
 
-<div>
-    <a href="@Url.Action("Assess", "Cloze")" class="btn btn-primary">Yes, take me to the assessment</a>
-</div>
-<div>
-    <a href="@Url.Action("Index", "Home")" class="btn btn-default">No, take me back home</a>
-</div>
-<div>
-    <a href="@Url.Action("StopAsking", "Cloze")" class="btn btn-danger">No, take me back home and don't ask me again.</a>
+<div class="cloze-options">
+    <button class="cloze-btn-option btn btn-success" onclick="location.href='@Url.Action("Assess","Cloze")'">YES</button>
+
+    <button class="cloze-btn-option btn btn-default" onclick="location.href='@Url.Action("Index","Home")'">NO</button>
+
+    <button class="cloze-btn-option btn btn-warning"onclick="location.href='@Url.Action("StopAsking","Cloze")'">No, and don't ask me again.</button>
 </div>
