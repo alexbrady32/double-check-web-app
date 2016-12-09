@@ -85,7 +85,7 @@ namespace DoubleCheck.Controllers
         // GET: Account/Create
         public ActionResult Create()
         {
-            return View("/Views/Account/Create.cshtml");
+            return View();
         }
 
         // POST: Account/Create
@@ -100,8 +100,8 @@ namespace DoubleCheck.Controllers
                 // Create Password Hash and store back into the model
                 user.Password = CreatePasswordHash(user.Password);
 
-                var userCount = db.Users.Count(u => (u.Username == user.Username) || (u.Password == user.Password)
-                || (u.Email == user.Email) || (u.phone_num == user.phone_num));
+                var userCount = db.Users.Count(u => (u.Username == user.Username) || (u.Email == user.Email) 
+                || (u.phone_num == user.phone_num));
                 if (userCount == 0)
                 {
                     db.Users.Add(user);
