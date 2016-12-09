@@ -44,6 +44,7 @@ namespace DoubleCheck.Controllers
 
                 if (user != null)
                 {
+                    Session.Timeout = 60;
                     Session["UserID"] = user.Id.ToString();
                     Session["UserFirstName"] = user.firstName.ToString();
                     Session["UserLastName"] = user.lastName.ToString();

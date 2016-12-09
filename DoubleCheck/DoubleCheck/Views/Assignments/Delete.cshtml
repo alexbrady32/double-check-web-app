@@ -10,49 +10,47 @@
         <p>&nbsp;</p>
         <h3 style="text-align:center;">Are you sure you want to delete this Assignment?</h3>
     </div>
-    
-    <br /><br />
-    <dl class="dl-horizontal">
-        <dt>Name</dt>
-        <dd>@Html.DisplayFor(model => model.Name)</dd>
+    <div class="Panel-Body">
+        <br /><br />
+        <dl class="dl-horizontal">
+            <dt><label>Name</label></dt>
+            <dd><input type="text" value="@Html.DisplayFor(model => model.Name)" class="form-control" disabled></dd><br />
 
-        <dt>Status</dt>
-        <dd>@Html.DisplayFor(model => model.Status)</dd>
+            <dt><label>Status</label></dt>
+            <dd><input type="text" value="@Html.DisplayFor(model => model.Status)" class="form-control" disabled></dd><br />
 
-        <dt>Due Date</dt>
-        <dd>@Html.DisplayFor(model => model.Due_Date)</dd>
-        
-        <dt>TTC</dt>
-        <dd>@Html.DisplayFor(model => model.TTC)</dd>
+            <dt><label>Due Date</label></dt>
+            <dd><input type="text" value="@Html.DisplayFor(model => model.Due_Date)" class="form-control" disabled></dd><br />
 
-        <dt>Description</dt>
-        <dd>@Html.DisplayFor(model => model.Description)</dd>
-        
-        <dt>Completion</dt>
-        <dd>@Html.DisplayFor(model => model.Completion)</dd>
+            <dt><label>TTC</label></dt>
+            <dd><input type="text" value="@Html.DisplayFor(model => model.TTC)" class="form-control" disabled></dd><br />
 
-        <dt>Class</dt>
-        <dd>@Html.DisplayFor(model => model.Class.Name)</dd>
-        
-        <dt>Type</dt>
-        <dd>@Html.DisplayFor(model => model.Asgmt_Type.Name)</dd>
+            <dt><label>Description</label></dt>
+            <dd><input type="text" value="@Html.DisplayFor(model => model.Description)" class="form-control" disabled></dd><br />
 
-    </dl>
+            <dt><label>Class</label></dt>
+            <dd><input type="text" value="@Html.DisplayFor(model => model.Class.Name)" class="form-control" disabled></dd><br />
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+            <dt><label>Assignment Type</label></dt>
+            <dd><input type="text" value="@Html.DisplayFor(model => model.Asgmt_Type.Name)" class="form-control" disabled></dd><br />
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger btn-create" />
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger btn-create" />
+                <a href="@Url.Action("Index", "Assignments")" class="btn btn-primary btn-create">Cancel</a>
+            </div>
+        }
+
+        <div>
+            <br />
+            <br />
+            <br />
         </div>
-    }
 
-    <div>
-        <br />
-        <a href="@Url.Action("Index", "Assignments")">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x21a9;Back to List</a>
-        <br />
-        <br />
     </div>
-
 </div>

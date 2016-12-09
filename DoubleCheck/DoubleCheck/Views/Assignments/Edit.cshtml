@@ -127,15 +127,12 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input id="SaveButton" type="submit" value="Save" class="btn btn-primary btn-create" />
+                        <a href="@Url.Action("Index", "Assignments")" class="btn btn-default btn-create">CANCEL</a>
+                        <input id="SaveButton" type="submit" value="&nbsp;&nbsp;SAVE&nbsp;&nbsp;" class="btn btn-success btn-create" />
+                        <a href="@Url.Action("Delete", "Assignments", new { id = Model.A_Id })" class="btn btn-danger btn-create">DELETE</a>
                     </div>
                 </div>
             </div>
         }
-
-        <div>
-            <br />
-            <a href="@Url.Action("Index", "Assignments")">&#x21a9; Back to List</a>
-        </div>
     </div>
 </div>

@@ -89,7 +89,7 @@
                                 @if (period.Days == "0101010")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control" >
                                             <option value="MWF" selected>MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW">MW</option>
@@ -106,7 +106,7 @@
                                 else if (period.Days == "0010100")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH" selected>TTH</option>
                                             <option value="MW">MW</option>
@@ -123,7 +123,7 @@
                                 else if (period.Days == "0101000")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW" selected>MW</option>
@@ -140,7 +140,7 @@
                                 else if (period.Days == "0100000")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW">MW</option>
@@ -157,7 +157,7 @@
                                 else if (period.Days == "0010000")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW">MW</option>
@@ -174,7 +174,7 @@
                                 else if (period.Days == "0001000")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW">MW</option>
@@ -191,7 +191,7 @@
                                 else if (period.Days == "0000100")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW">MW</option>
@@ -208,7 +208,7 @@
                                 else if (period.Days == "0000010")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW">MW</option>
@@ -225,7 +225,7 @@
                                 else if (period.Days == "0000001")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW">MW</option>
@@ -242,7 +242,7 @@
                                 else if (period.Days == "1000000")
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW">MW</option>
@@ -259,7 +259,7 @@
                                 else
                                 {
                                     <td>
-                                        <select id="days" name="days" form="EditClass">
+                                        <select id="days" name="days" form="EditClass" class="form-control">
                                             <option value="MWF">MWF</option>
                                             <option value="TTH">TTH</option>
                                             <option value="MW">MW</option>
@@ -274,10 +274,10 @@
                                     </td>
                                 }
                                 <td>
-                                    <input id="start_input" type="time" name="start_time" value="@period.Start_Time" />
+                                    <input id="start_input" type="time" name="start_time" value="@period.Start_Time" class="form-control"/>
                                 </td>
                                 <td>
-                                    <input id="end_input" type="time" name="end_time" value="@period.End_Time" />
+                                    <input id="end_input" type="time" name="end_time" value="@period.End_Time" class="form-control"/>
                                 </td>
                             </tr>
                         }
@@ -287,7 +287,8 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-primary btn-create" />
+                        <input type="submit" value="Save" class="btn btn-success btn-create" />
+                        <a href="@Url.Action("Delete", "Class", new { id = Model.C_Id })" class="btn btn-danger btn-create">Delete</a>
                     </div>
                 </div>
             </div>

@@ -512,6 +512,21 @@ h2 {
     -webkit-border-radius: 2px;   
 }
 
+.asgmt-card-delete {
+    height:25px;
+    width:25px;
+    color:white;
+    border-radius:12.5px;
+    border: 1px solid #380303;
+    background-color:#a21616;
+    position:relative;
+    float:right;
+    margin-top:-12px;
+    margin-right:-10px;
+    display:none;
+    z-index:3;
+}
+
 .asgmt-card-color {
     width:5px;
     height:120px;

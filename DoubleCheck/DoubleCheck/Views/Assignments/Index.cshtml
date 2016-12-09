@@ -6,6 +6,18 @@
     ViewBag.Title = "Assignments";
 }
 
+<script>
+
+    function displayDelete(id) {
+        document.getElementById(id).style.display = "initial";
+    }
+
+    function hideDelete(id) {
+        document.getElementById(id).style.display = "none";
+    }
+
+</script>
+
 <div class="bg">
 
     <div class="ttc-section">
@@ -55,7 +67,8 @@
                     dateClass = "asgmt-Orange";
                 }
 
-                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'">
+                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'" onmouseover="displayDelete(@Assignment.A_Id);" onmouseout="hideDelete(@Assignment.A_Id);">
+                    <div class="asgmt-card-delete" id="@Assignment.A_Id" onclick="window.location.href = '@Url.Action("Delete", "Assignments", new { id = Assignment.A_Id })'; window.event.stopPropagation();">X</div>
                     <div class="asgmt-card-color"></div>
                     <div class="asgmt-card-name">@Assignment.Name</div>
                     <div class="asgmt-card-class">@Assignment.Class.Name</div>
