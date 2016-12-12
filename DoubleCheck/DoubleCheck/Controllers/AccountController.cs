@@ -227,6 +227,7 @@ namespace DoubleCheck.Controllers
                                                 ? string.Empty
                                                 : ":" + context.Request.Url.Port
                                             );
+                    appPath += "/DoubleCheck" 
                     appPath += "/Account/ResetPassword";
                     // Adds the password hash as a GET parameter into the url
                     appPath += "?code=";
