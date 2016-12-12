@@ -261,7 +261,7 @@ namespace DoubleCheck.Controllers
             {
                 if ((string)Request.Params["retypePassword"] != "")
                 {
-                    if (String.Equals(CreatePasswordHash((string)Request.Params["retypePassword"]), user.Password))
+                    if (String.Equals((string)Request.Params["retypePassword"], user.Password))
                     {
                         db.Entry(user).State = EntityState.Modified;
                         // Create Password Hash and store back into the model
