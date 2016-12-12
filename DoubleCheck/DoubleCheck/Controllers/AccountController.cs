@@ -283,7 +283,6 @@ namespace DoubleCheck.Controllers
             return View(user);
         }
 
-
         public bool IsValidEmail(string strIn)
         {
             invalid = false;
