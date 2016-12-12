@@ -255,10 +255,11 @@ namespace DoubleCheck.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword([Bind(Include = "Id,Password")] User user)
+        public ActionResult ResetPassword(User user)
         {
             if (ModelState.IsValid)
             {
+                db.Entry(user).State = EntityState.Modified;
                 // Create Password Hash and store back into the model
                 user.Password = CreatePasswordHash(user.Password);
                 db.SaveChanges();
