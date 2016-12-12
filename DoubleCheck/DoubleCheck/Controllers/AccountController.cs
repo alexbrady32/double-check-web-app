@@ -259,12 +259,26 @@ namespace DoubleCheck.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                // Create Password Hash and store back into the model
-                user.Password = CreatePasswordHash(user.Password);
-                db.SaveChanges();
-                return RedirectToAction("Login", "Account");
+                if ((string)Request.Params["retypePassword"] != "")
+                {
+                    if (String.Equals(CreatePasswordHash((string)Request.Params["retypePassword"]), user.Password))
+                    {
+                        db.Entry(user).State = EntityState.Modified;
+                        // Create Password Hash and store back into the model
+                        user.Password = CreatePasswordHash(user.Password);
+                        db.SaveChanges();
+                        return RedirectToAction("Login", "Account");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Passwords do not match!";
+                        return View(user);
+                    }
+                }
+                ViewBag.Error = "Please retype the password.";
+                return View(user);
             }
+            ViewBag.Error = "An error occured. Please try again later.";
             return View(user);
         }
 
