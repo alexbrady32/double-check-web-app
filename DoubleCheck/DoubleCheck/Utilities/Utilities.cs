@@ -22,7 +22,8 @@ namespace DoubleCheck.Utilities
             int dueThisWeekTTC = 0;
             int dueNextWeeksTTC = 0;
             int pastDue = 0;
-            foreach (var assignment in incompleteAssignments)
+            var assignmentsList = incompleteAssignments.ToList();
+            foreach (var assignment in assignmentsList)
             {
                 // for assignments TTC to get split, assignment due date must be not this week
                 // and assignment's TTC must be more than 150 minutes
@@ -51,28 +52,28 @@ namespace DoubleCheck.Utilities
             var totalhours = (totalTTC / 60) > 0
                 ? (totalTTC / 60) == 1 ? "1" : (totalTTC / 60).ToString() : "0";
             var totalMinutes = (totalTTC % 60) > 0 
-                ? (totalTTC % 60) == 1 ? "01" : (totalTTC % 60).ToString() : "00";
+                ? (totalTTC % 60) < 10 ? "0" + (totalTTC % 60).ToString() : (totalTTC % 60).ToString() : "00";
             var total = totalhours + ":" + totalMinutes;
             times.Add(total);
 
             var thisWeekHours = (dueThisWeekTTC / 60) > 0
                 ? (dueThisWeekTTC / 60) == 1 ? "1" : (dueThisWeekTTC / 60).ToString() : "0";
             var thisWeekMinutes = (dueThisWeekTTC % 60) > 0
-                ? (dueThisWeekTTC % 60) == 1 ? "01" : (dueThisWeekTTC % 60).ToString() : "00";
+                ? (dueThisWeekTTC % 60) < 10 ? "0" + (dueThisWeekTTC % 60).ToString() : (dueThisWeekTTC % 60).ToString() : "00";
             var thisWeek = thisWeekHours + ":" + thisWeekMinutes;
             times.Add(thisWeek);
 
             var nextWeeksHours = (dueNextWeeksTTC / 60) > 0
                 ? (dueNextWeeksTTC / 60) == 1 ? "1" : (dueNextWeeksTTC / 60).ToString() : "0";
             var nextWeeksMinutes = (dueNextWeeksTTC % 60) > 0 
-                ? (dueNextWeeksTTC % 60) == 1 ? "01" : (dueNextWeeksTTC % 60).ToString() : "00";
+                ? (dueNextWeeksTTC % 60) < 10 ? "0" + (dueNextWeeksTTC % 60).ToString() : (dueNextWeeksTTC % 60).ToString() : "00";
             var nextWeek = nextWeeksHours + ":" + nextWeeksMinutes;
             times.Add(nextWeek);
 
             var pastDueHours = (pastDue / 60) > 0
                 ? (pastDue / 60) == 1 ? "1" : (pastDue / 60).ToString() : "0";
             var pastDueMinutes = (pastDue % 60) > 0 
-                ? (pastDue % 60) == 1 ? "01" : (pastDue % 60).ToString() : "00";
+                ? (pastDue % 60) < 10 ? "0" + (pastDue % 60).ToString() : (pastDue % 60).ToString() : "00";
             var pastDueString = pastDueHours + ":" + pastDueMinutes;
             times.Add(pastDueString);
 
