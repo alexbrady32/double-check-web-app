@@ -48,8 +48,15 @@
                 <div class="form-group">
                     @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.T_Id, (SelectList)ViewBag.AppDataTypes, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("T_Id", (SelectList)ViewBag.AppDataTypes, htmlAttributes: new { @class = "form-control", @id = "assignmentType" })
                         @Html.ValidationMessageFor(model => model.T_Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="container" style="display:none">
+                    <label class="control-label col-md-2">About how many pages will you be reading?</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="numberOfPages" onblur="calculateTime()" />
                     </div>
                 </div>
 
@@ -58,7 +65,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Due_Date, "Due Date", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Due_Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                        @Html.EditorFor(model => model.Due_Date, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "DueDate" } })
                         @Html.ValidationMessageFor(model => model.Due_Date, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -66,7 +73,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.TTC, "Estimated Time to Complete (in minutes)", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TTC, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.TTC, new { htmlAttributes = new { @class = "form-control", @id = "estimatedTTC" } })
                         @Html.ValidationMessageFor(model => model.TTC, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -95,3 +102,57 @@
         </div>
     </div>
 </div>
+
+<script>
+    function calculateTime() {
+        var selection = document.getElementById("assignmentType").value;
+        var ttc = document.getElementById("estimatedTTC");
+        var pagesInput = document.getElementById("numberOfPages");
+        // give estimatedTTC 300 words per page * # of pages / (ViewBag.ClozeMultiplier * WPM)
+        if (pagesInput.value != "") {
+            var wpm;
+            var pages = parseInt(pagesInput.value);
+            switch (selection) {
+                case "9":
+                    wpm = 100;
+                    ttc.value = Math.round((300 * pages) / (@ViewBag.ClozeMultiplier * wpm));
+                    break;
+                case "10":
+                    wpm = 200;
+                    ttc.value = Math.round((300 * pages) / (@ViewBag.ClozeMultiplier * wpm));
+                    break;
+                case "11":
+                    wpm = 300;
+                    ttc.value = Math.round((300 * pages) / (@ViewBag.ClozeMultiplier * wpm));
+                    break;
+                default:
+                    $("#container").addClass("hidden");
+                    break;
+            }
+
+        }
+    }
+
+    document.getElementById("assignmentType").onchange = function () {
+        var selection = document.getElementById("assignmentType").value;
+        var container = document.getElementById("container");
+        alert("Hello");
+        switch (selection) {
+            case "9":
+                container.style.display = "block";
+                calculateTime();
+                break;
+            case "10":
+                container.style.display = "block";
+                calculateTime();
+                break;
+            case "11":
+                container.style.display = "block";
+                calculateTime();
+                break;
+            default:
+                container.style.display = "none";
+                break;
+        }
+    }
+</script>
