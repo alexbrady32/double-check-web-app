@@ -271,6 +271,7 @@ namespace DoubleCheck.Controllers
                     }
                     else
                     {
+                        user.Password = "";
                         ViewBag.Error = "Passwords do not match!";
                         return View(user);
                     }
