@@ -6,149 +6,250 @@
     var attributes = new Dictionary<string, object>();
     attributes.Add("Id", "cloze-form");
 }
+<div class="cloze-pg">
 
-<h2>Assess</h2>
 
-@using (Html.BeginForm("Grade", "Cloze", FormMethod.Post, attributes))
-{
-    <h2>Read each paragraph and then select which words would best fill in the blanks, numbered 1-5 for each paragraph below.</h2>
+    @using (Html.BeginForm("Grade", "Cloze", FormMethod.Post, attributes))
+    {
+        <div class="cloze-assess-title">
+            <h2>Read each paragraph and then select which words would best fill in the blanks, numbered 1-5 for each paragraph below.</h2>
+        </div>
 
-    <h3>Paragraph 1:</h3>
-    <br />
-    <h3>The postal service is the government agency (1) ----- handles the mail. Its job is (2) ----- letters and packages to people and businesses all over the world. Its goal is to see that your mail gets to its destination (3) ----- possible. People (4) ----- the postal service to deliver important letters and even valuables, (5) ----- time and to the right person. </h3>
-    <br />
 
-    <h4>(1)</h4>
-    <div>
-        <fieldset>
-            <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-A" value="A" />A) the fact that <br />
-            <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-B" value="B" />B) whether <br />
-            <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-C" value="C" />C) of which <br />
-            <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-D" value="D" />D) that <br />
-            <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-E" value="E" />E) in that <br />
-        </fieldset>    
-    </div>
-    <br />
-    <h4>(2)</h4>
-    <div>
-        <fieldset>
-            <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-A" value="A" />A) being delivered <br />
-            <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-B" value="B" />B) to be delivered <br />
-            <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-C" value="C" />C) to have delivered <br />
-            <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-D" value="D" />D) having delivered <br />
-            <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-E" value="E" />E) to deliver <br />
-        </fieldset>
-    </div>
+        <h4>Paragraph 1:</h4>
+        <h3>The postal service is the government agency (1) _______ handles the mail. 
+            Its job is (2) _______ letters and packages to people and businesses all over the world. 
+            Its goal is to see that your mail gets to its destination (3) _______ possible. 
+            People (4) _______ the postal service to deliver important letters and even valuables, 
+            (5) _______ time and to the right person. </h3>
+        <br />
 
-    <h4>(3)</h4>
-    <div>
-        <fieldset>
-            <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-A" value="A" /> A) less quickly <br />
-            <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-B" value="B" /> B) too quickly <br />
-            <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-C" value="C" /> C) so quickly that <br />
-            <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-D" value="D" /> D) as quickly as <br />
-            <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-E" value="E" /> E) the most quickly <br />
-        </fieldset>
-    </div>
+        <h4>(1)</h4>
+        <div>
+            <fieldset>
+                <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-A" value="A" />
+                <label class="check" for="paragraph-1-answers-A">the fact that</label><br /> 
 
-    <h4>(4)</h4>
-    <div>
-        <fieldset>
-            <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-A" value="A" /> A) back out <br />
-            <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-B" value="B" /> B) check out <br />
-            <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-C" value="C" /> C) come in <br />
-            <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-D" value="D" /> D) figure out <br />
-            <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-E" value="E" /> E) rely on <br />
-        </fieldset>
-    </div>
+                <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-B" value="B" />
+                <label class="check" for="paragraph-1-answers-B">whether</label><br />
 
-    <h4>(5)</h4>
-    <div>
-        <fieldset>
-            <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-A" value="A" /> A) to <br />
-            <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-B" value="B" /> B) for <br />
-            <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-C" value="C" /> C) at <br />
-            <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-D" value="D" /> D) on <br />
-            <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-E" value="E" /> E) over <br />
-        </fieldset>
-    </div>
+                <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-C" value="C" />
+                <label class="check" for="paragraph-1-answers-C">of which</label><br />
+
+                <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-D" value="D" />
+                <label class="check" for="paragraph-1-answers-D">that</label><br />
+
+                <input type="radio" name="paragraph-1-answers" id="paragraph-1-answers-E" value="E" />
+                <label class="check" for="paragraph-1-answers-E">in that</label><br />
+            </fieldset>
+        </div>
+        <br />
+        <h4>(2)</h4>
+        <div>
+            <fieldset>
+                <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-A" value="A" />
+                <label class="check" for="paragraph-2-answers-A">being delivered</label><br />
+
+                <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-B" value="B" />
+                <label class="check" for="paragraph-2-answers-B">to be delivered</label><br />
+
+                <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-C" value="C" />
+                <label class="check" for="paragraph-2-answers-C">to have delivered</label><br />
+
+                <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-D" value="D" />
+                <label class="check" for="paragraph-2-answers-D">having delivered</label><br />
+
+                <input type="radio" name="paragraph-2-answers" id="paragraph-2-answers-E" value="E" />
+                <label class="check" for="paragraph-2-answers-E">to deliver</label><br />
+            </fieldset>
+        </div>
+
+        <h4>(3)</h4>
+        <div>
+            <fieldset>
+                <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-A" value="A" />
+                <label class="check" for="paragraph-3-answers-A">less quickly</label><br />
+
+                <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-B" value="B" />
+                <label class="check" for="paragraph-3-answers-B">too quickly</label><br />
+
+                <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-C" value="C" />
+                <label class="check" for="paragraph-3-answers-C">so quickly that</label><br />
+
+                <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-D" value="D" />
+                <label class="check" for="paragraph-3-answers-D">as quickly as</label><br />
+
+                <input type="radio" name="paragraph-3-answers" id="paragraph-3-answers-E" value="E" />
+                <label class="check" for="paragraph-3-answers-E">the most quickly</label><br />
+            </fieldset>
+        </div>
+
+        <h4>(4)</h4>
+        <div>
+            <fieldset>
+                <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-A" value="A" />
+                <label class="check" for="paragraph-4-answers-A">back out </label><br />
+
+                <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-B" value="B" />
+                <label class="check" for="paragraph-4-answers-B">check out</label><br />
+
+                <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-C" value="C" />
+                <label class="check" for="paragraph-4-answers-C">come in</label><br />
+
+                <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-D" value="D" />
+                <label class="check" for="paragraph-4-answers-D">figure out</label><br />
+
+                <input type="radio" name="paragraph-4-answers" id="paragraph-4-answers-E" value="E" />
+                <label class="check" for="paragraph-4-answers-E">rely in</label><br />
+            </fieldset>
+        </div>
+
+        <h4>(5)</h4>
+        <div>
+            <fieldset>
+                <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-A" value="A" />
+                <label class="check" for="paragraph-5-answers-A">to</label><br />
+
+                <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-B" value="B" />
+                <label class="check" for="paragraph-5-answers-B">for</label><br />
+
+                <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-C" value="C" />
+                <label class="check" for="paragraph-5-answers-C">at</label><br />
+
+                <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-D" value="D" />
+                <label class="check" for="paragraph-5-answers-D">on</label><br />
+
+                <input type="radio" name="paragraph-5-answers" id="paragraph-5-answers-E" value="E" />
+                <label class="check" for="paragraph-5-answers-E">over</label><br />
+            </fieldset>
+        </div>
 
     <!--From: http://www.testyourenglish.net/english-online/cloze-reading/cloze-test.html-->
+        <br />
+        <h4>Paragraph 2: </h4>
+        <h3>It's nearly spring and it's time to grow plants. Of course, not all plants are (1) _______ in season. 
+            This makes it very (2) _______ to pick the best plants to grow. The good news is that there are tons of choices. 
+            Do you know that plants can grow in nearly every climate? It's true that some plants are picky but most are super 
+            (3) _______ and only require water, dirt and of course sun.This spring is the 
+            (4) _______ time to start your own garden. There are three amazing plants that work in every single climate. 
+            The first is spinach. Spinach is very easy to grow because it (5) _______ water well and can stand different levels of heat. 
+            The second is carrots. There are many types of carrots you can grow. Most carrots are very quick to grow and also handle all types of climates as well. 
+            The third is tomatoes. There are tons of different types of tomatoes. It's easy to find the perfect tomato for any location. Go plant some plants!</h3>
 
-    <h3>Paragraph 2: </h3>
-    <br />
-    <h3>It's nearly spring and it's time to grow plants. Of course, not all plants are (1) .........in season. This makes it very (2) ........ . to pick the best plants to grow. The good news is that there are tons of choices. Do you know that plants can grow in nearly every climate? It's true that some plants are picky but most are super (3) ......... and only require water, dirt and of course sun. Thus spring is the (4) ......... time to start your own garden. There are three amazing plants that work in every single climate. The first is spinach. Spinach is very easy to grow because it (5) ......... water well and can stand different levels of heat. The second is carrots. There are many types of carrots you can grow. Most carrots are very quick to grow and also handle all types of climates as well. The third is tomatoes. There are tons of different types of tomatoes. It's easy to find the perfect tomato for any location. Go plant some plants!</h3>
+        <br />
 
-    <br />
-    
-    <h4>(1)</h4>
-    <div>
-        <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-A" value="A" /> A) actually <br />
-        <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-B" value="B" /> B) today <br />
-        <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-C" value="C" /> C) currently <br />
-        <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-D" value="D" /> D) actively <br />
-        <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-E" value="E" /> E) now <br />
-    </div>
+        <h4>(1)</h4>
+        <div>
+            <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-A" value="A" />
+            <label class="check" for="paragraph1-1-answers-A">actually</label><br />
 
-    <h4>(2)</h4>
-    <div>
-        <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-A" value="A" /> A) easy <br />
-        <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-B" value="B" /> B) fun <br />
-        <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-C" value="C" /> C) stressful <br />
-        <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-D" value="D" /> D) difficult <br />
-        <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-E" value="E" /> E) giddy <br />
-    </div>
+            <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-B" value="B" />
+            <label class="check" for="paragraph1-1-answers-B">today</label><br />
 
-    <h4>(3)</h4>
-    <div>
-        <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-A" value="A" /> A) flexible <br />
-        <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-B" value="B" /> B) picky <br />
-        <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-C" value="C" /> C) divine <br />
-        <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-D" value="D" /> D) cranky <br />
-        <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-E" value="E" /> E) difficult <br />
-    </div>
+            <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-C" value="C" />
+            <label class="check" for="paragraph1-1-answers-C">currently</label><br />
 
-    <h4>(4)</h4>
-    <div>
-        <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-A" value="A" /> A) worst <br />
-        <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-B" value="B" /> B) best <br />
-        <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-C" value="C" /> C) perfect <br />
-        <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-D" value="D" /> D) better <br />
-        <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-E" value="E" /> E) fun <br />
-    </div>
+            <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-D" value="D" />
+            <label class="check" for="paragraph1-1-answers-D">actively</label><br />
 
-    <h4>(5)</h4>
-    <div>
-        <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-A" value="A" /> A) losses <br />
-        <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-B" value="B" /> B) gets rid of <br />
-        <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-C" value="C" /> C) removes <br />
-        <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-D" value="D" /> D) shakes <br />
-        <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-E" value="E" /> E) holds <br />
-    </div>
+            <input type="radio" name="paragraph1-1-answers" id="paragraph1-1-answers-E" value="E" />
+            <label class="check" for="paragraph1-1-answers-E">now</label><br />
+        </div>
 
-    <input type="submit" value="Submit Test" />
-}
+        <h4>(2)</h4>
+        <div>
+            <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-A" value="A" />
+            <label class="check" for="paragraph1-2-answers-A">easy</label><br />
 
+            <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-B" value="B" />
+            <label class="check" for="paragraph1-2-answers-B">fun</label><br />
+
+            <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-C" value="C" />
+            <label class="check" for="paragraph1-2-answers-C">stressful</label><br />
+
+            <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-D" value="D" />
+            <label class="check" for="paragraph1-2-answers-D">difficult</label><br />
+
+            <input type="radio" name="paragraph1-2-answers" id="paragraph1-2-answers-E" value="E" />
+            <label class="check" for="paragraph1-2-answers-E">giddy</label><br />
+        </div>
+
+        <h4>(3)</h4>
+        <div>
+            <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-A" value="A" />
+            <label class="check" for="paragraph1-3-answers-A">flexible</label><br />
+
+            <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-B" value="B" />
+            <label class="check" for="paragraph1-3-answers-B">picky</label><br />
+
+            <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-C" value="C" />
+            <label class="check" for="paragraph1-3-answers-C">divine</label><br />
+
+            <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-D" value="D" />
+            <label class="check" for="paragraph1-3-answers-D">cranky</label><br />
+
+            <input type="radio" name="paragraph1-3-answers" id="paragraph1-3-answers-E" value="E" />
+            <label class="check" for="paragraph1-3-answers-E">difficult</label><br />
+        </div>
+
+        <h4>(4)</h4>
+        <div>
+            <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-A" value="A" />
+            <label class="check" for="paragraph1-4-answers-A">worst</label><br />
+
+            <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-B" value="B" />
+            <label class="check" for="paragraph1-4-answers-B">best</label><br />
+
+            <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-C" value="C" />
+            <label class="check" for="paragraph1-4-answers-C">perfect</label><br />
+
+            <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-D" value="D" />
+            <label class="check" for="paragraph1-4-answers-D">better</label><br />
+
+            <input type="radio" name="paragraph1-4-answers" id="paragraph1-4-answers-E" value="E" />
+            <label class="check" for="paragraph1-4-answers-E">fun</label><br />
+        </div>
+
+        <h4>(5)</h4>
+        <div>
+            <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-A" value="A" />
+            <label class="check" for="paragraph1-5-answers-A">losses</label><br />
+
+            <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-B" value="B" />
+            <label class="check" for="paragraph1-5-answers-B">gets rid of</label><br />
+
+            <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-C" value="C" />
+            <label class="check" for="paragraph1-5-answers-C">removes</label><br />
+
+            <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-D" value="D" />
+            <label class="check" for="paragraph1-5-answers-D">shakes</label><br />
+
+            <input type="radio" name="paragraph1-5-answers" id="paragraph1-5-answers-E" value="E" />
+            <label class="check" for="paragraph1-5-answers-E">holds</label><br />
+        </div>
+
+        <input type="submit" value="Submit Test" class="btn btn-success btn-create"/>
+    }
+</div>
 
 <script>
     document.getElementById('cloze-form').onsubmit = function () {
-        if (!$("input[name=paragraph-1-answers]:checked").val() || 
-            !$("input[name=paragraph-2-answers]:checked").val() || 
-            !$("input[name=paragraph-3-answers]:checked").val() || 
-            !$("input[name=paragraph-4-answers]:checked").val() || 
-            !$("input[name=paragraph-5-answers]:checked").val() || 
-            !$("input[name=paragraph1-1-answers]:checked").val() || 
-            !$("input[name=paragraph1-2-answers]:checked").val() || 
-            !$("input[name=paragraph1-3-answers]:checked").val() || 
-            !$("input[name=paragraph1-4-answers]:checked").val() || 
-            !$("input[name=paragraph1-5-answers]:checked").val()) 
-        {
+        if (!$("input[name=paragraph-1-answers]:checked").val() ||
+            !$("input[name=paragraph-2-answers]:checked").val() ||
+            !$("input[name=paragraph-3-answers]:checked").val() ||
+            !$("input[name=paragraph-4-answers]:checked").val() ||
+            !$("input[name=paragraph-5-answers]:checked").val() ||
+            !$("input[name=paragraph1-1-answers]:checked").val() ||
+            !$("input[name=paragraph1-2-answers]:checked").val() ||
+            !$("input[name=paragraph1-3-answers]:checked").val() ||
+            !$("input[name=paragraph1-4-answers]:checked").val() ||
+            !$("input[name=paragraph1-5-answers]:checked").val()) {
             alert("You're not done yet!");
             return false;
         }
         else {
             alert("Thank you for completing the cloze exam! Your exam will be submitted and scored.");
-        }     
+        }
     };
 </script>
 

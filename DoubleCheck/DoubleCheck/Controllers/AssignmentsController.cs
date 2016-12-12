@@ -24,7 +24,7 @@ namespace DoubleCheck.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return RedirectToAction("Login", "Account");
             }
 
             var ttc_strings = Utilities.Utilities.calculateWeeklyTotal(user);
@@ -47,7 +47,7 @@ namespace DoubleCheck.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return RedirectToAction("Login", "Account");
             }
 
             var stringsToUse = Utilities.Utilities.calculateWeeklyTotal(user);
@@ -88,7 +88,16 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Create()
         {
-            var user = Int32.Parse((string)Session["UserID"]);
+            Int32 user;
+
+            if (Session["UserID"] != null)
+            {
+                user = Int32.Parse((string)Session["UserID"]);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var usersClasses = db.Classes.Where(c => c.U_Id == user);
             ViewBag.AppDataClassList = new SelectList(usersClasses, "C_Id", "Name");
             ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
@@ -130,7 +139,18 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Edit(int id)
         {
-            var user = Int32.Parse((string)Session["UserID"]);
+
+            Int32 user;
+
+            if (Session["UserID"] != null)
+            {
+                user = Int32.Parse((string)Session["UserID"]);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var usersClasses = db.Classes.Where(c => c.U_Id == user);
             ViewBag.AppDataClassList = new SelectList(usersClasses, "C_Id", "Name");
             ViewBag.AppDataTypes = new SelectList(db.Asgmt_Type, "Id", "Name");
@@ -170,6 +190,24 @@ namespace DoubleCheck.Controllers
                 a.Due_Date = assignment.Due_Date;
                 a.TTC = assignment.TTC;
                 a.Description = assignment.Description;
+                a.Completion = assignment.Completion;
+                
+                // Assignment is not started
+                if (assignment.Completion == 0)
+                {
+                    a.Status = 1;
+                }
+                // Assignment is Completed
+                else if (assignment.Completion == 1)
+                {
+                    a.Status = 3;
+                }
+                // Assignment is in progress
+                else
+                {
+                    a.Status = 2;
+                }
+                
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -181,16 +219,25 @@ namespace DoubleCheck.Controllers
 
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Assignment a = db.Assignments.Find(id);
+                if (a == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(a);
             }
-            Assignment a = db.Assignments.Find(id);
-            if (a == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Account");
             }
-            return View(a);
+
         }
 
         // POST: Account/Delete/5

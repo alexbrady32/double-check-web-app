@@ -2,55 +2,160 @@
 
 @{
     ViewBag.Title = "Classes";
+    var Start_Date = "";
+    var End_Date = "";
+    var Start_Time = "";
+    var End_Time = "";
+    var Days = "";
 }
 
-<h2>Classes</h2>
+<div class="bg">
+    <div class="class-title">
+        <p>Classes</p>
+    </div>
+    <a class="asgmt-new" href="@Url.Action("Create", "Class")"><i class="fa fa-plus-circle fa-sm"></i> Add New Class</a>
+    
+    
+    <div class="class-panel">
+        @foreach (var Class in Model)
+        {
+            Start_Date = Class.Start_Date.ToString();
+            End_Date = Class.End_Date.ToString();
+            Start_Time = Class.Time_Periods.FirstOrDefault().Start_Time.ToString();
+            End_Time = Class.Time_Periods.FirstOrDefault().End_Time.ToString();
+            Days = Class.Time_Periods.FirstOrDefault().Days.ToString();
+                <div class="class-card" onclick="window.location.href = '@Url.Action("Edit", "Class", new { id = Class.C_Id })'">
+                    <div class="class-card-color"></div>
+                    <div class="class-card-name">@Class.Name</div>
+                    <div class="class-card-building">@Class.Building</div>
+                    <div class="class-card-startdate">Starts: @Start_Date.Substring(0, 10)</div>
+                    <div class="class-card-enddate">Ends: @End_Date.Substring(0, 10)</div>
+                    <div class="class-card-room">Room #: @Class.Room_Num</div>
+                    <div class="class-card-times">@Start_Time - @End_Time</div>
+                    <div class="class-card-separator"></div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Building)
-        </th>
-        <th>
-            @Html.DisplayName("Room Number")
-        </th>
-        <th>
-            @Html.DisplayName("Start Date")
-        </th>
-        <th>
-            @Html.DisplayName("End Date")
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Building)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Room_Num)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Start_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.End_Date)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.C_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.C_Id })
-        </td>
-    </tr>
-}
-
-</table>
+                    @if ( Days == "0101010")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day">Sun</div>
+                            <div class="class-card-day class-selected">Mon</div>
+                            <div class="class-card-day">Tes</div>
+                            <div class="class-card-day class-selected">Wed</div>
+                            <div class="class-card-day">Thu</div>
+                            <div class="class-card-day class-selected">Fri</div>
+                            <div class="class-card-day">Sat</div>
+                        </div>
+                    }
+                    else if (Days == "0010100")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day">Sun</div>
+                            <div class="class-card-day">Mon</div>
+                            <div class="class-card-day class-selected">Tes</div>
+                            <div class="class-card-day">Wed</div>
+                            <div class="class-card-day class-selected">Thu</div>
+                            <div class="class-card-day">Fri</div>
+                            <div class="class-card-day">Sat</div>
+                        </div>
+                    }
+                    else if (Days == "0101000")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day">Sun</div>
+                            <div class="class-card-day class-selected">Mon</div>
+                            <div class="class-card-day">Tes</div>
+                            <div class="class-card-day class-selected">Wed</div>
+                            <div class="class-card-day">Thu</div>
+                            <div class="class-card-day">Fri</div>
+                            <div class="class-card-day">Sat</div>
+                        </div>
+                    }
+                    else if (Days == "0100000")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day">Sun</div>
+                            <div class="class-card-day class-selected">Mon</div>
+                            <div class="class-card-day">Tes</div>
+                            <div class="class-card-day">Wed</div>
+                            <div class="class-card-day">Thu</div>
+                            <div class="class-card-day">Fri</div>
+                            <div class="class-card-day">Sat</div>
+                        </div>
+                    }
+                    else if ( Days == "0010000")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day">Sun</div>
+                            <div class="class-card-day">Mon</div>
+                            <div class="class-card-day class-selected">Tes</div>
+                            <div class="class-card-day">Wed</div>
+                            <div class="class-card-day">Thu</div>
+                            <div class="class-card-day">Fri</div>
+                            <div class="class-card-day">Sat</div>
+                        </div>
+                    }
+                    else if ( Days == "0001000")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day">Sun</div>
+                            <div class="class-card-day">Mon</div>
+                            <div class="class-card-day">Tes</div>
+                            <div class="class-card-day class-selected">Wed</div>
+                            <div class="class-card-day">Thu</div>
+                            <div class="class-card-day">Fri</div>
+                            <div class="class-card-day">Sat</div>
+                        </div>
+                    }
+                    else if (Days == "0000100")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day">Sun</div>
+                            <div class="class-card-day">Mon</div>
+                            <div class="class-card-day">Tes</div>
+                            <div class="class-card-day">Wed</div>
+                            <div class="class-card-day class-selected">Thu</div>
+                            <div class="class-card-day">Fri</div>
+                            <div class="class-card-day">Sat</div>
+                        </div>
+                    }
+                    else if (Days == "0000010")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day">Sun</div>
+                            <div class="class-card-day">Mon</div>
+                            <div class="class-card-day">Tes</div>
+                            <div class="class-card-day">Wed</div>
+                            <div class="class-card-day">Thu</div>
+                            <div class="class-card-day class-selected">Fri</div>
+                            <div class="class-card-day">Sat</div>
+                        </div>
+                    }
+                    else if (Days == "0000001")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day">Sun</div>
+                            <div class="class-card-day">Mon</div>
+                            <div class="class-card-day">Tes</div>
+                            <div class="class-card-day">Wed</div>
+                            <div class="class-card-day">Thu</div>
+                            <div class="class-card-day">Fri</div>
+                            <div class="class-card-day class-selected">Sat</div>
+                        </div>
+                    }
+                    else if (Days == "1000000")
+                    {
+                        <div class="class-card-days-panel">
+                            <div class="class-card-day class-selected">Sun</div>
+                            <div class="class-card-day">Mon</div>
+                            <div class="class-card-day">Tes</div>
+                            <div class="class-card-day">Wed</div>
+                            <div class="class-card-day">Thu</div>
+                            <div class="class-card-day">Fri</div>
+                            <div class="class-card-day">Sat</div>
+                        </div>
+                    }
+                </div>
+           
+        }
+    </div>
+</div>

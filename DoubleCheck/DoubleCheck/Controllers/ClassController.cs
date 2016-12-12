@@ -24,21 +24,20 @@ namespace DoubleCheck.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return RedirectToAction("Login", "Account");
             }
 
             return View(user.Classes);
         }
 
-        // GET: Class/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Class/Create
         public ActionResult Create()
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             return View();
         }
 
@@ -73,6 +72,11 @@ namespace DoubleCheck.Controllers
         // GET: Class/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var editClass = db.Classes.Where(c => c.C_Id == id).FirstOrDefault();
             return View(editClass);
         }
@@ -104,6 +108,11 @@ namespace DoubleCheck.Controllers
         // GET: Class/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var currentClass = db.Classes.Where(c => c.C_Id == id).First();
             string timePeriods = "";
             var periods = currentClass.Time_Periods;

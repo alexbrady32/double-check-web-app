@@ -44,6 +44,7 @@ namespace DoubleCheck.Controllers
 
                 if (user != null)
                 {
+                    Session.Timeout = 60;
                     Session["UserID"] = user.Id.ToString();
                     Session["UserFirstName"] = user.firstName.ToString();
                     Session["UserLastName"] = user.lastName.ToString();
@@ -57,26 +58,39 @@ namespace DoubleCheck.Controllers
             return View(credentials);
 
         }
-
-        // GET: Account/Details/5
-        public ActionResult Details(int? id)
+        
+        // GET: Account/Logout
+        public ActionResult Logout()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
         }
+
 
         // GET: Account/Create
         public ActionResult Create()
         {
-            return View("/Views/Account/Create.cshtml");
+            return View();
+        }
+
+        // GET: Account/ForgotPassword
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        // GET: Account/ResetPassword
+        public ActionResult ResetPassword(string code)
+        {
+            var user = db.Users.Where(u => u.ResetPasswordHash == code).First();
+            if (DateTime.Now < user.ResetPasswordExpiration)
+            {
+                return View(user);
+            }
+            // TODO: Either Hash is expired, or a code was not in the link (verify this)
+            // So we need to either give them a message, or I guess just redirect the user in the case of 
+            // a code not being passed in
+            return View();
         }
 
         // POST: Account/Create
@@ -91,8 +105,8 @@ namespace DoubleCheck.Controllers
                 // Create Password Hash and store back into the model
                 user.Password = CreatePasswordHash(user.Password);
 
-                var userCount = db.Users.Count(u => (u.Username == user.Username) || (u.Password == user.Password)
-                || (u.Email == user.Email) || (u.phone_num == user.phone_num));
+                var userCount = db.Users.Count(u => (u.Username == user.Username) || (u.Email == user.Email) 
+                || (u.phone_num == user.phone_num));
                 if (userCount == 0)
                 {
                     db.Users.Add(user);
@@ -113,8 +127,9 @@ namespace DoubleCheck.Controllers
         {
             if (Session["UserID"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return RedirectToAction("Login", "Account");
             }
+
             User user = db.Users.Find(Int32.Parse((string)Session["UserID"]));
             if (user == null)
             {
@@ -163,7 +178,7 @@ namespace DoubleCheck.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Account");
             }
             User user = db.Users.Find(id);
             if (user == null)
@@ -182,6 +197,90 @@ namespace DoubleCheck.Controllers
             db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // POST: Account/ForgotPassword/email
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(string email)
+        {
+            var result = db.Users.Where(u => u.Email == email);
+            if (result.Count() == 1)
+            {
+                User user = result.First();
+                user.ResetPasswordHash = CreatePasswordHash(DateTime.Now.ToString());
+                user.ResetPasswordExpiration = DateTime.Now.AddDays(3);
+                db.SaveChanges();
+
+                // Code to get current url path taken from StackOverflow post
+                // http://stackoverflow.com/questions/1214607/how-can-i-get-the-root-domain-uri-in-asp-net
+                var appPath = string.Empty;
+                //Getting the current context of HTTP request
+                var context = System.Web.HttpContext.Current;
+                //Checking the current context content
+                if (context != null)
+                {
+                    //Formatting the fully qualified website url/name
+                    appPath = string.Format("{0}://{1}{2}",
+                                            context.Request.Url.Scheme,
+                                            context.Request.Url.Host,
+                                            context.Request.Url.Port == 80
+                                                ? string.Empty
+                                                : ":" + context.Request.Url.Port
+                                            );
+                    appPath += "/Account/ResetPassword";
+                    // Adds the password hash as a GET parameter into the url
+                    appPath += "?code=";
+                    appPath += user.ResetPasswordHash;
+                }
+                
+
+                string emailBody = "Hello, " + user.firstName.ToString() + "!\n\n"
+                        + "Please click on the following link to reset your DoubleCheck password. \n\n" +  
+                        appPath + " \n\n" +
+                        "Sincerely, \n\n" + "Your friends at DoubleCheck";
+                string emailSubject = "DoubleCheck - Reset Password Request";
+                // TODO: Use the logged in user's email address
+                Utilities.EmailJob.SendEmailMessage("alexbrady32@gmail.com", emailBody, emailSubject);
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                // Email either exists twice (which it shouldn't, if database implemented correctly)
+                // Or, email doesn't exist. For security reasons, the user should not know whether its a valid email or not
+                return RedirectToAction("Login");
+            }
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                if ((string)Request.Params["retypePassword"] != "")
+                {
+                    if (String.Equals((string)Request.Params["retypePassword"], user.Password))
+                    {
+                        db.Entry(user).State = EntityState.Modified;
+                        // Create Password Hash and store back into the model
+                        user.Password = CreatePasswordHash(user.Password);
+                        db.SaveChanges();
+                        return RedirectToAction("Login", "Account");
+                    }
+                    else
+                    {
+                        user.Password = "";
+                        ViewBag.Error = "Passwords do not match!";
+                        return View(user);
+                    }
+                }
+                ViewBag.Error = "Please retype the password.";
+                return View(user);
+            }
+            ViewBag.Error = "An error occured. Please try again later.";
+            return View(user);
         }
 
         public bool IsValidEmail(string strIn)

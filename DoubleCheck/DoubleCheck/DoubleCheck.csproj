@@ -153,23 +153,49 @@
     <Content Include="Models\DoubleCheckDBContext.edmx.diagram">
       <DependentUpon>DoubleCheckDBContext.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="Properties\PublishProfiles\web_deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\web_deploy_2.pubxml" />
     <Content Include="Resources\Fonts\fontawesome-webfont.eot" />
     <Content Include="Resources\Fonts\fontawesome-webfont.ttf" />
     <Content Include="Resources\Fonts\fontawesome-webfont.woff" />
     <Content Include="Resources\Fonts\fontawesome-webfont.woff2" />
     <Content Include="Resources\Fonts\FontAwesome.otf" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Resources\Fonts\font-awesome.min.css" />
     <Content Include="Resources\Fonts\fontawesome-webfont.svg" />
     <Content Include="Resources\Images\background-light.jpg" />
     <Content Include="Resources\Images\create_acct_bg.jpg" />
     <Content Include="Resources\Images\login-background.jpg" />
     <Content Include="Resources\Images\profile.png" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.css" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Scripts\fullcalendar\gcal.js" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Scripts\fullcalendar\lib\jquery-ui.min.js" />
+    <Content Include="Scripts\fullcalendar\lib\jquery.min.js" />
+    <Content Include="Scripts\fullcalendar\lib\moment.min.js" />
+    <Content Include="Scripts\fullcalendar\LICENSE.txt" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -229,7 +255,6 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -248,6 +273,8 @@
     <Content Include="Views\Class\Delete.cshtml" />
     <Content Include="Views\Class\Edit.cshtml" />
     <Content Include="Views\Assignments\Index.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

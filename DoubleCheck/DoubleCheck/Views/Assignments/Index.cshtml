@@ -6,6 +6,18 @@
     ViewBag.Title = "Assignments";
 }
 
+<script>
+
+    function displayDelete(id) {
+        document.getElementById(id).style.display = "initial";
+    }
+
+    function hideDelete(id) {
+        document.getElementById(id).style.display = "none";
+    }
+
+</script>
+
 <div class="bg">
 
     <div class="ttc-section">
@@ -33,7 +45,8 @@
             <span class="ttc-card-time">@ViewBag.TTC_Total</span>Hrs
         </div>
     </div>
-
+    <a class="asgmt-new" href="@Url.Action("Create", "Assignments")"><i class="fa fa-plus-circle fa-sm"></i> New Assignment</a>
+    <br />
     <div class="asgmt-panels">
         <p class="asg-title">Not Started</p>
         @foreach (var Assignment in Model)
@@ -54,7 +67,8 @@
                     dateClass = "asgmt-Orange";
                 }
 
-                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'">
+                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'" onmouseover="displayDelete(@Assignment.A_Id);" onmouseout="hideDelete(@Assignment.A_Id);">
+                    <div class="asgmt-card-delete" id="@Assignment.A_Id" onclick="window.location.href = '@Url.Action("Delete", "Assignments", new { id = Assignment.A_Id })'; window.event.stopPropagation();">X</div>
                     <div class="asgmt-card-color"></div>
                     <div class="asgmt-card-name">@Assignment.Name</div>
                     <div class="asgmt-card-class">@Assignment.Class.Name</div>
@@ -75,17 +89,21 @@
             if (Assignment.Status == 2)
             {
                 date = Assignment.Due_Date.ToString();
-                if (Assignment.Due_Date > DateTime.Now.Date) {
+                if (Assignment.Due_Date > DateTime.Now.Date)
+                {
                     dateClass = "asgmt-Green";
                 }
-                else if (Assignment.Due_Date < DateTime.Now.Date) {
+                else if (Assignment.Due_Date < DateTime.Now.Date)
+                {
                     dateClass = "asgmt-Red";
                 }
-                else {
+                else
+                {
                     dateClass = "asgmt-Orange";
                 }
 
-                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'">
+                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'" onmouseover="displayDelete(@Assignment.A_Id);" onmouseout="hideDelete(@Assignment.A_Id);">
+                    <div class="asgmt-card-delete" id="@Assignment.A_Id" onclick="window.location.href = '@Url.Action("Delete", "Assignments", new { id = Assignment.A_Id })'; window.event.stopPropagation();">X</div>
                     <div class="asgmt-card-color"></div>
                     <div class="asgmt-card-name">@Assignment.Name</div>
                     <div class="asgmt-card-class">@Assignment.Class.Name</div>
@@ -105,7 +123,8 @@
         {
             if (Assignment.Status == 3)
             {
-                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'">
+                <div class="asgmt-card" onclick="window.location.href = '@Url.Action("Edit", "Assignments", new { id = Assignment.A_Id })'" onmouseover="displayDelete(@Assignment.A_Id);" onmouseout="hideDelete(@Assignment.A_Id);">
+                    <div class="asgmt-card-delete" id="@Assignment.A_Id" onclick="window.location.href = '@Url.Action("Delete", "Assignments", new { id = Assignment.A_Id })'; window.event.stopPropagation();">X</div>
                     <div class="asgmt-card-color"></div>
                     <div class="asgmt-card-name">@Assignment.Name</div>
                     <div class="asgmt-card-class">@Assignment.Class.Name</div>
@@ -120,6 +139,4 @@
     </div>
     <br />
 
-
-    @Html.ActionLink("New Assignment", "Create")
 </div>
